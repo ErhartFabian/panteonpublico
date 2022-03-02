@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter,Router,Route} from 'react-router-dom';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {Home} from './Components';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Router>
+    <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
-    </Router>
+    </Routes>
   </BrowserRouter>,
   document.getElementById('root')
 );

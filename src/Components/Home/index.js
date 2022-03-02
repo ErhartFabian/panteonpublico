@@ -1,1 +1,14 @@
-export * from './Home.component'
+import React from "react";
+import './Home.css';
+
+
+function Home() {
+
+    return (
+        <div className="home">
+            <h2>Panteon Publico</h2>
+        </div>
+    )
+}
+
+export default Home;

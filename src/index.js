@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {Home} from './Components';
+import InfoPago from './Components/InfoPago/InfoPago';
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
+      <Route path="/InfoPago" element={<InfoPago/>} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

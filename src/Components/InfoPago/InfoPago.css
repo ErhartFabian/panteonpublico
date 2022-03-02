@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family:sans-serif;
+    padding: 90px 20px 0;
+    background: #3D3737;
+}
+
+.header{
+    background-color: #20201B;
+    height: 100px;
+    position: fixed;
+    width: 100%;
+    top:0;
+    left: 0;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+}
+.nav-link{
+    color:#fff;
+    text-decoration: none;
+}
+.logo{
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0 40px;
+    line-height: 100px;
+}
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 100px;
+}
+.nav-menu{
+    display: flex;
+    margin-right: 40px;
+    list-style: none;
+}
+.nav-menu-item{
+    font-size: 18px;
+    margin: 0 10px;
+    line-height: 100px;
+    text-transform: uppercase;
+}
+.nav-menu-link{
+    padding: 8px 12px;
+    border-radius: 3px;
+
+}
+.nav-menu-link:hover{
+    background-color: #65B891;
+    transition: 0.5s;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    
+    margin: 80px auto 0 auto;
+    background: #F6F2F1;
+    width: 1000px;
+    height: 400px;
+}
+
+#name{
+    text-align: center;
+    justify-content: center ;
+}
+
+
+
+@media screen and (max-width: 768px){
+    body{
+        font-family:sans-serif;
+        padding-top: 70px;
+    }
+    .header{
+        height: 60px;
+    }
+    .nav{
+        display: flex;
+        justify-content: space-between;
+    }
+    .nav-link{
+        color:#fff;
+        text-decoration: none;
+    }
+    .logo{
+        font-size: 25px;
+        padding: 0 40px;
+        line-height: 60px;
+    }
+    .title{
+        font-size: 25px;
+        font-weight: bold;
+        line-height: 60px;
+    }
+    .nav-menu{
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0; 
+        margin-right: 20px;
+        background-color: #484349;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 100%;
+        padding: 20px 0;
+        height: calc(100% -60px);
+        overflow-y: auto;
+    }
+    .nav-menu-item{
+        line-height: 70px;
+    }
+    .nav-menu-link:hover{
+        background: none;
+        color: #00CAE0;
+    }
+}

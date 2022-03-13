@@ -6,22 +6,23 @@ function FormaContacto() {
     //imprimir el nomre de la persona en consola
     const form = useRef();
 
-    const sendEmail = (e) => {
-      e.preventDefault();
-      emailjs.sendForm('service_y1w5vug', 'template_nmhx1uc', form.current, 'KFcgLyPohhWVvEG6y')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
-        e.target.reset();
-    };
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_ljg41tl', 'template_hsh9d4l', form.current, 'KFcgLyPohhWVvEG6y')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    e.target.reset();
+  };
     
     
 
     return (
         <div className="area-form">
-            <form id="form" ref={form} >
+            <form id="form" ref={form} onSubmit={sendEmail}>
                 <h1>Contacto</h1>
                 {/* Formulario */}
                 
@@ -36,7 +37,7 @@ function FormaContacto() {
                             </div>
 
                             <div id="Numero" className="form-element">
-                                <input maxlength="10" type="tel" className="form-control" className="input-group" id="numero-telefono" placeholder="Numero de Telefono" name="numero"/>
+                                <input maxlength="10" type="tel" className="form-control" className="input-group" id="numero-telefono" placeholder="Numero de Telefono" name="user_number"/>
                             </div>
 
                         </div>

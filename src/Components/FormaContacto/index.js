@@ -3,7 +3,6 @@ import './FormaContacto.css';
 import emailjs from '@emailjs/browser';
 
 function FormaContacto() {
-    //imprimir el nomre de la persona en consola
     const form = useRef();
 
   const sendEmail = (e) => {
@@ -16,14 +15,22 @@ function FormaContacto() {
           console.log(error.text);
       });
     e.target.reset();
-  };
+  }
+   /* cuando todos los datos este llenos al momento de hacer click en el boton se muestra un mensaje de exito */
+   function handleSubmit(e) {
+    e.preventDefault();
+    if(form.current.checkValidity()){
+      sendEmail(e);
+        alert('Mensaje Enviado');
+    }
+    form.current.classList.add('was-validated');
+  }
 
     return (
         <div className="area-form">
-            <form id="form" /* ref={form} */ onSubmit={validarCorreo}>
+            <form id="form" ref={form} onSubmit={handleSubmit}>
                 <h1>Contacto</h1>
                 {/* Formulario */}
-                
                     <div className="form-group">
                         <div id="top-form">
                             <div id="Nombre" className="form-element">

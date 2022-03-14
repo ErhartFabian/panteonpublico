@@ -16,41 +16,41 @@ function Navbar() {
     return (
         <React.Fragment>
             <Nav>
-                <NavLogo to= "/">
+                <NavLogo to= "/Home">
                     <img src={logoImg} id="logoImg" />
                 </NavLogo>
                 <Bars />
 
                 <NavMenu>
                     <NavLink
-                        to="/"
-                        activtestyle={{ color: 'black' }}
+                        to="/Mapa"
+                        activtestyle={{ color: '#bfbfbf' }}
                     >
                         Mapa Topográfico
                     </NavLink>
                     <NavLink
-                        to="/about"
-                        activtestyle={{ color: 'black' }}
+                        to="/Avisos"
+                        activtestyle={{ color: '#bfbfbf' }}
                     >
                         Avisos
                     </NavLink>
                     <NavLink
-                        to="/contact"
-                        activtestyle={{ color: 'black' }}
+                        to="/InformacionPago"
+                        activtestyle={{ color: '#bfbfbf' }}
                     >
                         Información de Pago
                     </NavLink>
                     <NavLink
-                        to="/signin"
-                        activtestyle={{ color: 'black' }}
+                        to="/Busqueda"
+                        activtestyle={{ color: '#bfbfbf' }}
                     >
-                        Sign In
+                        Búsqueda
                     </NavLink>
                     <NavLink
-                        to="/more"
-                        activtestyle={{ color: 'black' }}
+                        to="/Contacto"
+                        activtestyle={{ color: '#bfbfbf' }}
                     >
-                        More
+                        Contacto
                     </NavLink>
                 </NavMenu>
             </Nav>

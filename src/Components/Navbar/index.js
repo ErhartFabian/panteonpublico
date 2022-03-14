@@ -52,9 +52,6 @@ function Navbar() {
                     >
                         More
                     </NavLink>
-                    <NavBtn>
-                        <NavBtnLink to="/sign-up">Sign up</NavBtnLink>
-                    </NavBtn>
                 </NavMenu>
             </Nav>
         </React.Fragment>

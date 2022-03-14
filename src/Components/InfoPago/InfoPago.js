@@ -1,47 +1,55 @@
-
 import './InfoPago.css'
+import React from 'react';
+import Button from "@material-ui/core/Button";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faReceipt} from '@fortawesome/free-solid-svg-icons';
+import {faFile} from '@fortawesome/free-solid-svg-icons';
 function InfoPago() {
 
     return (
         <div className="container">
-            <div className="header">
-                <nav className='nav'>
-                    <a href='#' className='logo nav-link'>Logo</a>
-                    <h2 className='title nav-link'>Información de pago</h2>
-                    <ul className='nav-menu'>
-                        <li className='nav-menu-item'>
-                            <a href='#' className='nav-menu-link nav-link'>Mapa topográfico</a>
-                        </li>
-                        <li className='nav-menu-item'>
-                            <a href='#' className='nav-menu-link nav-link'>Información de pago</a>
-                            </li> 
-                        <li className='nav-menu-item'>
-                            <a href='#'  className='nav-menu-link nav-link'>Búsqueda</a>
-                        </li> 
-                        <li className='nav-menu-item'>
-                            <a href='#' className='nav-menu-link nav-link'>Contacto</a>
-                        </li>  
-                    </ul>
-                </nav>
-            </div>
-            <div className='info'>
-            <h1 id="name">Nombre del fallecido</h1>
+           
+            <div className='info nombre'>
+                <h1 id="name">Fulanito muerto</h1>
             
-            <div className='dato'>
-                <label>Tipo de pago </label> <input type="text"></input>
-            </div>
+                <div className='dato'>
+                    <label id="form1">Tipo de pago: </label> <input className='input' type="text"></input>
+                </div>
 
-            <div className='dato'>
-                <label>Cuartel asignado:</label><input type="text"></input>
-            </div>
+                <div className='dato'>
+                    <label id="form2">Cuartel asignado:</label>
+                    <select id="options" name="cuartel">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
 
-            <div className='dato'>
-                <button> Recibo de pago </button>
-                <button>Acta de defunción</button>
+                <div className='generador'>
+                    <Button 
+                    variant="contained" 
+                    color="primary"
+                    size="Large"
+                    disableElevation>
+                       <FontAwesomeIcon className='icono' icon={faReceipt} />
+                        Recibo de pago 
+                    </Button>
+
+                    <Button 
+                    id="Acta"
+                    variant="contained"
+                    color="secondary"
+                    size="Large"
+                    disableElevation>
+                     <FontAwesomeIcon className='icono' icon={faFile} />
+                    Acta de defunción</Button>
+                </div>
             </div>
+            <div>
+            <FontAwesomeIcon icon="faReceip" />
             </div>
         </div>
     )
 }
-
 export default InfoPago;

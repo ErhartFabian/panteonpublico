@@ -9,6 +9,7 @@ import {Busqueda} from './Components';
 
 ReactDOM.render(
   <BrowserRouter>
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />

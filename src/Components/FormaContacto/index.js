@@ -5,11 +5,11 @@ import emailjs from '@emailjs/browser';
 function FormaContacto() {
     const form = useRef();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+    const sendEmail = (e) => {
+        e.preventDefault();
 
     emailjs.sendForm('service_ljg41tl', 'template_hsh9d4l', form.current, 'KFcgLyPohhWVvEG6y')
-      .then((result) => {
+    .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);

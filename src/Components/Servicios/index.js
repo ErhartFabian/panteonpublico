@@ -257,7 +257,7 @@ function Servicios() {
                                 <tr>
                                     <th class='text '>Actividad</th>
                                     <th class='text '>Descripcion</th>
-                                    <th class='number '>Cuota Fija</th>
+                                    <th class='number '>Cuota fija</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -315,6 +315,62 @@ function Servicios() {
                                     <td class='text ' data-title='Actividad'>Venta de ataúd infantil 70 cm</td>
                                     <td class='text ' data-title='Descripcion'>Ataúd de 70 cm fabricado con madera de pino de 12 mm de espesor y piso de triplay de 12 mm, tapizado en su interior  y exterior con satín o terciopelo blanco y detallado con flecos en los bordes plisados de la tela</td>
                                     <td class='number ' data-title='Cuota fija'>$800.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Venta de ataúd infantil 80 cm</td>
+                                    <td class='text ' data-title='Descripcion'>Ataúd de 80 cm fabricado con madera de pino de 12 mm de espesor y piso de triplay de 12 mm, tapaizado en su interior y exteriror con satin o terciopelo blanco  y detallado con flecos en los bordes plisados de tela</td>
+                                    <td class='number ' data-title='Cuota fija'>$1,000.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Venta de ataúd infantil 90 cm</td>
+                                    <td class='text ' data-title='Descripcion'>Ataúd de 90 cm fabricado con madera de pino de 12 mm de espesor y piso de triplay de 12 mm, tapaizado en su interior y exteriror con satin o terciopelo blanco  y detallado con flecos en los bordes plisados de tela</td>
+                                    <td class='number ' data-title='Cuota fija'>$1,100.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Venta de ataúd infantil 100 cm</td>
+                                    <td class='text ' data-title='Descripcion'>Ataúd de 100 cm fabricado con madera de pino de 12 mm de espesor y piso de triplay de 12 mm, tapaizado en su interior y exteriror con satin o terciopelo blanco  y detallado con flecos en los bordes plisados de tela</td>
+                                    <td class='number ' data-title='Cuota fija'>$1,200.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Venta de ataúd infantil 120 cm</td>
+                                    <td class='text ' data-title='Descripcion'>Ataúd de 120 cm fabricado con madera de pino de 12 mm de espesor y piso de triplay de 12 mm, tapaizado en su interior y exteriror con satin o terciopelo blanco  y detallado con flecos en los bordes plisados de tela</td>
+                                    <td class='number ' data-title='Cuota fija'>$1,300.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Servicios Funerarios Paquete Basico</td>
+                                    <td class='text ' data-title='Descripcion'>Renta de sala y equipo de velación, incluye insumos de cafetería y ataúd fabricado en MDF de 12 mm, con marco de pino de 20 mm y piso de madera de 12 mm y tres refuerzos, con tapizado de tela tafeta blanca y detalles plisados en tapa superior abatible con opción de grabado de imagen religiosa</td>
+                                    <td class='number ' data-title='Cuota fija'>$7,798.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Servicios Funerarios Paquete Mediano</td>
+                                    <td class='text ' data-title='Descripcion'>Renta de sala y equipo de leación, incluye insumo de cafetería y ataúd fabricado con enchapado de caobilla de 15 mm, con marcos, moldura en madera de pino de 20 mm de espesor, piso de madera de 12 mm y 3 refuerzos, tapizado de interiores con satin blanco, con dos tapas, una interiro abatible y una fija con opción de diseño de grabado de imagen religiosa</td>
+                                    <td class='number ' data-title='Cuota fija'>$9,879.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Servicios Funerarios Paquete Alto</td>
+                                    <td class='text ' data-title='Descripcion'>Renta de sala y equipo de velación, incluye insumos de cafetería y ataúd fabricado tipo bóveda con enchapado, domo duelas, molduras y pisos de madera de pino, tapizado en interior con satín blanco y con un plisado de 3 hilos, en la tapa interior lleva un tapizado capitoneado con satín, cuenta con 2 tapas tipo domo, uno fijo y otro abatible con opción de diseño de grabado de imagen religiosa</td>
+                                    <td class='number ' data-title='Cuota fija'>$17,327.00</td>
+                                </tr>
+
+
+                                <tr class='hide-mobile'>
+                                    <td class='text ' data-title='Actividad'>Servicios Funerarios Paquete para bebe</td>
+                                    <td class='text ' data-title='Descripcion'>Renta de sala y equipo de velación, incluye insumo en cafeteria y 1 ataud infantil a elegir, de 50,70,80,90.100 o 120 centrímetros, fabricado con madera de pino de 12 mm de espesor y piso de ttriplay de 12 mm, tapizado en su interior y exterios con satín o terciopelo blanco, con fleco en los bordes</td>
+                                    <td class='number ' data-title='Cuota fija'>$4,244.00</td>
                                 </tr>
 
                             </tbody>

@@ -3,35 +3,6 @@
     margin: 0;
 }
 
-.table_container{
-    margin-top: 10vh;
-    height: 90vh;
-    width: 100vw;
-    border: 10px solid black;
-}
-
-.search_box{
-    height: 30px;
-    width: 250px;
-    border: 3px solid blue;
-}
-
-.search_input{
-    height: 25px;
-    width: 150px;
-    border-radius: 20px;
-    background-color: #EBEBEB;
-}
-
-.filters > div {
-    display: inline-block;
-    border: 2px solid black
-}
-
-.filters > button {
-    position: absolute;
-    left: 100px;
-    border-radius: 10px;
-    height: 20px;
-    width: 100px
+.MuiTableCell-root > div{
+    background-color: #b3acab;
 }

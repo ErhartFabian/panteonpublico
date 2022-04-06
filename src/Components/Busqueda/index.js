@@ -10,12 +10,12 @@ function Busqueda () {
     const [selectedRow, setSelectedRow] = useState(null);
 
     const columns = [
-      {title: "Cuartel", field: 'cuartel', align: 'center'},
+      {title: "Cuartel", field: 'cuartel', align: 'center'}, 
       {title: "Clase", field: 'clase', align: 'center'},
       {title: "Lote", field: 'lote', align: 'center'},
       {title: "Fosa", field: 'fosa', align: 'center'},
-      {title: "Nombre del Finado", field: 'finado'},
-      {title: "Responsable de la fosa", field: 'responsable'},
+      {title: "Nombre del Finado", field: 'finado', width: '20%'},
+      {title: "Responsable de la fosa", field: 'responsable', width: '20%'},
       {title: "Adeudo", field: 'adeudo', align: 'center'},
     ]
   
@@ -38,23 +38,26 @@ function Busqueda () {
           options={{
             filtering: true,
             headerStyle: {
-              backgroundColor: '#b3acab',
-              fontSize: '23px',
+              color: '#fff',
+              fontSize: '18px',
+              fontWeight: 'bold',
               fontFamily: 'TimesNewRoman',
-              
-              justifyContent: 'center'
+              backgroundColor: "#999999",
+              align: 'center'
             },
-            rowStyle: {
-              fontSize: '20px',
+            rowStyle: (rowData) => ({
+              //backgroundColor: selectedRow === rowData.tableData.id ? "#6ABAC9" : null,
+              fontSize: '15px',
               fontFamily: 'TimesNewRoman',
-            },
+            }),
             pageSize: 10,
             searchFieldStyle: {
-              fontSize: '22px'
+              fontSize: '18px',
+              fontFamily: 'time new roman'
             }
           }}
           
-          onRowClick={((selectedRow) => setSelectedRow(selectedRow.tableData))}
+          onRowClick={((event, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
           
           localization={
             {

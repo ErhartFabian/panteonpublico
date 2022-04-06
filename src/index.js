@@ -5,8 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {
-  Home,FormaContacto,Servicios,Navbar} from './Components';
-import Busqueda from './Components/Busqueda';
+  Home,FormaContacto,Servicios,Navbar, Busqueda} from './Components';
+
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,7 +14,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
-      <Route path="/FormaContacto" element={<FormaContacto />} />
+      <Route path="/Contacto" element={<FormaContacto />} />
       <Route path="/Servicios" element={<Servicios />} />
       <Route path='/Busqueda' element={<Busqueda/>} />
     </Routes>

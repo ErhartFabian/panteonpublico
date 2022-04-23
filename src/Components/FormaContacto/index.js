@@ -34,17 +34,21 @@ function FormaContacto() {
                     <div className="form-group">
                         <div id="top-form">
                             <div id="Nombre" className="form-element">
-                                <input maxLength="60" type="text" className="form-control" className="input-group" id="nombre"  placeholder="Nombre" name="user_name"required/>
+                                <label htmlFor="Nombre" >Nombre</label>
+                                <input maxLength="60" type="text" className="form-control" className="input-group" id="nombre"   name="user_name"required/>
                             </div>
                             <div id="Email" className="form-element">
-                                <input type="email" className="form-control" className="input-group" id="correo"  placeholder="Ingrese Correo" name="user_email" required/>
+                                <label htmlFor="Email"  >Email</label>
+                                <input type="email" className="form-control" className="input-group" id="correo"   name="user_email" required/>
                             </div>
                             <div id="Numero" className="form-element">
-                                <input maxLength="10" type="tel" className="form-control" className="input-group" id="numero-telefono" placeholder="Numero de Telefono" name="user_number" required/>
+                                <label htmlFor="Numero" >Numero</label>
+                                <input maxLength="10" type="tel" className="form-control" className="input-group" id="numero-telefono"  name="user_number" required/>
                             </div>
                         </div>
                         <div id="bottom-form">
-                                <textarea maxLength="252" id="area-mensaje"  rows="3" placeholder="Mensaje" name="message" required></textarea>
+                                <label htmlFor="Mensaje" >Mensaje</label>
+                                <textarea maxLength="252" id="area-mensaje"  rows="3"  name="message" required></textarea>
                             
                             {/* boton de enviar */}
                             <button type="submit" className="enviar-button" value="Send">Enviar</button>

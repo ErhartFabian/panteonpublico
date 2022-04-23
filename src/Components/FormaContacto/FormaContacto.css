@@ -24,7 +24,9 @@
 }
 
 .form-element{
-    margin: 2% 5% 5% 5%;
+    margin: 2% 5% 10% 5%;
+    background-color: white;
+    text-align: center;
 }
 
 #top-form{
@@ -53,13 +55,20 @@
    font-size: larger;
    background-color: white;
 }
+label{
+    width: 100%;
+   text-align: center;
+   box-sizing: border-box;
+   font-size: larger;
+   background-color: white;
+   font-weight: semibold;
+}
 #area-mensaje{
     width: 90%;
     height: 200px;   
     align-items: center;
     font-size: 160%;
     text-align: center;
-    ;
     padding-top: 4%;
     box-sizing: border-box;
     background-color: white;

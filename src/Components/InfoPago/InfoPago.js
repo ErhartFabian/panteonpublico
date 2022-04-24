@@ -1,16 +1,22 @@
-import React, {useState} from 'react';
-import './InfoPago.css'
+import React, {useState,useEffect} from 'react';
+import './css/InfoPago.css'
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Datepicker,{registerLocale} from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es'
+import Comprobante from './Comprobante';
+import DocPdf from './DocPdf';
 
 registerLocale("es",es);
 
 function InfoPago() {
     const [datospago,setDatospago] =useState({})
+    const [verComprobante,setVerComprobante] = useState(false);
+    
+    React.useEffect(()=>{
+    },[]);
 
     const handleChange = e =>{
         setDatospago({
@@ -22,31 +28,19 @@ function InfoPago() {
     const[fecha,setFecha] = useState(new Date("2022", "01", "01"));
 
     const handleSubmit = e =>{
-        let emptyVal=false;
         e.preventDefault();
         setDatospago({
             ...datospago,
             [e.target.name]:e.target.value, 
         })
-        if(e.target.value===" "){
-            emptyVal=true;
-        }
-        if(emptyVal === true)
-        {
-            alert("Complete todos los datos");
-        }
-        else{
-            alert("Datos enviados");
-        }
     }
+    
     return (
         <div className="container">
-           
             <form onSubmit={handleSubmit} className='informacion'>
-                <h1 id="name">Ficha de pago</h1>
-
+                <h1 id="name">Comprobante de pago</h1>
                 <div className='dato'>
-                    <label htmlfor="idpago" id='pago'>Clave de pago </label> 
+                    <label htmlFor="idpago" id='pago'>Clave de pago </label> 
                     <input 
                     className='input'
                     placeholder='Ingrese clave de pago' 
@@ -58,7 +52,7 @@ function InfoPago() {
                 </div>
 
                 <div className='dato'>
-                    <label htmlfor="idfosa" id='fosa'>Clave de fosa </label> 
+                    <label htmlFor="idfosa" id='fosa'>Clave de fosa </label> 
                     <input 
                     className='input' 
                     type="text"
@@ -70,7 +64,7 @@ function InfoPago() {
                 </div>
 
                 <div className='dato'>
-                    <label  htmlfor='fecha' id="fechaPago" >Fecha de pago</label>
+                    <label  htmlFor='fecha' id="fechaPago" >Fecha de pago</label>
                     <div>
                     <Datepicker
                     className='datepicker'
@@ -87,12 +81,18 @@ function InfoPago() {
                     variant="contained" 
                     color="primary"
                     size="large"
-                    disableElevation>
-                       <FontAwesomeIcon className='icono' icon={faReceipt} />
-                        Descargar recibo de pago 
+                    disableElevation
+                    onClick={()=>{
+                        setVerComprobante(!verComprobante);
+                    }}
+                    >
+                    <FontAwesomeIcon className='icono' icon={faReceipt} />
+                        {verComprobante ? "Ocultar comprobante" : "Ver Comprobante"} 
                     </Button>
+                    <DocPdf/>
                 </div>
             </form>
+            {verComprobante ? <Comprobante/> : null}
         </div>
     )
 }

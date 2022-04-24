@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {Home} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
+import Comprobante from './Components/InfoPago/Comprobante';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/InfoPago" element={<InfoPago/>} />
+      <Route path="/Comprobante" element={<Comprobante/>} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

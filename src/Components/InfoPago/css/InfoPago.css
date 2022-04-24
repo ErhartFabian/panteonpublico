@@ -18,6 +18,7 @@ body{
     width: 800px;
     height: 400px;
     border-radius: 1rem;
+    margin-bottom: 50px;
 }
 #name{
     text-align: center;

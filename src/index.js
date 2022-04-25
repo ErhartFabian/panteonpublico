@@ -10,6 +10,7 @@ import Comprobante from './Components/InfoPago/Comprobante';
 
 ReactDOM.render(
   <BrowserRouter>
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />

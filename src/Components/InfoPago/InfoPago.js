@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import './css/InfoPago.css'
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,9 +14,6 @@ registerLocale("es",es);
 function InfoPago() {
     const [datospago,setDatospago] =useState({})
     const [verComprobante,setVerComprobante] = useState(false);
-    
-    React.useEffect(()=>{
-    },[]);
 
     const handleChange = e =>{
         setDatospago({

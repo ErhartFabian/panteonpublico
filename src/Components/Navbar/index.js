@@ -35,7 +35,7 @@ function Navbar() {
                         Avisos
                     </NavLink>
                     <NavLink
-                        to="/InformacionPago"
+                        to="/InfoPago"
                         activtestyle={{ color: '#bfbfbf' }}
                     >
                         Información de Pago

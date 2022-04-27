@@ -8,6 +8,7 @@ import {Home} from './Components';
 import {Navbar} from './Components';
 import {Busqueda} from './Components';
 import {FormaContacto} from './Components';
+import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
 import Comprobante from './Components/InfoPago/Comprobante';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/Comprobante" element={<Comprobante/>} />
       <Route path="/Busqueda" element={<Busqueda />} />
       <Route path="/Contacto" element={<FormaContacto />} />
+      <Route path="/Mapa" element={<Mapa />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

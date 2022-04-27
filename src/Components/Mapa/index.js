@@ -1,15 +1,12 @@
 import React from "react";
-import './Mapa.css';
-import Leaflet from 'leaflet';
-
+import DOMPurify from "dompurify";
 
 function Mapa() {
-    let map = Leaflet.map('map').setView([0, 0], 0);
+    const myHTML = `<h1>Mapa<h1>`;
+    const mySafeHTML = DOMPurify.sanitize(myHTML);
     return (
         <React.Fragment>
-            <div id="map">
-                {map}
-            </div>
+            <div dangerouslySetInnerHTML={{ __html: mySafeHTML }}/>
         </React.Fragment>
     )
 }

@@ -1,41 +1,8 @@
-import React, { useRef } from "react";
-import Button from "@material-ui/core/Button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFile} from '@fortawesome/free-solid-svg-icons';
-import ReactToPrint from "react-to-print";
+import React from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
-
-export default function DocPdf () {
-    let componentRef = useRef();
+import './css/boleta.css'
+export default function Boleta(){
     return (
-      <>
-        <div>
-          {/* button to trigger printing of target component */}
-          <ReactToPrint
-            trigger={() => 
-            <Button
-            type="submit"
-            variant="contained" 
-            color="secondary"
-            size="large"
-            disableElevation
-            ><FontAwesomeIcon className='icono' icon={faFile}/>Descargar Pdf</Button>
-            }
-            content={() => componentRef}
-          />
-  
-          <div style={{ display: "none" }}>
-              <ComponentToPrint ref={(el) => (componentRef = el)} />
-          </div>
-  
-        </div>
-      </>
-    );
-  }
-
-class ComponentToPrint extends React.Component {
-    render() {
-      return (
         <div id="boleta">
         <div className="datos1">
             <div>
@@ -122,6 +89,5 @@ class ComponentToPrint extends React.Component {
             <h2>Referencia Bancaria</h2>
         </div>
     </div>
-      );
-    }
-  }
+    );
+}

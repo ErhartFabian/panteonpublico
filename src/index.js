@@ -5,18 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {Home} from './Components';
+import {Navbar} from './Components';
+import {Busqueda} from './Components';
+import {FormaContacto} from './Components';
+import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
 import Comprobante from './Components/InfoPago/Comprobante';
 import Boleta from './Components/InfoPago/Boleta';
 
 ReactDOM.render(
   <BrowserRouter>
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/InfoPago" element={<InfoPago/>} />
       <Route path="/Comprobante" element={<Comprobante/>} />
-      <Route path="/Boleta" element={<Boleta />} />
+      <Route path="/Busqueda" element={<Busqueda />} />
+      <Route path="/Contacto" element={<FormaContacto />} />
+      <Route path="/Mapa" element={<Mapa />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

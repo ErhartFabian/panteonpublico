@@ -11,6 +11,7 @@ import {FormaContacto} from './Components';
 import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
 import Comprobante from './Components/InfoPago/Comprobante';
+import Boleta from './Components/InfoPago/Boleta';
 
 ReactDOM.render(
   <BrowserRouter>

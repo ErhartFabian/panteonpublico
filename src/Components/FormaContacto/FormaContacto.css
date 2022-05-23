@@ -1,94 +1,143 @@
-.area-form > *{
-    margin: 0px;
-    padding: 0px;
-    background-color: rgb(158, 155, 155);  
+:root {
+    --detail-blue: #3866F2;
 }
 
-.area-form{
-    display: flex;
-    justify-content: center;
+@font-face {
+
+    font-family: Helvetica-Nue;
+    
+    src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);
+    
+    }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica-Nue,Arial;
+    
 }
 
-#form{
-    width: 80%;
-    height: 80%;
+.area-form {
+    height: calc(100vh - 85px);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 6%;
-    background-color: white;
-}
-.form-group{
-    width:80%;    
+    background-color: #e5e5f7;
+    opacity: 1;
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
+
 }
 
-.form-element{
-    margin: 2% 5% 10% 5%;
-    background-color: white;
-    text-align: center;
+
+#area-mensaje {
+    resize: none;
+
 }
 
-#top-form{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-sizing: border-box;
-}
-#bottom-form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 2%;
-    background-color: white;
-    box-sizing: border-box;
-}
-.input-group{
-   height: 180%;
-   width: 100%;
-   border:rgb(207, 204, 204) solid 2px;
-   text-align: center;
-   box-sizing: border-box;
-   font-size: larger;
-   background-color: white;
-}
-label{
-    width: 100%;
-   text-align: center;
-   box-sizing: border-box;
-   font-size: larger;
-   background-color: white;
-   font-weight: semibold;
-}
-#area-mensaje{
+.form {
+    background-color: #fff;
+    margin: auto;
     width: 90%;
-    height: 200px;   
-    align-items: center;
-    font-size: 160%;
+    max-width: 400px;
+    padding: 4.5em 3em;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
-    padding-top: 4%;
-    box-sizing: border-box;
-    background-color: white;
-    margin-bottom: 2%;
 }
 
-.enviar-button{
-    height: 50px;
-    width: 15%;
-    border:rgb(207, 204, 204) solid 2px;
-    text-align: center;
-    box-sizing: border-box;
-    font-size: medium;
-    color: white;
-    font-weight: bold;
-    background-color: #20201B;
+.form__title {
+    font-size: 2rem;
+    margin-bottom: .5em;
 }
 
- h1{
-     font-size: 250%;
-     background-color: white;
-     
- }
+.form__paragraph {
+    font-weight: 300;
+}
+
+.form__link {
+    font-weight: 400;
+    color: var(--detail-blue);
+    text-decoration: none;
+}
+
+.form__container {
+    margin-top: 3rem;
+    display: grid;
+    gap: 2.5rem;
+}
+
+.form__group {
+    position: relative;
+    --color: #5757577E;
+}
+
+.form__input {
+    width: 100%;
+    background: none;
+    color: #706C6C;
+    font-size: 1rem;
+    padding: .6em .3em;
+    border: none;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 1px solid var(--color);
+}
+
+.form__input:focus,
+.form__input:not(:placeholder-shown) {
+    color: #4D4646;
+}
+
+.form__input:focus+.form__label,
+.form__input:not(:placeholder-shown)+.form__label {
+    transform: translateY(-12px) scale(.7);
+    color: var(--detail-blue);
+}
+
+.form__label {
+    color: var(--color);
+    cursor: text;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    transform: translateY(10px);
+    transform-origin: left top;
+    transition: transform .5s ease-in-out, color .3s ease-in;
+}
+
+.form__submit {
+    background-color: var(--detail-blue);
+    color: #FFF;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 300;
+    font-size: 1rem;
+    padding: .8em 0;
+    border: none;
+    border-radius: .5em;
+}
+
+.form__line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--detail-blue);
+    transform: scale(0);
+    transform-origin: center bottom;
+    transition: transform .4s;
+}
+
+
+.form__input:focus~.form__line,
+.form__input:not(:placeholder-shown)~.form__line {
+    transform: scale(1);
+}
+
+@media screen and (max-width:425px) {
+    .form__title {
+        font-size: 1.8rem;
+    }
+}

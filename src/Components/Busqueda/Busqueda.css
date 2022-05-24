@@ -16,3 +16,17 @@
     font-size: 22px;
     font-family: 'Times New Roman', Times, serif;
 }
+
+.filter{
+    width: 80%;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid ;
+}
+
+.fa-solid{
+    color: #4b4b4b;
+}
+
+
+

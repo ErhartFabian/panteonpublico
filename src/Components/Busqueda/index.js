@@ -10,13 +10,13 @@ function Busqueda () {
     const [selectedRow, setSelectedRow] = useState(null);
 
     const columns = [
-      {title: "Cuartel", field: 'cuartel', align: 'center'}, 
-      {title: "Clase", field: 'clase', align: 'center'},
-      {title: "Lote", field: 'lote', align: 'center'},
-      {title: "Fosa", field: 'fosa', align: 'center'},
-      {title: "Nombre del Finado", field: 'finado', width: '20%'},
+      {title: "Cuartel", field: 'cuartel', align: 'center', width:'10'}, 
+      {title: "Clase", field: 'clase', align: 'center', width:'10'},
+      {title: "Lote", field: 'lote', align: 'center', width:'10'},
+      {title: "Fosa", field: 'fosa', align: 'center', width:'40'},
+      {title: "Nombre del finado", field: 'finado', width: '20%'},
       {title: "Responsable de la fosa", field: 'responsable', width: '20%'},
-      {title: "Adeudo", field: 'adeudo', align: 'center'},
+      {title: "Adeudo", field: 'adeudo', align: 'center', width:'10'},
     ]
   
     const URL = 'http://localhost:3001/panteon';
@@ -53,7 +53,7 @@ function Busqueda () {
             pageSize: 10,
             searchFieldStyle: {
               fontSize: '18px',
-              fontFamily: 'time new roman'
+              fontFamily: 'time new roman',
             }
           }}
           
@@ -73,6 +73,37 @@ function Busqueda () {
               }
             }
           }
+
+          components={{
+            FilterRow: (rowProps) => {
+              const { columns, onFilterChanged } = rowProps;
+    
+              return (
+                <>
+                  <tr>
+                    {columns.map((col) => {
+                      if (col.field) {
+                        return (
+                          <td key={col.field}>
+                            <i className="fa-solid fa-filter"></i>
+                            <input
+                              className="filter"
+                              // placeholder="Filtro"
+                              id={col.field}
+                              onChange={(e) => {
+                                console.log(e.target.id, e.target.value);
+                                onFilterChanged(col.tableData.id, e.target.value);
+                              }}
+                            />
+                          </td>
+                        );
+                      }
+                    })}
+                  </tr>
+                </>
+              );
+            },
+          }}
         />
       </div>
     );

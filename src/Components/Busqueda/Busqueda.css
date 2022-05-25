@@ -3,19 +3,19 @@
     src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);    
 }
 
-/* Para tener el formato background de los demás 
+/*Para tener el formato background de los demás */
 .MuiPaper-root{
     background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
     background-size: 15px 15px;
     background-color: #e5e5f7;
-} */
+}
 
 /* .MuiInputBase-input{
     font-family: Helvetica-Nue,Arial;
 } */
 
 .MuiTypography-h6{
-    font-family: Helvetica-Nue;
+    font-family: 'Helvetica-Nue', Arial;
 }
 
 .MuiTableCell-root > div{

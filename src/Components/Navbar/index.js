@@ -15,7 +15,7 @@ function Navbar() {
 
     return (
         <React.Fragment>
-            <Nav>
+            <Nav className="nav">
                 <NavLogo to= "/Home">
                     <img src={logoImg} id="logoImg" />
                 </NavLogo>

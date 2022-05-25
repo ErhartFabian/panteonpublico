@@ -1,14 +1,16 @@
-import React from "react";
-import DOMPurify from "dompurify";
+import React from 'react';
+import './index.css';
+import MapView from './react-leaflet.js';
+import * as serviceWorker from './serviceWorker';
 
 function Mapa() {
-    const myHTML = `<h1>Mapa<h1>`;
-    const mySafeHTML = DOMPurify.sanitize(myHTML);
-    return (
-        <React.Fragment>
-            <div dangerouslySetInnerHTML={{ __html: mySafeHTML }}/>
-        </React.Fragment>
-    )
+
+  return (
+      <div className="mapa">
+          <MapView />
+      </div>
+  )
 }
+serviceWorker.unregister();
 
 export default Mapa;

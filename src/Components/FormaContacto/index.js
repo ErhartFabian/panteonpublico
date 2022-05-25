@@ -55,7 +55,6 @@ function FormaContacto() {
                     <button type="submit" className="form__submit" value="Send">Enviar</button>
                 </div>
             </form>
-            
         </div>
     )
 }

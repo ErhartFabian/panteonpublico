@@ -15,7 +15,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Helvetica-Nue,Arial;
-    
 }
 
 .area-form {
@@ -23,11 +22,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e5e5f7;
     opacity: 1;
+    background-color: #e5e5f7;
     background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
     background-size: 15px 15px;
-
 }
 
 
@@ -110,7 +108,7 @@
 .form__submit {
     background-color: var(--detail-blue);
     color: #FFF;
-    font-family: 'Roboto', 'sans-serif';
+    font-family: Helvetica-Nue,Arial;
     font-weight: 300;
     font-size: 1rem;
     padding: .8em 0;

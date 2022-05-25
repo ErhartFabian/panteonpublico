@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import './Busqueda.css';
 
 
+
 function Busqueda () {
     const [data, setData] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null);
@@ -29,6 +30,7 @@ function Busqueda () {
       peticionGET();
     },[]);
   
+
     return (
       <div className="App">
         <MaterialTable
@@ -41,19 +43,18 @@ function Busqueda () {
               color: '#fff',
               fontSize: '18px',
               fontWeight: 'bold',
-              fontFamily: 'TimesNewRoman',
-              backgroundColor: "#999999",
+              backgroundColor: "#706C6C",
+              fontFamily: 'Helvetica-Nue',
               align: 'center'
             },
             rowStyle: (rowData) => ({
               //backgroundColor: selectedRow === rowData.tableData.id ? "#6ABAC9" : null,
               fontSize: '15px',
-              fontFamily: 'TimesNewRoman',
             }),
             pageSize: 10,
             searchFieldStyle: {
               fontSize: '18px',
-              fontFamily: 'time new roman',
+              fontFamily: 'Helvetica-Nue'
             }
           }}
           
@@ -91,7 +92,6 @@ function Busqueda () {
                               // placeholder="Filtro"
                               id={col.field}
                               onChange={(e) => {
-                                console.log(e.target.id, e.target.value);
                                 onFilterChanged(col.tableData.id, e.target.value);
                               }}
                             />

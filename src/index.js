@@ -12,6 +12,7 @@ import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
 import Comprobante from './Components/InfoPago/Comprobante';
 import Boleta from './Components/InfoPago/Boleta';
+import Servicios from './Components/Servicios';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Route path="/Busqueda" element={<Busqueda />} />
       <Route path="/Contacto" element={<FormaContacto />} />
       <Route path="/Mapa" element={<Mapa />} />
+      <Route path="/Servicios" element={<Servicios />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

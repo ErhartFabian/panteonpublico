@@ -35,6 +35,12 @@ function Navbar() {
                         Avisos
                     </NavLink>
                     <NavLink
+                        to="/Servicios"
+                        activtestyle={{ color: '#bfbfbf' }}
+                    >
+                        Servicios
+                    </NavLink>
+                    <NavLink
                         to="/InfoPago"
                         activtestyle={{ color: '#bfbfbf' }}
                     >

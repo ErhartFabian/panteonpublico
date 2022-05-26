@@ -1,18 +1,46 @@
-.app > *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+@font-face {
+    font-family: Helvetica-Nue;
+    src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);    
 }
 
-.MuiInputBase-input{
-    font-family: 'Times New Roman', Times, serif;
+/*Para tener el formato background de los demás */
+.MuiPaper-root{
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
+    background-color: #e5e5f7;
+}
+
+/* .MuiInputBase-input{
+    font-family: Helvetica-Nue,Arial;
+} */
+
+.MuiTypography-h6{
+    font-family: 'Helvetica-Nue', Arial;
 }
 
 .MuiTableCell-root > div{
     justify-content: center;
 }
 
+.MuiTableRow-root{
+    font-family: Helvetica-Nue, Arial;   
+}
+
 .MTableToolbar-title-9 > h6{
     font-size: 22px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Helvetica-Nue, Arial;
 }
+
+.filter{
+    width: 80%;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid ;
+}
+
+.fa-solid{
+    color: #706C6C;
+}
+
+
+

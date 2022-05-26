@@ -10,6 +10,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    background-color: #e5e5f7;
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
 }
 h1{
     text-align: center;
@@ -19,7 +23,8 @@ h1{
     height: 60%;
     margin-top: 1%;
     background-color: #f2f2f2;
-    border: black solid 1px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 50%);
 }
 
 .rg-container {

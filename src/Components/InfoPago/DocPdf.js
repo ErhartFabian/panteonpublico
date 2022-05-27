@@ -12,6 +12,7 @@ export default function DocPdf () {
         <div>
           {/* button to trigger printing of target component */}
           <ReactToPrint
+            documentTitle="Comprobante de pago"
             trigger={() => 
             <Button
             type="submit"

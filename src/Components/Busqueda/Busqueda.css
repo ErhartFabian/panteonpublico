@@ -16,6 +16,7 @@
 
 .MuiTypography-h6{
     font-family: 'Helvetica-Nue', Arial;
+    color: #6e7b86;
 }
 
 .MuiTableCell-root > div{
@@ -32,14 +33,20 @@
 }
 
 .filter{
-    width: 80%;
+    width: 70%;
     text-align: center;
     border: none;
-    border-bottom: 1px solid ;
+    border-bottom: 1px solid #6e7b86;
+    background-color: #F7F7FF;
 }
 
+.filter:focus{
+    background-color:#dedcdc ;
+}
 .fa-solid{
-    color: #706C6C;
+    color: #6e7b86;
+    margin-top: 5px;
+    margin-left: 20px;
 }
 
 

@@ -26,7 +26,7 @@
     background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
     background-size: 15px 15px;
 }
-.instructions {
+.instructions_contacto {
     height: calc(80vh - 85px);
     display: flex;
     justify-content: center;

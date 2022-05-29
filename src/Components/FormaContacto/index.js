@@ -32,10 +32,13 @@ function FormaContacto() {
 
     return (
         <div className="area-form">
-            <div className="instructions">
+            <div className="instructions_contacto">
                 <h2>¿Tienes alguna duda?</h2>
                 <p>
-                    Si tienes alguna duda o sugerencia, por favor llena el siguiente formulario y nos pondremos en contacto contigo.
+                    Favor llena el siguiente formulario y nos pondremos en contacto contigo.
+                </p>
+                <p>
+                    En la sección de mensaje siéntete libre de escribir cualquier duda, comentario o sugerencia.
                 </p>
             </div>
             <form className="form" id="form" ref={form} onSubmit={handleSubmit}>
@@ -49,12 +52,12 @@ function FormaContacto() {
                     </div>
                     <div className="form__group">
                         <input type="email" id="correo" className="form__input" placeholder=" " name="user_email" required/>
-                            <label htmlFor="correo" className="form__label">Email</label>
+                            <label htmlFor="correo" className="form__label">Correo</label>
                             <span className="form__line"></span>
                     </div>
                     <div className="form__group">
                         <input type="text" id="numero-telefono" className="form__input" placeholder=" " name="user_number" required/>
-                            <label htmlFor="numero-telefono" className="form__label">Numero de telefono</label>
+                            <label htmlFor="numero-telefono" className="form__label">Numero de teléfono</label>
                             <span className="form__line"></span>
                     </div>
                     <div className="form__group">

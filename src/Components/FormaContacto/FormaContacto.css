@@ -26,6 +26,24 @@
     background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
     background-size: 15px 15px;
 }
+.instructions {
+    height: calc(80vh - 85px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.9rem;
+    color: #3866F2;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+}
 
 
 #area-mensaje {
@@ -129,6 +147,20 @@
 .form__input:focus~.form__line,
 .form__input:not(:placeholder-shown)~.form__line {
     transform: scale(1);
+}
+
+.mensaje-enviado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    text-align: center;
+    color: #4D4646;
 }
 
 @media screen and (max-width:425px) {

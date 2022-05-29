@@ -4,6 +4,8 @@ import emailjs from '@emailjs/browser';
 
 function FormaContacto() {
     const form = useRef();
+    //useState para el mensaje de enviado correctamente
+    const [mensajeEnviado, setMensajeEnviado] = useState(false);
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -24,10 +26,18 @@ function FormaContacto() {
             alert('Mensaje Enviado');
         }
         form.current.classNameList.add('was-validated');
+        //mensaje enviato set true
+        setMensajeEnviado(true);
     }
 
     return (
         <div className="area-form">
+            <div className="instructions">
+                <h2>¿Tienes alguna duda?</h2>
+                <p>
+                    Si tienes alguna duda o sugerencia, por favor llena el siguiente formulario y nos pondremos en contacto contigo.
+                </p>
+            </div>
             <form className="form" id="form" ref={form} onSubmit={handleSubmit}>
                 <h2 className="form__title">Contacto</h2>
 
@@ -54,6 +64,9 @@ function FormaContacto() {
                     </div>
                     <button type="submit" className="form__submit" value="Send">Enviar</button>
                 </div>
+                
+                    {mensajeEnviado ? <div className="mensaje-enviado" >Mensaje enviado correctamente</div> : null}
+                
             </form>
         </div>
     )

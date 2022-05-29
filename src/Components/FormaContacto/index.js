@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import './FormaContacto.css';
 import emailjs from '@emailjs/browser';
 
@@ -6,6 +6,8 @@ function FormaContacto() {
     const form = useRef();
     //useState para el mensaje de enviado correctamente
     const [mensajeEnviado, setMensajeEnviado] = useState(false);
+    const [alert, setAlert] = useState(true);
+    const [showElement, setShowElement] = useState(false);
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -25,6 +27,10 @@ function FormaContacto() {
             sendEmail(e);
             /* alert('Mensaje Enviado'); */
             setMensajeEnviado(true);
+            setShowElement(true);
+            setTimeout(function () {
+                setShowElement(false);
+            }, 3000);
         }
         form.current.classNameList.add('was-validated');
     }
@@ -45,32 +51,37 @@ function FormaContacto() {
 
                 <div className="form__container">
                     <div className="form__group">
-                        <input type="text" id="nombre" className="form__input" placeholder=" " name="user_name"required />
-                            <label htmlFor="nombre" className="form__label">Nombre</label>
-                            <span className="form__line"></span>
+                        <input type="text" id="nombre" className="form__input" placeholder=" " name="user_name" required />
+                        <label htmlFor="nombre" className="form__label">Nombre</label>
+                        <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="email" id="correo" className="form__input" placeholder=" " name="user_email" required/>
-                            <label htmlFor="correo" className="form__label">Correo</label>
-                            <span className="form__line"></span>
+                        <input type="email" id="correo" className="form__input" placeholder=" " name="user_email" required />
+                        <label htmlFor="correo" className="form__label">Correo</label>
+                        <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="text" id="numero-telefono" className="form__input" placeholder=" " name="user_number" required/>
-                            <label htmlFor="numero-telefono" className="form__label">Numero de teléfono</label>
-                            <span className="form__line"></span>
+                        <input type="text" id="numero-telefono" className="form__input" placeholder=" " name="user_number" required />
+                        <label htmlFor="numero-telefono" className="form__label">Numero de teléfono</label>
+                        <span className="form__line"></span>
                     </div>
                     <div className="form__group">
                         <textarea type="text" id="area-mensaje" className="form__input" placeholder=" " name="message" maxLength={150} required></textarea>
-                            <label htmlFor="area-mensaje" className="form__label">Mensaje</label>
-                            <span className="form__line"></span>
+                        <label htmlFor="area-mensaje" className="form__label">Mensaje</label>
+                        <span className="form__line"></span>
                     </div>
                     <button type="submit" className="form__submit" value="Send">Enviar</button>
                 </div>
-                
-                <div className={mensajeEnviado ? 'mensaje-enviado' : 'mensaje-enviado-oculto'}>
-                    <p>Mensaje enviado correctamente</p>
-                </div>
-                
+                {showElement ? (
+                    <div  className={mensajeEnviado ? 'mensaje-enviado' : 'mensaje-enviado-oculto'}>
+                        {mensajeEnviado && (
+                            <p>Mensaje enviado correctamente</p>
+                        )}
+                    </div>
+                ) : (
+                    <div> </div>
+                )}{" "}
+
             </form>
         </div>
     )

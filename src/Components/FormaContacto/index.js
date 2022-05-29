@@ -23,11 +23,10 @@ function FormaContacto() {
         e.preventDefault();
         if (form.current.checkValidity()) {
             sendEmail(e);
-            alert('Mensaje Enviado');
+            /* alert('Mensaje Enviado'); */
+            setMensajeEnviado(true);
         }
         form.current.classNameList.add('was-validated');
-        //mensaje enviato set true
-        setMensajeEnviado(true);
     }
 
     return (
@@ -68,7 +67,9 @@ function FormaContacto() {
                     <button type="submit" className="form__submit" value="Send">Enviar</button>
                 </div>
                 
-                    {mensajeEnviado ? <div className="mensaje-enviado" >Mensaje enviado correctamente</div> : null}
+                <div className={mensajeEnviado ? 'mensaje-enviado' : 'mensaje-enviado-oculto'}>
+                    <p>Mensaje enviado correctamente</p>
+                </div>
                 
             </form>
         </div>

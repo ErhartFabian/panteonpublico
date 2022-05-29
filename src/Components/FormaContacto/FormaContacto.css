@@ -155,12 +155,18 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: #fff;
+    background-color: #45CB85;
     padding: 2em;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
-    color: #4D4646;
+    color: #fff;
+    margin: 10px;
+    padding: 10px;
+}
+
+.mensaje-enviado-oculto {
+    display: none;
 }
 
 @media screen and (max-width:425px) {

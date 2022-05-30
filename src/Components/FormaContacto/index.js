@@ -6,7 +6,6 @@ function FormaContacto() {
     const form = useRef();
     //useState para el mensaje de enviado correctamente
     const [mensajeEnviado, setMensajeEnviado] = useState(false);
-    const [alert, setAlert] = useState(true);
     const [showElement, setShowElement] = useState(false);
 
     const sendEmail = (e) => {
@@ -25,7 +24,6 @@ function FormaContacto() {
         e.preventDefault();
         if (form.current.checkValidity()) {
             sendEmail(e);
-            /* alert('Mensaje Enviado'); */
             setMensajeEnviado(true);
             setShowElement(true);
             setTimeout(function () {

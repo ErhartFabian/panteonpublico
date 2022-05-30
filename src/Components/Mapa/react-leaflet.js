@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './react-leaflet.css';
-import {MarkerIcon} from './react-leaflet-icon.js';
 
 class MapView extends Component {
   render() {

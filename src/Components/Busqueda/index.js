@@ -14,7 +14,7 @@ function Busqueda () {
       {title: "Cuartel", field: 'cuartel', align: 'center', width:'10'}, 
       {title: "Clase", field: 'clase', align: 'center', width:'10'},
       {title: "Lote", field: 'lote', align: 'center', width:'10'},
-      {title: "Fosa", field: 'fosa', align: 'center', width:'40'},
+      {title: "Fosa", field: 'Fosa', align: 'center', width:'40'},
       {title: "Nombre del finado", field: 'finado', width: '20%'},
       {title: "Responsable de la fosa", field: 'responsable', width: '20%'},
       {title: "Adeudo", field: 'adeudo', align: 'center', width:'10'},
@@ -40,10 +40,10 @@ function Busqueda () {
           options={{
             filtering: true,
             headerStyle: {
-              color: '#fff',
+              color: '#6e7b86',
               fontSize: '18px',
               fontWeight: 'bold',
-              backgroundColor: "#706C6C",
+              backgroundColor: "##FFFFFF",
               fontFamily: 'Helvetica-Nue',
               align: 'center'
             },

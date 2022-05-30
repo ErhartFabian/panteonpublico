@@ -18,7 +18,9 @@ function Navbar() {
             <Nav className="nav">
                 <NavLogo to= "/Home">
                     <img src={logoImg} id="logoImg" />
+                    <h2>Presidencia Municipal de Pachuca de Soto</h2>
                 </NavLogo>
+                
                 <Bars />
 
                 <NavMenu>

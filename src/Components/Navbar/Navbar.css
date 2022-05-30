@@ -4,4 +4,22 @@
 }
 .nav{
     padding: 0 2rem;
+
+}
+@font-face {
+
+    font-family: 'Helvetica-Nue';
+    src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);
+    
+    }
+
+    
+a {
+    display: flex;
+    align-items: center;
+    font-family: 'Helvetica-Nue',Arial;
+    
+}
+a h2{
+    font-size: 1.4rem;
 }

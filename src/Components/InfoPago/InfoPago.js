@@ -17,6 +17,15 @@ function InfoPago() {
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
+    //Estados para saber si estan vacio los campos a llenar
+    const [campocuartel,setCampoCuartel] = useState(""); 
+    const [campolote,setCampoLote] = useState("");
+    const [campoclase,setCampoClase] = useState("");
+    const [campofosa,setCampoFosa] = useState("");
+
+    //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
+    const [mostrarOpciones,setMostrarOpciones] = useState (false);
+
 
     /*Estado para mostrar y ocultar comprobante*/
     const [verComprobante,setVerComprobante] = useState(false);
@@ -25,16 +34,46 @@ function InfoPago() {
 
     const [datosfosa,setDatosFosa] = useState({
         cuartel:"",
-        clase:"",
-        fosa:"",
         lote:"",
+        clase: "",
+        fosa:"",
     });
+    
+
+    if(datosfosa.cuartel === ""){
+            datosfosa.lote = "";
+            datosfosa.clase =" ";
+            datosfosa.fosa = ""
+        }
+    if(datosfosa.lote === ""){
+            datosfosa.clase = "";
+            datosfosa.fosa = "";
+        }
+    
+    if(datosfosa.clase === ""){
+        datosfosa.fosa = "";
+    }
 
     const handleChange = e =>{
         setDatosFosa({
             ...datosfosa, 
             [e.target.name]:e.target.value,
         });
+    }
+    //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
+    function comprobardatos () {
+        if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
+        && campofosa === "completo"){
+            console.log(campocuartel,campolote,campoclase,campofosa);
+            console.log(mostrarOpciones);
+            setMostrarOpciones(true);
+        }
+        else{
+            console.log(campocuartel,campolote,campoclase,campofosa);
+            console.log(mostrarOpciones);
+            setMostrarOpciones(false);
+            setBuscar(false);
+        }
     }
 
     const handleSubmit = e =>{
@@ -46,11 +85,16 @@ function InfoPago() {
         handleChange(e);
         if(datosfosa.cuartel !==""){
             setDisabledLote(false)
+            setCampoCuartel("completo");
+            comprobardatos()
         }
         else{
             setDisabledLote(true);
+            setCampoCuartel("");
+            comprobardatos();
         }
     }
+    
 
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = ()=>{
@@ -58,7 +102,7 @@ function InfoPago() {
             <div className='generador'>
             <Button 
              /*Habilitar boton*/
-             disabled={!buscar}
+            disabled={!buscar}
             id="boton"
             type="submit"
             variant="contained" 
@@ -78,8 +122,8 @@ function InfoPago() {
 
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
-        if(datosfosa.cuartel ==="cuartel 1" && datosfosa.clase ==="clase 2" 
-        && datosfosa.fosa ==="48" && datosfosa.lote ==="50"){
+        if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "50"
+        && datosfosa.clase ==="clase 2" && datosfosa.fosa === "48"){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
         }
@@ -89,6 +133,7 @@ function InfoPago() {
         }    
     }
 
+    
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className='informacion'>
@@ -123,9 +168,14 @@ function InfoPago() {
                     onBlur={(e)=>{
                         handleChange(e);
                         if(datosfosa.lote !==""){
-                            setDisabledClase(false);}
+                            setDisabledClase(false);
+                            setCampoLote("completo")
+                            comprobardatos();
+                        }
                         else{
                             setDisabledClase(true);
+                            setCampoLote("");
+                            comprobardatos();
                         }
                     }}
                     />
@@ -140,11 +190,17 @@ function InfoPago() {
                     name="clase" 
                     onChange={handleChange}
                     onBlur={(e)=>{
+                       
                         handleChange(e);
                         if(datosfosa.clase !==""){
-                            setDisabledFosa(false);}
+                            setDisabledFosa(false);
+                            setCampoClase("completo");
+                            comprobardatos();
+                        }
                         else{
                             setDisabledFosa(true);
+                            setCampoClase("");
+                            comprobardatos();
                         }
                     }}
                     defaultValue={datosfosa.clase}>
@@ -166,20 +222,20 @@ function InfoPago() {
                     name="fosa" 
                     value={datosfosa.fosa}
                     onChange={handleChange} 
+                    onBlur={(e)=>{
+                       
+                        handleChange(e);
+                        if(datosfosa.fosa !==""){
+                            setCampoFosa("completo");
+                            comprobardatos();
+                        }
+                        else{
+                            setCampoFosa("");
+                            comprobardatos();
+                        }
+                    }}
                     />
                 </div>
-
-                {/*<div className='dato'>
-                    <label  htmlFor='fecha' id="fechaPago" >Fecha de pago</label>
-                    <div>
-                    <Datepicker
-                    className='datepicker'
-                    selected={fecha}
-                    onChange={(date: fecha) => setFecha(date)}
-                    locale={es}
-                    dateFormat="dd-MMMM-yyyy"/>
-                    </div>
-                </div>*/}
 
                 { msjerror && <div className="mensaje_error">
                     <p>
@@ -200,8 +256,8 @@ function InfoPago() {
                     >
                         Buscar comprobante 
                     </Button>
-                    <Comprobante/>
-                    {buscar ? <DocPdf/> : null}
+                    <Comprobante disabled={!mostrarOpciones}/>
+                    {buscar && mostrarOpciones ? <DocPdf/> : null}
                 </div>
 
             </form>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile} from '@fortawesome/free-solid-svg-icons';
 import ReactToPrint from "react-to-print";
 import ayuntamiento from './imagenes/ayuntamiento.png';
+import './css/boleta.css'
 
 export default function DocPdf () {
     let componentRef = useRef();
@@ -71,14 +72,14 @@ class ComponentToPrint extends React.Component {
         <p>Fosa: <b>1</b> </p>
         </div>
         <div className="informacionfosa2">
-        <div className="datosfosa">
-            <p>Tipo de construcción: </p>
-            <p>Capilla Individual</p>
-        </div>
-        <div className="datosfosa">
-            <p>Ultima persona inhumada:</p>
-            <p>Finado Hérnandez Hernández 01/Enero/2022</p>
-        </div>
+            <div className="datosfosa">
+                <p>Tipo de construcción: </p>
+                <p>Capilla Individual</p>
+            </div>
+            <div className="datosfosa2">
+                <p>Ultima persona inhumada:</p>
+                <p>Finado Hérnandez Hernández 01/Enero/2022</p>
+            </div>
         </div>
         <h3>Adeudos por Ejercicio Fiscal</h3>
         <table className="tabladatos">
@@ -119,9 +120,6 @@ class ComponentToPrint extends React.Component {
                 </tr>
             </tfoot>
         </table>
-        <div>
-            <h2>Referencia Bancaria</h2>
-        </div>
     </div>
       );
     }

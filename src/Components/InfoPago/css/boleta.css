@@ -2,7 +2,7 @@
 
 #boleta{
     background-color: #fff;
-    padding: 1cm 2cm 1cm 2cm;
+    margin: 2cm 2cm 1cm 2cm;
   }
   
   p{
@@ -12,6 +12,9 @@
 
   h2{
       font-size: 18px;
+  }
+  h3{
+    margin-top: 1cm;
   }
   
   .datos1{
@@ -53,7 +56,8 @@
   }
   .responsable2{
       text-align: left;
-      font-family: 'Lato', sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
+      font-weight: 500;
       font-size: 14px;
       margin: 0 200px 30px 200px;
       padding: 10px 0 0 10px;
@@ -72,7 +76,7 @@
     text-align: left;
     font-family:Arial, Helvetica, sans-serif;
     font-size: 18px;
-    margin: 0 200px 20px 200px;
+    margin: 0 200px 50px 200px;
     border-style: solid;
     border-radius: 1rem;
     border-color: #201e1e;
@@ -87,20 +91,31 @@
     text-align: left;
     font-family:Arial, Helvetica, sans-serif;
     font-size: 18px;
-    margin: 0 200px 20px 200px;
-    width: 780px;
+    margin: 0cm 0cm 2cm 2cm;
+    width: 90%;
   }
 
   .datosfosa{
       text-align: left;
       font-size: 14px;
-      font-family: 'Lato', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
       padding: 10px 100px 0 10px;
       border-style: solid;
       border-radius: 1rem;
       border-color: #201e1e;
+      margin-right: 1cm;
   }
+  .datosfosa2{
+    text-align: left;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    padding: 10px 100px 0 10px;
+    border-style: solid;
+    border-radius: 1rem;
+    border-color: #201e1e;
+}
   .tabladatos{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;

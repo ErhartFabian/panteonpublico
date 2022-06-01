@@ -10,7 +10,6 @@ import {Busqueda} from './Components';
 import {FormaContacto} from './Components';
 import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
-import Comprobante from './Components/InfoPago/Comprobante';
 import Boleta from './Components/InfoPago/Boleta';
 import Servicios from './Components/Servicios';
 
@@ -21,7 +20,6 @@ ReactDOM.render(
       <Route path="/" element={<App />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/InfoPago" element={<InfoPago/>} />
-      <Route path="/Comprobante" element={<Comprobante/>} />
       <Route path="/Busqueda" element={<Busqueda />} />
       <Route path="/Contacto" element={<FormaContacto />} />
       <Route path="/Mapa" element={<Mapa />} />

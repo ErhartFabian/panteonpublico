@@ -64,13 +64,9 @@ function InfoPago() {
     function comprobardatos () {
         if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
         && campofosa === "completo"){
-            console.log(campocuartel,campolote,campoclase,campofosa);
-            console.log(mostrarOpciones);
             setMostrarOpciones(true);
         }
         else{
-            console.log(campocuartel,campolote,campoclase,campofosa);
-            console.log(mostrarOpciones);
             setMostrarOpciones(false);
             setBuscar(false);
         }

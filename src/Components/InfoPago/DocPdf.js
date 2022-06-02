@@ -40,31 +40,34 @@ class ComponentToPrint extends React.Component {
       return (
         <div id="boleta">
         <div className="datos1">
-            <div>
+            <div className="titulos">
                 <h2>Municipio de Pachuca de Soto- Secretaria de
-                Servicios <br></br> Públicos Municipales
+                <br></br>
+                Servicios Públicos Municipales
                 </h2>
-                <h3>Boleta de Anualidad Panteon Municipal</h3>
+                <h3 id="Tboleta">Boleta de Anualidad Panteon Municipal</h3>
             </div>
-        <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
+            <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
         </div>
         <div className="titular">
-        <div id="datostitular">
-            <p>Titular de la concesión: Juana Perez Hernández</p>
-            <p>Col. Santa Julia calle 5 de Mayo #113</p>
-            <p>Pachuca de Soto Hidalgo C.p 42039 </p>
-            <p>R.F.C</p>
-        </div>
-        <div id="clave">
-            <p>Clave:</p>
-            <p>PM001997</p>
-        </div>
+            <div id="datostitular">
+                <p>Titular de la concesión: Juana Perez Hernández</p>
+                <p>Col. Santa Julia calle 5 de Mayo #113</p>
+                <p>Pachuca de Soto Hidalgo C.p 42039 </p>
+                <div> <p>R.F.C</p></div>
+            </div>
+            <div id="clave">
+                <p>Clave:</p>
+                <p>PM001997</p>
+            </div>
         </div>
         <div className="responsable2">
-        <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
-        <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
+            <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
+            <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
         </div>
-        <h3>Información de la fosa</h3>
+        <div>
+            <h3 id="Tfosa">Información de la fosa</h3>
+        </div>
         <div className="informacionfosa">
         <p>Cuartel: <b>1</b> </p> 
         <p>Clase: <b>1</b> </p>
@@ -77,11 +80,12 @@ class ComponentToPrint extends React.Component {
                 <p>Capilla Individual</p>
             </div>
             <div className="datosfosa2">
-                <p>Ultima persona inhumada:</p>
-                <p>Finado Hérnandez Hernández 01/Enero/2022</p>
+                <p id="Ultimapersona">Ultima persona inhumada:</p>
+                <p>Finado Hérnandez Hernández</p>
+                <div><p>01/Enero/2022</p></div>
             </div>
         </div>
-        <h3>Adeudos por Ejercicio Fiscal</h3>
+        <h3 id="adeudos">Adeudos por Ejercicio Fiscal</h3>
         <table className="tabladatos">
             <thead>
                 <tr>

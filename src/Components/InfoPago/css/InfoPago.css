@@ -17,19 +17,38 @@
     align-items: center;
 }
 
+.instrutions-infopago{
+    height: calc(70vh - 85px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #3866F2;
+    text-align: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    margin-left: auto;
+    margin-right: 100px;
+    max-width: 400px;
+}
+
+.instrutions-infopago p{
+    font-size: 1.3rem;
+    margin-top: 0.2em;
+}
+
 .informacion{
     display: flex;
-    padding-top: 0;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    /* margin: 100px auto 0 auto; */
-    margin: auto;
+    margin-right: auto;
     background-color: #fff;
     width: 800px;
-    height: 400px;
+    height: calc(70vh - 85px);
     border-radius: 10px;
-    /* margin-bottom: 50px; */
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
 }
 

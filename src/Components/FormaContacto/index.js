@@ -37,11 +37,11 @@ function FormaContacto() {
         <div className="area-form">
             <div className="instructions_contacto">
                 <h2>¿Tienes alguna duda?</h2>
+                <label>
+                    Llena el siguiente formulario y nos pondremos en contacto contigo.
+                </label>
                 <p>
-                    Favor llena el siguiente formulario y nos pondremos en contacto contigo.
-                </p>
-                <p>
-                    En la sección de mensaje siéntete libre de escribir cualquier duda, comentario o sugerencia.
+                   Escribe tu duda, comentario o sugerencia.
                 </p>
             </div>
             <form className="form" id="form" ref={form} onSubmit={handleSubmit}>

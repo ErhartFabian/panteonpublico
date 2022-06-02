@@ -32,16 +32,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-size: 1.9rem;
+    font-size: 1.3rem;
     color: #3866F2;
-    font-weight: bold;
     text-align: center;
     padding: 30px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
-    margin: auto;
-    width: 90%;
+    margin-left: auto;
+    margin-right: 100px;
     max-width: 400px;
 }
 
@@ -52,13 +51,14 @@
 
 .form {
     background-color: #fff;
-    margin: auto;
+    margin-right: auto;
     width: 90%;
-    max-width: 400px;
+    max-width: 800px;
     padding: 4.5em 3em;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
+    height: calc(80vh - 85px);
 }
 
 .form__title {
@@ -154,7 +154,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 10%;
     background-color: #45CB85;
     padding: 2em;
     border-radius: 10px;

@@ -132,6 +132,11 @@ function InfoPago() {
     
     return (
         <div className="container">
+            <div className="instrutions-infopago">
+                <h1>Comprobante de Pago</h1>
+                {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
+                <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
+            </div>
             <form onSubmit={handleSubmit} className='informacion'>
                 <h1 id="name">Comprobante de pago</h1>
                 <div className='dato'>

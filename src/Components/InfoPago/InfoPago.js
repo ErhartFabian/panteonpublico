@@ -118,8 +118,8 @@ function InfoPago() {
 
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
-        if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "50"
-        && datosfosa.clase ==="clase 2" && datosfosa.fosa === "48"){
+        if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "1"
+        && datosfosa.clase ==="clase 1" && datosfosa.fosa === "1"){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
         }

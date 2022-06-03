@@ -3,10 +3,8 @@
 }
 
 @font-face {
-
     font-family: 'Helvetica-Nue';
     src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);
-    
     }
 
 * {
@@ -43,6 +41,11 @@
     margin-right: 100px;
     max-width: 400px;
 }
+.instructions_contacto h2{
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+}
+
 
 
 #area-mensaje {

@@ -2,7 +2,7 @@
 
 #boleta{
     background-color: #fff;
-    margin: 2cm 2cm 1cm 2cm;
+    margin: 1.5cm 2cm 1cm 2cm;
   }
   
   p{
@@ -12,39 +12,44 @@
 
   h2{
       font-size: 18px;
-  }
-  h3{
-    margin-top: 1cm;
+      margin-bottom: 30px;
   }
   
   .datos1{
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     text-align: center;
-    margin-bottom: 1cm;
+    margin-bottom: 20px;
   }
- 
+  .titulos{
+    padding-left: 50px;
+    margin-right: 120px;
+  }
   #logo{
-    width: 100px;
-    height: 100px; 
+    width: 120px;
+    height: 120px; 
   }
   .titular{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
-    width: 800px;
-    margin: 0 auto 1cm auto;
+    margin: 0 0 1cm 1.5cm;
   }
+
   #datostitular{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     border-style: solid;
     border-color: #201e1e;
     border-radius:1rem;
-    padding: 10px 200px 0 10px;
-    padding-right: 200px;
+    padding: 10px 80px 10px 10px;
+    margin-right: 20px;
   }
 
   #clave{
@@ -52,69 +57,82 @@
     border-radius: 1rem;
     border-color: #201e1e;
     text-align: center;
-    padding: 8px 10px 0 160px;
+    margin-top: 45px;
+    padding: 8px 20px 0 30px;
   }
+
   .responsable2{
       text-align: left;
       font-family:Arial, Helvetica, sans-serif;
       font-weight: 500;
       font-size: 14px;
-      margin: 0 200px 30px 200px;
-      padding: 10px 0 0 10px;
+      margin: 1cm 0cm 1cm 1.5cm;
+      padding: 10px 0px 0px 10px;
       border-style: solid;
       border-radius: 1rem;
       border-color: #201e1e;
   }
-  h3{
-      margin: 0 200px 30px 200px;
+  #Tfosa{
       font-family: Arial, Helvetica, sans-serif;
       font-size: 18px;
-  }
-  .informacionfosa{
-    display: flex;
-    justify-content: space-around;
-    text-align: left;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    margin: 0 200px 50px 200px;
-    border-style: solid;
-    border-radius: 1rem;
-    border-color: #201e1e;
-  }
-  .informacionfosa p{
-    margin: 0;
-    padding: 8px 0 5px 0;
-  }
-  .informacionfosa2{
-    display: flex;
-    justify-content: space-around;
-    text-align: left;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    margin: 0cm 0cm 2cm 2cm;
-    width: 90%;
+      margin: 0cm 0cm 1cm 1.7cm;
   }
 
+  .informacionfosa{
+    display: flex;
+    justify-content: space-evenly;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    border-style: solid;
+    border-radius: 0.8rem;
+    border-color: #201e1e;
+    margin: 0cm 0cm 1cm 1.5cm;
+  }
+
+  .informacionfosa p{
+    margin: 0;
+    padding: 10px 0px 5px 0px;
+  }
+
+  .informacionfosa2{
+    display: flex;
+    justify-content: space-evenly;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0cm 0cm 1cm 1.5cm;
+  } 
+
   .datosfosa{
-      text-align: left;
+      text-align: center;
       font-size: 14px;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
-      padding: 10px 100px 0 10px;
+      padding-top: 10px;
       border-style: solid;
       border-radius: 1rem;
       border-color: #201e1e;
-      margin-right: 1cm;
+      margin-right: 10px;
+      width: 15rem;
   }
   .datosfosa2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     text-align: left;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 0px 0px 10px;
     font-weight: 500;
-    padding: 10px 100px 0 10px;
     border-style: solid;
     border-radius: 1rem;
     border-color: #201e1e;
+}
+
+#Ultimapersona{
+  padding: 0px 10px 0px 100px;
+}
+#adeudos{
+  margin: 0 0 1cm 1.5cm;
 }
   .tabladatos{
     text-align: center;
@@ -122,10 +140,10 @@
     font-size: 14px;
     width: 750px;
     border-style: solid;
-    border-radius: 1rem;
-    margin: 0 auto 50px auto;
+    border-radius: 1.5rem;
+    margin-left: 1.5cm;
     padding: 10px;
-    margin-bottom: 50px;
+    width: 92%;
   }
   .fila{
     background: #423F3E;

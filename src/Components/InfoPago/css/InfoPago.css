@@ -6,7 +6,7 @@
     
 }
 
-.container{
+.container-infopago{
     width: 100vw;
     height: calc(100vh - 85px);
     border: 1px solid white; /*Revisar porque sin esto deja un espacio en blanco*/

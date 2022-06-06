@@ -8,7 +8,7 @@ function Mapa() {
 
   return (
     <div className="pantalla">
-      <div className="busqueda">
+      <div className="Busqueda">
         <BusquedaMapa />
       </div>
       <div className="mapa">

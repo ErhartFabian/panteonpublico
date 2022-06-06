@@ -5,48 +5,17 @@
     box-sizing: border-box;
 }
 
-.container{
+ .container{
     width: 40vw;
-    height: 88vh;
-    border: 1px solid white; /*Revisar porque sin esto deja un espacio en blanco*/
-    background-color: #e5e5f7;
-    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
-    background-size: 15px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: -60vw;
-}
+    /* height: 88vh; */
+} 
 
-.instrutions-infopago{
-    height: calc(70vh - 85px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: #3866F2;
-    text-align: center;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
-    margin-left: auto;
-    margin-right: 100px;
-    max-width: 400px;
-}
-
-.instrutions-infopago p{
-    font-size: 1.3rem;
-    margin-top: 0.2em;
-}
 
 .informacion{
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     justify-content: space-around;
-    margin-left: -100px;
-    margin-right: auto;
     background-color: #fff;
     height: 88vh;
     border-radius: 10px;

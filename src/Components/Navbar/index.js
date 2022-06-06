@@ -30,12 +30,12 @@ function Navbar() {
                     >
                         Mapa Topográfico
                     </NavLink>
-                    <NavLink
+                   {/*  <NavLink
                         to="/Avisos"
                         activtestyle={{ color: '#bfbfbf' }}
                     >
                         Avisos
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink
                         to="/Servicios"
                         activtestyle={{ color: '#bfbfbf' }}
@@ -48,12 +48,12 @@ function Navbar() {
                     >
                         Información de Pago
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                         to="/Busqueda"
                         activtestyle={{ color: '#bfbfbf' }}
                     >
                         Búsqueda
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink
                         to="/Contacto"
                         activtestyle={{ color: '#bfbfbf' }}

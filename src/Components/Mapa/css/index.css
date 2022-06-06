@@ -11,9 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.busqueda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
 .pantalla {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: calc(100vh - 95px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 1; */
+    background-color: #e5e5f7;
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
+
 }

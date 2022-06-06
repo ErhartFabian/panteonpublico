@@ -131,7 +131,7 @@ function InfoPago() {
 
     
     return (
-        <div className="container">
+        <div className="container-infopago">
             <div className="instrutions-infopago">
                 <h2>Comprobante de Pago</h2>
                 {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}

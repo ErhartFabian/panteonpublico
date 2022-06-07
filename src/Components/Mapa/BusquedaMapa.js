@@ -147,17 +147,11 @@ function BusquedaMapa() {
 
     
     return (
-        <div className="container">
-            {/*
-            <div className="instrutions-infopago">
-                <h1>Comprobante de Pago</h1>
-                <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
-            </div>
-            */}
-            <form onSubmit={handleSubmit} className='informacion'>
+        <div className="containermapa">
+            <form onSubmit={handleSubmit} className='informacion-mapa'>
                 <h1 id="name">Buscar en el mapa</h1>
-                <div className='dato'>
-                    <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
+                <div className='dato-mapa'>
+                    <label htmlFor="selectcuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
                     <select 
                     className='inputselect'
                     id="selectcuartel"
@@ -173,10 +167,11 @@ function BusquedaMapa() {
                     </select>
                 </div>
 
-                <div className='dato'>
+                <div className='dato-mapa'>
                     <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
                     <input 
                     // disabled = {disabledLote}
+                    id='lote'
                     className='input'
                     placeholder='Ingrese numero de lote' 
                     type="text" 
@@ -199,8 +194,8 @@ function BusquedaMapa() {
                     />
                 </div>
 
-                <div className='dato'>
-                    <label htmlFor="nclase" id="labelclase" className='stylelabel'>Clase </label> 
+                <div className='dato-mapa'>
+                    <label htmlFor="selectclase" id="labelclase" className='stylelabel'>Clase </label> 
                     <select
                     // disabled = {disabledClase}
                     id="selectclase"
@@ -230,10 +225,11 @@ function BusquedaMapa() {
                     </select>
                 </div>
 
-                <div className='dato'>
-                    <label htmlFor="fosa" id='labelfosa' className='stylelabel'>Fosa </label> 
+                <div className='dato-mapa'>
+                    <label htmlFor="fosal" id='labelfosa' className='stylelabel'>Fosa </label> 
                     <input 
                     // disabled = {disabledFosa}
+                    id='fosal'
                     className='input'
                     placeholder='Ingrese el numero de fosa' 
                     type="number" 

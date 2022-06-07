@@ -5,52 +5,20 @@
     box-sizing: border-box;
 }
 
-.container{
+ .containermapa{
     width: 40vw;
-    height: 88vh;
-    border: 1px solid white; /*Revisar porque sin esto deja un espacio en blanco*/
-    background-color: #e5e5f7;
-    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
-    background-size: 15px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: -60vw;
-}
+} 
 
-.instrutions-infopago{
-    height: calc(70vh - 85px);
+
+.informacion-mapa{
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    color: #3866F2;
-    text-align: center;
-    padding: 30px;
+    align-items: center;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
-    margin-left: auto;
-    margin-right: 100px;
-    max-width: 400px;
-}
-
-.instrutions-infopago p{
-    font-size: 1.3rem;
-    margin-top: 0.2em;
-}
-
-.informacion{
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-around;
-    margin-left: -100px;
-    margin-right: auto;
-    background-color: #fff;
-    height: 88vh;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    padding: 4em 2em;
+    gap: 3rem;
 }
 
 #name{
@@ -78,13 +46,14 @@
     margin-right: 170px;
 }
 
-.dato{
+.dato-mapa{
     font-weight: 400;
     font-size: 20px;
     text-align:left;
     display: flex;
     justify-content: space-around;
     background:transparent;
+    flex-wrap: wrap;
 }
 
 .inputselect{

@@ -5,21 +5,20 @@
     box-sizing: border-box;
 }
 
- .container{
+ .containermapa{
     width: 40vw;
-    /* height: 88vh; */
 } 
 
 
-.informacion{
+.informacion-mapa{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
     background-color: #fff;
-    height: 88vh;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    padding: 4em 2em;
+    gap: 3rem;
 }
 
 #name{
@@ -47,13 +46,14 @@
     margin-right: 170px;
 }
 
-.dato{
+.dato-mapa{
     font-weight: 400;
     font-size: 20px;
     text-align:left;
     display: flex;
     justify-content: space-around;
     background:transparent;
+    flex-wrap: wrap;
 }
 
 .inputselect{

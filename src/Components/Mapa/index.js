@@ -7,16 +7,13 @@ import * as serviceWorker from './serviceWorker';
 function Mapa() {
 
   return (
-    <div className="pantalla">
-      <div className="Busqueda">
-        <BusquedaMapa />
+    <>
+      <div className="container-mapa">
+        <BusquedaMapa className="form-mapa" />
+        <MapView className="mapa"/>
       </div>
-      <div className="mapa">
-        <MapView />
-      </div>
-    </div>
-  )
-}
+    </>
+)}
 serviceWorker.unregister();
 
 export default Mapa;

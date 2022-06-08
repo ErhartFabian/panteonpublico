@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
-import Message from './Message';
 /*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
 /*import "react-datepicker/dist/react-datepicker.css";*/
 /*import es from 'date-fns/locale/es'*/
@@ -16,16 +15,10 @@ import Message from './Message';
 function InfoPago() {
 
     const [msjerror,setMsjerror] =useState(false);
-    const [error,setError] =useState(null);
     const [loading,setLoading] =useState(false);
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
-    //Estados para saber si estan vacio los campos a llenar
-    const [campocuartel,setCampoCuartel] = useState(""); 
-    const [campolote,setCampoLote] = useState("");
-    const [campoclase,setCampoClase] = useState("");
-    const [campofosa,setCampoFosa] = useState("");
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -65,7 +58,7 @@ function InfoPago() {
         });
     }
     //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
-    function comprobardatos () {
+    /*function comprobardatos () {
         if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
         && campofosa === "completo"){
             setMostrarOpciones(true);
@@ -74,7 +67,7 @@ function InfoPago() {
             setMostrarOpciones(false);
             setBuscar(false);
         }
-    }
+    }*/
 
     const handleSubmit = e =>{
         e.preventDefault();
@@ -90,7 +83,6 @@ function InfoPago() {
             setDisabledLote(true);
             setDisabledClase(true);   
             setDisabledLote(true);     
-            setCampoCuartel("");
         }
     }
     
@@ -130,14 +122,16 @@ function InfoPago() {
         }
     },[datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
 
+    //Loader
+    /*useEffect(()=>{
+        setLoading(true);
+    },[buscar])*/
     
-
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
         setLoading(true)
         if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "1"
         && datosfosa.clase ==="clase 1" && datosfosa.fosa === "1"){
-            setLoading(true);
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
             setLoading(false);
@@ -193,7 +187,7 @@ function InfoPago() {
                         }
                         else{
                             setDisabledClase(true);
-                            setCampoLote("");
+                           
                             
                         }
                     }}
@@ -216,7 +210,7 @@ function InfoPago() {
                         }
                         else{
                             setDisabledFosa(true);
-                            setCampoClase("");
+                            
                             
                         }
                     }}
@@ -239,17 +233,6 @@ function InfoPago() {
                     name="fosa" 
                     value={datosfosa.fosa}
                     onChange={handleChange} 
-                    onBlur={(e)=>{
-                       
-                        handleChange(e);
-                        if(datosfosa.fosa !==""){
-                            setCampoFosa("completo");
-                            
-                        }
-                        else{
-                            setCampoFosa("");
-                        }
-                    }}
                     />
                 </div>
                 {loading && <Loader/>}
@@ -273,8 +256,6 @@ function InfoPago() {
                         Buscar comprobante 
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
-                    
-                    {error && <Message/>}
                     {buscar && mostrarOpciones ? <DocPdf/> : null}
                 </div>            
             </form>

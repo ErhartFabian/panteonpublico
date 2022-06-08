@@ -41,11 +41,10 @@ class ComponentToPrint extends React.Component {
         <div id="boleta">
         <div className="datos1">
             <div className="titulos">
-                <h2>Municipio de Pachuca de Soto- Secretaria de
-                <br></br>
+                <h2 id="Tboleta">Municipio de Pachuca de Soto - Secretaria de
                 Servicios Públicos Municipales
                 </h2>
-                <h3 id="Tboleta">Boleta de Anualidad Panteon Municipal</h3>
+                <h3 id="Sboleta">Boleta de Anualidad Panteon Municipal</h3>
             </div>
             <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
         </div>

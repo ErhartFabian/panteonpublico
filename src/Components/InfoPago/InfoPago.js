@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
 import './css/InfoPago.css'
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
+import Loader from './Loader'
+import Message from './Message';
 /*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
 /*import "react-datepicker/dist/react-datepicker.css";*/
 /*import es from 'date-fns/locale/es'*/
@@ -14,6 +16,8 @@ import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 function InfoPago() {
 
     const [msjerror,setMsjerror] =useState(false);
+    const [error,setError] =useState(null);
+    const [loading,setLoading] =useState(false);
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
@@ -42,11 +46,11 @@ function InfoPago() {
 
     if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
-            datosfosa.clase =" ";
+           
             datosfosa.fosa = ""
         }
     if(datosfosa.lote === ""){
-            datosfosa.clase = "";
+            
             datosfosa.fosa = "";
         }
     
@@ -80,14 +84,13 @@ function InfoPago() {
     const selectclase = e =>{
         handleChange(e);
         if(datosfosa.cuartel !==""){
-            setDisabledLote(false)
-            setCampoCuartel("completo");
-            comprobardatos()
+            setDisabledLote(false);
         }
         else{
             setDisabledLote(true);
+            setDisabledClase(true);   
+            setDisabledLote(true);     
             setCampoCuartel("");
-            comprobardatos();
         }
     }
     
@@ -115,15 +118,32 @@ function InfoPago() {
         </div>
         );
     };
+    
+    useEffect(()=>{
+        if(datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
+        && datosfosa.fosa !==""){
+            setMostrarOpciones(true);
+        }
+        else{
+            setBuscar(false);
+            setMostrarOpciones(false)
+        }
+    },[datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
+
+    
 
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
+        setLoading(true)
         if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "1"
         && datosfosa.clase ==="clase 1" && datosfosa.fosa === "1"){
+            setLoading(true);
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
+            setLoading(false);
         }
         else{
+            setLoading(false);
             setBuscar(false);
             setMsjerror(true);/*Ver mensaje de error */
         }    
@@ -162,21 +182,19 @@ function InfoPago() {
                     disabled = {disabledLote}
                     className='input'
                     placeholder='Ingrese numero de lote' 
-                    type="text" 
+                    type="number" 
                     name="lote" 
                     value={datosfosa.lote}
                     onChange={handleChange}
                     onBlur={(e)=>{
                         handleChange(e);
                         if(datosfosa.lote !==""){
-                            setDisabledClase(false);
-                            setCampoLote("completo")
-                            comprobardatos();
+                            setDisabledClase(false);                            
                         }
                         else{
                             setDisabledClase(true);
                             setCampoLote("");
-                            comprobardatos();
+                            
                         }
                     }}
                     />
@@ -195,13 +213,11 @@ function InfoPago() {
                         handleChange(e);
                         if(datosfosa.clase !==""){
                             setDisabledFosa(false);
-                            setCampoClase("completo");
-                            comprobardatos();
                         }
                         else{
                             setDisabledFosa(true);
                             setCampoClase("");
-                            comprobardatos();
+                            
                         }
                     }}
                     defaultValue={datosfosa.clase}>
@@ -228,16 +244,15 @@ function InfoPago() {
                         handleChange(e);
                         if(datosfosa.fosa !==""){
                             setCampoFosa("completo");
-                            comprobardatos();
+                            
                         }
                         else{
                             setCampoFosa("");
-                            comprobardatos();
                         }
                     }}
                     />
                 </div>
-
+                {loading && <Loader/>}
                 { msjerror && <div className="mensaje_error">
                     <p>
                         <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
@@ -258,11 +273,13 @@ function InfoPago() {
                         Buscar comprobante 
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
+                    
+                    {error && <Message/>}
                     {buscar && mostrarOpciones ? <DocPdf/> : null}
-                </div>
-
+                </div>            
             </form>
             {verComprobante ? <Boleta/> : null}
+            
         </div>
     )
 }

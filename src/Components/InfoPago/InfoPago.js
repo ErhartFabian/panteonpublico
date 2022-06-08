@@ -35,13 +35,13 @@ function InfoPago() {
         clase: "",
         fosa:"",
     });
-    
 
     if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
            
             datosfosa.fosa = ""
         }
+
     if(datosfosa.lote === ""){
             
             datosfosa.fosa = "";
@@ -86,7 +86,6 @@ function InfoPago() {
         }
     }
     
-
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = ()=>{
         return(
@@ -145,6 +144,7 @@ function InfoPago() {
 
     
     return (
+        <div >
         <div className="container-infopago">
             <div className="instrutions-infopago">
                 <h2>Comprobante de Pago</h2>
@@ -187,8 +187,7 @@ function InfoPago() {
                         }
                         else{
                             setDisabledClase(true);
-                           
-                            
+                        
                         }
                     }}
                     />
@@ -259,9 +258,13 @@ function InfoPago() {
                     {buscar && mostrarOpciones ? <DocPdf/> : null}
                 </div>            
             </form>
-            {verComprobante ? <Boleta/> : null}
-            
         </div>
+        <div className= 'vistacotenedor'>
+        <div className='vista'>
+            {verComprobante ? <Boleta /> : null}
+        </div>
+        </div>
+    </div>
     )
 }
 

@@ -38,7 +38,7 @@ export default function DocPdf () {
 class ComponentToPrint extends React.Component {
     render() {
       return (
-        <div id="boleta">
+    <div id="boleta">
         <div className="datos1">
             <div className="titulos">
                 <h2 id="Tboleta">Municipio de Pachuca de Soto - Secretaria de

@@ -13,6 +13,43 @@ import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 
 function InfoPago() {
 
+    const [dataFosa, setDataFosa] = useState();
+    const [dataResponsables, setDataResponsables] = useState();
+    const [dataFinado, setDataFinado] = useState();
+
+    const URLDataFosa = 'https://panteonpachuca.herokuapp.com/api/test';
+    const URLResponsables = 'https://panteonpachuca.herokuapp.com/api/readResponsable';
+    const URLFinado = 'https://panteonpachuca.herokuapp.com/api/readFinado';
+
+    const responsablesFinados = {
+        idFosa: 1111
+    };
+
+    useEffect(()=>{
+        let i = 0;
+        const GetData = async () => {
+            try{
+                const responseDataFosa = await axios.get(URLDataFosa);
+                setDataFosa(responseDataFosa.data);
+                const responseResponsables = await axios.post(URLResponsables, responsablesFinados);
+                setDataResponsables(responseResponsables.data);
+                const responseFinados = await axios.post(URLFinado, responsablesFinados);
+                setDataFinado(responseFinados.data);
+                console.log(i);
+            }
+            catch(error){
+                console.error(error);
+            }
+        }
+        i +=1 ;
+        GetData();
+    },[]);
+
+    //Para acceder a los datos de la fosa
+    console.log(dataFosa);
+    console.log(dataResponsables);
+    console.log(dataFinado);
+
     const [msjerror,setMsjerror] =useState(false);
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa

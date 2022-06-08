@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
 import './css/InfoPago.css'
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
+import Loader from './Loader'
 /*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
 /*import "react-datepicker/dist/react-datepicker.css";*/
 /*import es from 'date-fns/locale/es'*/
@@ -14,14 +15,10 @@ import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 function InfoPago() {
 
     const [msjerror,setMsjerror] =useState(false);
+    const [loading,setLoading] =useState(false);
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
-    //Estados para saber si estan vacio los campos a llenar
-    const [campocuartel,setCampoCuartel] = useState(""); 
-    const [campolote,setCampoLote] = useState("");
-    const [campoclase,setCampoClase] = useState("");
-    const [campofosa,setCampoFosa] = useState("");
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -38,15 +35,15 @@ function InfoPago() {
         clase: "",
         fosa:"",
     });
-    
 
     if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
-            datosfosa.clase =" ";
+           
             datosfosa.fosa = ""
         }
+
     if(datosfosa.lote === ""){
-            datosfosa.clase = "";
+            
             datosfosa.fosa = "";
         }
     
@@ -61,7 +58,7 @@ function InfoPago() {
         });
     }
     //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
-    function comprobardatos () {
+    /*function comprobardatos () {
         if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
         && campofosa === "completo"){
             setMostrarOpciones(true);
@@ -70,7 +67,7 @@ function InfoPago() {
             setMostrarOpciones(false);
             setBuscar(false);
         }
-    }
+    }*/
 
     const handleSubmit = e =>{
         e.preventDefault();
@@ -80,18 +77,15 @@ function InfoPago() {
     const selectclase = e =>{
         handleChange(e);
         if(datosfosa.cuartel !==""){
-            setDisabledLote(false)
-            setCampoCuartel("completo");
-            comprobardatos()
+            setDisabledLote(false);
         }
         else{
             setDisabledLote(true);
-            setCampoCuartel("");
-            comprobardatos();
+            setDisabledClase(true);   
+            setDisabledLote(true);     
         }
     }
     
-
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = ()=>{
         return(
@@ -115,15 +109,34 @@ function InfoPago() {
         </div>
         );
     };
+    
+    useEffect(()=>{
+        if(datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
+        && datosfosa.fosa !==""){
+            setMostrarOpciones(true);
+        }
+        else{
+            setBuscar(false);
+            setMostrarOpciones(false)
+        }
+    },[datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
 
+    //Loader
+    /*useEffect(()=>{
+        setLoading(true);
+    },[buscar])*/
+    
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
+        setLoading(true)
         if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "1"
         && datosfosa.clase ==="clase 1" && datosfosa.fosa === "1"){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
+            setLoading(false);
         }
         else{
+            setLoading(false);
             setBuscar(false);
             setMsjerror(true);/*Ver mensaje de error */
         }    
@@ -131,6 +144,7 @@ function InfoPago() {
 
     
     return (
+        <div >
         <div className="container-infopago">
             <div className="instrutions-infopago">
                 <h2>Comprobante de Pago</h2>
@@ -162,21 +176,18 @@ function InfoPago() {
                     disabled = {disabledLote}
                     className='input'
                     placeholder='Ingrese numero de lote' 
-                    type="text" 
+                    type="number" 
                     name="lote" 
                     value={datosfosa.lote}
                     onChange={handleChange}
                     onBlur={(e)=>{
                         handleChange(e);
                         if(datosfosa.lote !==""){
-                            setDisabledClase(false);
-                            setCampoLote("completo")
-                            comprobardatos();
+                            setDisabledClase(false);                            
                         }
                         else{
                             setDisabledClase(true);
-                            setCampoLote("");
-                            comprobardatos();
+                        
                         }
                     }}
                     />
@@ -195,13 +206,11 @@ function InfoPago() {
                         handleChange(e);
                         if(datosfosa.clase !==""){
                             setDisabledFosa(false);
-                            setCampoClase("completo");
-                            comprobardatos();
                         }
                         else{
                             setDisabledFosa(true);
-                            setCampoClase("");
-                            comprobardatos();
+                            
+                            
                         }
                     }}
                     defaultValue={datosfosa.clase}>
@@ -223,21 +232,9 @@ function InfoPago() {
                     name="fosa" 
                     value={datosfosa.fosa}
                     onChange={handleChange} 
-                    onBlur={(e)=>{
-                       
-                        handleChange(e);
-                        if(datosfosa.fosa !==""){
-                            setCampoFosa("completo");
-                            comprobardatos();
-                        }
-                        else{
-                            setCampoFosa("");
-                            comprobardatos();
-                        }
-                    }}
                     />
                 </div>
-
+                {loading && <Loader/>}
                 { msjerror && <div className="mensaje_error">
                     <p>
                         <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
@@ -259,11 +256,15 @@ function InfoPago() {
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
                     {buscar && mostrarOpciones ? <DocPdf/> : null}
-                </div>
-
+                </div>            
             </form>
-            {verComprobante ? <Boleta/> : null}
         </div>
+        <div className= 'vistacotenedor'>
+        <div className='vista'>
+            {verComprobante ? <Boleta /> : null}
+        </div>
+        </div>
+    </div>
     )
 }
 

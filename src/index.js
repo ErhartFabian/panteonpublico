@@ -10,7 +10,6 @@ import {Busqueda} from './Components';
 import {FormaContacto} from './Components';
 import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
-import Boleta from './Components/InfoPago/Boleta';
 import Servicios from './Components/Servicios';
 
 ReactDOM.render(

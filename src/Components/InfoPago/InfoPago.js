@@ -23,7 +23,6 @@ function InfoPago() {
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
 
-
     /*Estado para mostrar y ocultar comprobante*/
     const [verComprobante,setVerComprobante] = useState(false);
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
@@ -104,7 +103,7 @@ function InfoPago() {
             }}
             >
             <FontAwesomeIcon className='icono' icon={faReceipt} />
-                {verComprobante ? "Ocultar comprobante" : "Ver Comprobante"} 
+                {verComprobante &&  buscar ? "Ocultar comprobante" : "Ver Comprobante"} 
             </Button>
         </div>
         );
@@ -261,7 +260,13 @@ function InfoPago() {
         </div>
         <div className= 'vistacotenedor'>
         <div className='vista'>
-            {verComprobante ? <Boleta /> : null}
+            {verComprobante && mostrarOpciones ? 
+            <Boleta 
+            campo_cuartel={datosfosa.cuartel}
+            campo_clase ={datosfosa.clase}
+            campo_lote={datosfosa.lote}
+            campo_fosa={datosfosa.fosa}
+            /> : null}
         </div>
         </div>
     </div>

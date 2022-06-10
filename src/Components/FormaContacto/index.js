@@ -54,13 +54,13 @@ function FormaContacto() {
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="email" id="correo" className="form__input" placeholder=" " name="user_email" required />
+                        <input type="email" id="correo"  className="form__input" placeholder=" " name="user_email" required />
                         <label htmlFor="correo" className="form__label">Correo</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="text" id="numero-telefono" className="form__input" placeholder=" " name="user_number" required />
-                        <label htmlFor="numero-telefono" className="form__label">Numero de teléfono</label>
+                        <input type="text" maxLength={10} id="numero-telefono" className="form__input" placeholder=" " name="user_number" required />
+                        <label htmlFor="numero-telefono" className="form__label">Número de teléfono</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">

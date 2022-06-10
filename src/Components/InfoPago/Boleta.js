@@ -1,7 +1,9 @@
 import React from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
-export default function Boleta() {
+
+export default function Boleta({campo_cuartel,campo_clase,campo_lote,campo_fosa}) {
+    
     return (
         <div id="boleta">
         <div className="datos1">
@@ -33,10 +35,10 @@ export default function Boleta() {
             <h3 id="Tfosa">Información de la fosa</h3>
         </div>
         <div className="informacionfosa">
-        <p>Cuartel: <b>1</b> </p> 
-        <p>Clase: <b>1</b> </p>
-        <p>Lote: <b>1</b>  </p>
-        <p>Fosa: <b>1</b> </p>
+        <p>Cuartel: <b>{campo_cuartel}</b> </p> 
+        <p>Clase: <b>{campo_clase}</b> </p>
+        <p>Lote: <b>{campo_lote} </b>  </p>
+        <p>Fosa: <b>{campo_fosa}</b> </p>
         </div>
         <div className="informacionfosa2">
             <div className="datosfosa">

@@ -6,6 +6,9 @@ import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
+import { getValue } from '@testing-library/user-event/dist/utils';
+
+
 /*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
 /*import "react-datepicker/dist/react-datepicker.css";*/
 /*import es from 'date-fns/locale/es'*/
@@ -56,6 +59,13 @@ function InfoPago() {
             [e.target.name]:e.target.value,
         });
     }
+    /*Prevenir valores menores que 0 */
+    const preventMinus = (e) => {
+        if (e.code === 'Minus') {
+            e.preventDefault();
+        }
+    };
+    
     //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
     /*function comprobardatos () {
         if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
@@ -128,8 +138,8 @@ function InfoPago() {
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
         setLoading(true)
-        if(datosfosa.cuartel === "cuartel 1" && datosfosa.lote === "1"
-        && datosfosa.clase ==="clase 1" && datosfosa.fosa === "1"){
+        if(datosfosa.cuartel !== "" && datosfosa.lote !== ""
+        && datosfosa.clase !=="" && datosfosa.fosa !== ""){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
             setLoading(false);
@@ -162,10 +172,10 @@ function InfoPago() {
                     onBlur={selectclase}
                     defaultValue={datosfosa.cuartel}>
                         <option value="">---</option>
-                        <option value="cuartel 1">Cuartel 1</option>
-                        <option value="cuartel 2">Cuartel 2</option>
-                        <option value="cuartel 3">Cuartel 3</option>
-                        <option value="cuartel 4">Cuartel 4</option>
+                        <option value="1">Cuartel 1</option>
+                        <option value="2">Cuartel 2</option>
+                        <option value="3">Cuartel 3</option>
+                        <option value="4">Cuartel 4</option>
                     </select>
                 </div>
 
@@ -179,6 +189,8 @@ function InfoPago() {
                     name="lote" 
                     value={datosfosa.lote}
                     onChange={handleChange}
+                    min="1"
+                    onKeyPress={preventMinus}
                     onBlur={(e)=>{
                         handleChange(e);
                         if(datosfosa.lote !==""){
@@ -214,10 +226,10 @@ function InfoPago() {
                     }}
                     defaultValue={datosfosa.clase}>
                         <option value="">---</option>
-                        <option value="clase 1">Clase 1</option>
-                        <option value="clase 2">Clase 2</option>
-                        <option value="clase 3">Clase 3</option>
-                        <option value="clase 4">Clase 4</option>
+                        <option value="1">Clase 1</option>
+                        <option value="2">Clase 2</option>
+                        <option value="3">Clase 3</option>
+                        <option value="4">Clase 4</option>
                     </select>
                 </div>
 
@@ -228,9 +240,11 @@ function InfoPago() {
                     className='input'
                     placeholder='Ingrese el numero de fosa' 
                     type="number" 
+                    min="1"
                     name="fosa" 
                     value={datosfosa.fosa}
                     onChange={handleChange} 
+                    onKeyPress={preventMinus}
                     />
                 </div>
                 {loading && <Loader/>}
@@ -254,7 +268,13 @@ function InfoPago() {
                         Buscar comprobante 
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
-                    {buscar && mostrarOpciones ? <DocPdf/> : null}
+                    {buscar && mostrarOpciones ? 
+                    <DocPdf 
+                    Campo_cuartel = {datosfosa.cuartel}
+                    Campo_clase = {datosfosa.clase}
+                    Campo_lote = {datosfosa.lote}
+                    Campo_fosa = {datosfosa.fosa}                
+                    /> : null}
                 </div>            
             </form>
         </div>

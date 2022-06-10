@@ -3,6 +3,7 @@ import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
 export default function Boleta({campo_cuartel,campo_clase,campo_lote,campo_fosa}) {
+    
     return (
         <div id="boleta">
         <div className="datos1">

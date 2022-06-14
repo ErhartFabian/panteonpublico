@@ -18,38 +18,41 @@ function InfoPago() {
     const [dataResponsables, setDataResponsables] = useState();
     const [dataFinado, setDataFinado] = useState();
 
-    const URLDataFosa = 'https://panteonpachuca.herokuapp.com/api/test';
-    const URLResponsables = 'https://panteonpachuca.herokuapp.com/api/readResponsable';
-    const URLFinado = 'https://panteonpachuca.herokuapp.com/api/readFinado';
+    const URLFosainfo = 'http://localhost:3001/panteon';
 
-    const responsablesFinados = {
-        idFosa: 1234
-    };
 
-    useEffect(()=>{
-        let i = 0;
-        const GetData = async () => {
-            try{
-                const responseDataFosa = await axios.get(URLDataFosa);
-                setDataFosa(responseDataFosa.data);
-                const responseResponsables = await axios.post(URLResponsables, responsablesFinados);
-                setDataResponsables(responseResponsables.data);
-                const responseFinados = await axios.post(URLFinado, responsablesFinados);
-                setDataFinado(responseFinados.data);
-                console.log(i);
-            }
-            catch(error){
-                console.error(error);
-            }
-        }
-        i +=1 ;
-        GetData();
-    },[]);
+    // const URLDataFosa = 'https://panteonpachuca.herokuapp.com/api/test';
+    // const URLResponsables = 'https://panteonpachuca.herokuapp.com/api/readResponsable';
+    // const URLFinado = 'https://panteonpachuca.herokuapp.com/api/readFinado';
 
-    //Para acceder a los datos de la fosa
-    console.log(dataFosa[0]);
-    console.log(dataResponsables);
-    console.log(dataFinado);
+    // const responsablesFinados = {
+    //     idFosa: 1234
+    // };
+
+    // useEffect(()=>{
+    //     let i = 0;
+    //     const GetData = async () => {
+    //         try{
+    //             const responseDataFosa = await axios.get(URLDataFosa);
+    //             setDataFosa(responseDataFosa.data);
+    //             const responseResponsables = await axios.post(URLResponsables, responsablesFinados);
+    //             setDataResponsables(responseResponsables.data);
+    //             const responseFinados = await axios.post(URLFinado, responsablesFinados);
+    //             setDataFinado(responseFinados.data);
+    //             console.log(i);
+    //         }
+    //         catch(error){
+    //             console.error(error);
+    //         }
+    //     }
+    //     i +=1 ;
+    //     GetData();
+    // },[]);
+
+    // //Para acceder a los datos de la fosa
+    // console.log(dataFosa[0]);
+    // console.log(dataResponsables);
+    // console.log(dataFinado);
 
     const [msjerror,setMsjerror] =useState(false);
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
@@ -61,6 +64,8 @@ function InfoPago() {
     const [campoclase,setCampoClase] = useState("");
     const [campofosa,setCampoFosa] = useState("");
 
+    
+
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
 
@@ -69,6 +74,23 @@ function InfoPago() {
     const [verComprobante,setVerComprobante] = useState(false);
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
+
+    useEffect(()=>{
+        // URLFosainfo += "?id=";
+        const getData = async () => {
+            try{
+                const response = await axios.get(URLFosainfo);
+                setDataFosa(response.data);
+            }catch(error){
+                console.log(error);
+                alert('Esos datos no existn');
+            }
+        }
+        getData();
+    },[setBuscar])
+
+    console.log('fosa:' + URLFosainfo);
+    console.log(dataFosa);
 
     const [datosfosa,setDatosFosa] = useState({
         cuartel:"",
@@ -300,7 +322,16 @@ function InfoPago() {
                 </div>
 
             </form>
-            {verComprobante ? <Boleta/> : null}
+            {verComprobante ? 
+            <Boleta 
+            cuartel = {dataFosa[0].cuartel}
+            clase = {dataFosa[0].clase}
+            finado = {dataFosa[0].finado}
+            fosa = {dataFosa[0].fosa}
+            lote = {dataFosa[0].lote}
+            adeudo = {dataFosa[0].adeudo}
+            resposable = {dataFosa[0].responsable[0].nombre}
+            /> : null}
         </div>
     )
 }

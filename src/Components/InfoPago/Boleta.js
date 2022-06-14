@@ -1,7 +1,7 @@
 import React from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
-export default function Boleta() {
+export default function Boleta(props) {
     return (
         <div id="boleta">
             <div className="datos1">
@@ -15,7 +15,7 @@ export default function Boleta() {
             </div>
             <div className="titular">
                 <div id="datostitular">
-                    <p>Titular de la concesión: Juana Perez Hernández</p>
+                    <p>Titular de la concesión: <b>{props.responsable}</b> </p>
                     <p>Col. Santa Julia calle 5 de Mayo #113</p>
                     <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                     <p>R.F.C</p>
@@ -31,8 +31,8 @@ export default function Boleta() {
             </div>
             <h3>Información de la fosa</h3>
             <div className="informacionfosa">
-                <p>Cuartel: <b>1</b> </p>
-                <p>Clase: <b>1</b> </p>
+                <p>Cuartel: <b>{props.cuartel}</b> </p>
+                <p>Clase: <b>{props.clase}</b> </p>
                 <p>Lote: <b>1</b>  </p>
                 <p>Fosa: <b>1</b> </p>
             </div>

@@ -8,20 +8,16 @@ import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
 import { getValue } from '@testing-library/user-event/dist/utils';
 
-
-/*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
-/*import "react-datepicker/dist/react-datepicker.css";*/
-/*import es from 'date-fns/locale/es'*/
-
-/*registerLocale("es",es);*/
-
 function InfoPago() {
 
-    const [msjerror,setMsjerror] =useState(false);
-    const [loading,setLoading] =useState(false);
+    const [msjerror,setMsjerror] =useState(false); //Componente para habilitar el mensaje de error
+    const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
+    const [disabledCuartel,setDisabledCuartel] = useState(true); //Componente para activar el campo cuartel
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
+   
+
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -31,6 +27,8 @@ function InfoPago() {
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
+    const [Titular,setTitular] = useState('');
+
     const [datosfosa,setDatosFosa] = useState({
         cuartel:"",
         lote:"",
@@ -38,14 +36,17 @@ function InfoPago() {
         fosa:"",
     });
 
+    if(Titular === ""){
+        datosfosa.lote = "";
+        datosfosa.fosa = ""
+    }
+   
     if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
-           
             datosfosa.fosa = ""
         }
 
     if(datosfosa.lote === ""){
-            
             datosfosa.fosa = "";
         }
     
@@ -59,36 +60,29 @@ function InfoPago() {
             [e.target.name]:e.target.value,
         });
     }
+    const onlyLetters = e =>{
+        const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
+        setTitular(result);
+    }
     /*Prevenir valores menores que 0 */
     const preventMinus = (e) => {
         if (e.code === 'Minus') {
             e.preventDefault();
         }
     };
-    
-    //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
-    /*function comprobardatos () {
-        if(campocuartel === "completo" && campolote === "completo" && campoclase ==="completo" 
-        && campofosa === "completo"){
-            setMostrarOpciones(true);
-        }
-        else{
-            setMostrarOpciones(false);
-            setBuscar(false);
-        }
-    }*/
 
     const handleSubmit = e =>{
         e.preventDefault();
         handleChange(e);  
     }
 
-    const selectclase = e =>{
+    const selectcuartel = e =>{
         handleChange(e);
-        if(datosfosa.cuartel !==""){
-            setDisabledLote(false);
+        if(Titular !==""){
+            setDisabledCuartel(false);
         }
         else{
+            setDisabledCuartel(true);
             setDisabledLote(true);
             setDisabledClase(true);   
             setDisabledLote(true);     
@@ -120,7 +114,7 @@ function InfoPago() {
     };
     
     useEffect(()=>{
-        if(datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
+        if(Titular !=="" && datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
         && datosfosa.fosa !==""){
             setMostrarOpciones(true);
         }
@@ -128,7 +122,7 @@ function InfoPago() {
             setBuscar(false);
             setMostrarOpciones(false)
         }
-    },[datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
+    },[Titular, datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
 
     //Loader
     /*useEffect(()=>{
@@ -151,7 +145,6 @@ function InfoPago() {
         }    
     }
 
-    
     return (
         <div >
         <div className="container-infopago">
@@ -162,14 +155,39 @@ function InfoPago() {
             </div>
             <form onSubmit={handleSubmit} className='informacion'>
                 <h1 id="name">Comprobante de pago</h1>
+
+                <div className='dato'>
+                    <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
+                    <input 
+                    className='input'
+                    placeholder='Ingrese nombre de titular' 
+                    type="text" 
+                    name="Titular" 
+                    value={Titular}
+                    onChange={onlyLetters}
+                    onBlur={selectcuartel}
+                    />
+                </div>
+
                 <div className='dato'>
                     <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
                     <select 
+                    disabled={disabledCuartel}
                     className='inputselect'
                     id="selectcuartel"
                     name="cuartel" 
                     onChange={handleChange}
-                    onBlur={selectclase}
+                    onBlur={(e)=>{
+                        handleChange(e);
+                        if(datosfosa.cuartel !==""){
+                            setDisabledLote(false);
+                        }
+                        else{
+                            setDisabledLote(true);
+                            setDisabledClase(true);   
+                            setDisabledLote(true);     
+                        }
+                    }}
                     defaultValue={datosfosa.cuartel}>
                         <option value="">---</option>
                         <option value="1">Cuartel 1</option>
@@ -247,6 +265,7 @@ function InfoPago() {
                     onKeyPress={preventMinus}
                     />
                 </div>
+
                 {loading && <Loader/>}
                 { msjerror && <div className="mensaje_error">
                     <p>
@@ -270,10 +289,11 @@ function InfoPago() {
                     <Comprobante disabled={!mostrarOpciones}/>
                     {buscar && mostrarOpciones ? 
                     <DocPdf 
+                    Campo_titular={Titular}
                     Campo_cuartel = {datosfosa.cuartel}
                     Campo_clase = {datosfosa.clase}
                     Campo_lote = {datosfosa.lote}
-                    Campo_fosa = {datosfosa.fosa}                
+                    Campo_fosa = {datosfosa.fosa}     
                     /> : null}
                 </div>            
             </form>
@@ -282,6 +302,7 @@ function InfoPago() {
         <div className='vista'>
             {verComprobante && mostrarOpciones ? 
             <Boleta 
+            campo_titular={Titular}
             campo_cuartel={datosfosa.cuartel}
             campo_clase ={datosfosa.clase}
             campo_lote={datosfosa.lote}

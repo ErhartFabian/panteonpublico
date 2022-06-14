@@ -6,7 +6,7 @@ import ReactToPrint from "react-to-print";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
-export default function DocPdf ({Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa}) {
+export default function DocPdf ({Campo_titular,Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa}) {
     let componentRef = useRef();
     return (
       <>
@@ -28,6 +28,7 @@ export default function DocPdf ({Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa
   
           <div style={{ display: "none" }}>
               <ComponentToPrint 
+                Print_titular ={Campo_titular}
                 Print_cuartel = {Campo_cuartel}
                 Print_clase = {Campo_clase}
                 Print_lote = {Campo_lote}
@@ -55,7 +56,7 @@ class ComponentToPrint extends React.Component {
         </div>
         <div className="titular">
             <div id="datostitular">
-                <p>Titular de la concesión: Juana Perez Hernández</p>
+                <p>Titular de la concesión: {this.props.Print_titular}</p>
                 <p>Col. Santa Julia calle 5 de Mayo #113</p>
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>

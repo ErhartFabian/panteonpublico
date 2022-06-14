@@ -324,13 +324,13 @@ function InfoPago() {
             </form>
             {verComprobante ? 
             <Boleta 
-            cuartel = {dataFosa[0].cuartel}
-            clase = {dataFosa[0].clase}
-            finado = {dataFosa[0].finado}
-            fosa = {dataFosa[0].fosa}
-            lote = {dataFosa[0].lote}
-            adeudo = {dataFosa[0].adeudo}
-            resposable = {dataFosa[0].responsable[0].nombre}
+            cuartel = {dataFosa[1].cuartel}
+            clase = {dataFosa[1].clase}
+            finado = {dataFosa[1].finado}
+            fosa = {dataFosa[1].Fosa}
+            lote = {dataFosa[1].lote}
+            adeudo = {dataFosa[1].adeudo}
+            responsable = {dataFosa[1].responsable[0].nombre}
             /> : null}
         </div>
     )

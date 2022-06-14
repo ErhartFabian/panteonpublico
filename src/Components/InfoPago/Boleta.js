@@ -2,6 +2,8 @@ import React from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 export default function Boleta(props) {
+    console.log('En boleta: ' + props.responsable);
+
     return (
         <div id="boleta">
             <div className="datos1">
@@ -33,8 +35,8 @@ export default function Boleta(props) {
             <div className="informacionfosa">
                 <p>Cuartel: <b>{props.cuartel}</b> </p>
                 <p>Clase: <b>{props.clase}</b> </p>
-                <p>Lote: <b>1</b>  </p>
-                <p>Fosa: <b>1</b> </p>
+                <p>Lote: <b>{props.lote}</b>  </p>
+                <p>Fosa: <b>{props.fosa}</b> </p>
             </div>
             <div className="informacionfosa2">
                 <div className="datosfosa">
@@ -43,7 +45,7 @@ export default function Boleta(props) {
                 </div>
                 <div className="datosfosa">
                     <p>Ultima persona inhumada:</p>
-                    <p>Finado Hérnandez Hernández 01/Enero/2022</p>
+                    <p>{props.finado}</p>
                 </div>
             </div>
             <h3>Adeudos por Ejercicio Fiscal</h3>
@@ -59,29 +61,29 @@ export default function Boleta(props) {
                 <tbody>
                     <tr>
                         <td className="columnafecha">2020</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
+                        <td className="columna">$0</td>
+                        <td className="columna">$0</td>
+                        <td className="columna">$0</td>
                     </tr>
 
                     <tr>
                         <td className="columnafecha">2021</td>
-                        <td className="datos4">0</td>
-                        <td className="datos4">0</td>
-                        <td className="datos4">0</td>
+                        <td className="datos4">$0</td>
+                        <td className="datos4">$0</td>
+                        <td className="datos4">$0</td>
                     </tr>
 
                     <tr>
                         <td className="columnafecha">2022</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
+                        <td className="columna">${props.adeudo}</td>
+                        <td className="columna">$0</td>
+                        <td className="columna">$0</td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colSpan="1"> Monto a pagar: </td>
-                        <td bgcolor="#EEEEEE" colSpan="4"> <b>$183.00 (Ciento ochenta y tres pesos 00/100 M.N</b></td>
+                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${props.adeudo}.00 Ciento ochenta y tres pesos</b></td>
                     </tr>
                 </tfoot>
             </table>

@@ -2,7 +2,7 @@ import React from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
-export default function Boleta({campo_cuartel,campo_clase,campo_lote,campo_fosa}) {
+export default function Boleta(props) {
     
     return (
         <div id="boleta">
@@ -17,7 +17,7 @@ export default function Boleta({campo_cuartel,campo_clase,campo_lote,campo_fosa}
         </div>
         <div className="titular">
             <div id="datostitular">
-                <p>Titular de la concesión: Juana Perez Hernández</p>
+                <p>Titular de la concesión: {props.campo_titular}</p>
                 <p>Col. Santa Julia calle 5 de Mayo #113</p>
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>
@@ -35,10 +35,10 @@ export default function Boleta({campo_cuartel,campo_clase,campo_lote,campo_fosa}
             <h3 id="Tfosa">Información de la fosa</h3>
         </div>
         <div className="informacionfosa">
-        <p>Cuartel: <b>{campo_cuartel}</b> </p> 
-        <p>Clase: <b>{campo_clase}</b> </p>
-        <p>Lote: <b>{campo_lote} </b>  </p>
-        <p>Fosa: <b>{campo_fosa}</b> </p>
+        <p>Cuartel: <b>{props.campo_cuartel}</b> </p> 
+        <p>Clase: <b>{props.campo_clase}</b> </p>
+        <p>Lote: <b>{props.campo_lote} </b>  </p>
+    <p>Fosa: <b>{props.campo_fosa}</b> </p>
         </div>
         <div className="informacionfosa2">
             <div className="datosfosa">

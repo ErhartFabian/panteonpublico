@@ -19,7 +19,7 @@
 }
 
 .instrutions-infopago{
-    height: calc(70vh - 85px);
+    height: calc(80vh - 50px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,8 @@
     margin-right: auto;
     background-color: #fff;
     width: 800px;
-    height: calc(70vh - 85px);
+    height: calc(80vh - 50px);
+    min-height: 250px;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
 }
@@ -59,6 +60,8 @@
     text-align: center;
     font-weight: 100;
     font-display: swap;
+    font-size: 30px;
+    padding: 10px 10px 10px 10px;
 }
 
 .stylelabel{
@@ -67,8 +70,9 @@
     min-height: 35px;
 	cursor: pointer;  
 }
+
 #labelcuartel{
-    padding-right:180px;
+    padding-right: 180px;
 }
 #labelclase{
     padding-right: 190px;
@@ -79,6 +83,11 @@
 #labelote{
     margin-right: 170px;
 }
+#labeltitular{
+    margin-right: 170px;
+
+}
+
 
 .dato{
     font-weight: 400;
@@ -87,6 +96,7 @@
     display: flex;
     justify-content: space-around;
     background:transparent;
+    width: 100%;
 }
 
 .inputselect{
@@ -100,11 +110,12 @@
     text-align: center;
 	border: 3px solid transparent;
     font-size: 15px;
+    margin-bottom: 15px;
 }
 .inputselect:focus{
     border: 3px solid #0075FF;
     outline: none;
-    box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+    box-shadow: 3px 0px 10px rgba(163,163,163, 0.4);
 }
 .inputselect:disabled{
     background: rgb(235,235,228);
@@ -141,16 +152,18 @@ input::placeholder {
     border: none;
     text-align: center;
     border-bottom: 1px solid #5757577E;
+    margin-bottom: 20px;
 }
 .input:disabled {
     background: rgb(235,235,228);
 }
 .mensaje_error{
-    height: 45px;
-	line-height: 45px;
+    height: auto;
+	line-height: auto;
 	background: #F66060;
 	padding: 0px 15px;
 	border-radius: 3px;
+    margin-bottom: 10px;
 }
 
 .mensaje_error p{
@@ -174,6 +187,7 @@ input::placeholder {
 }
 #boton{
     margin-right: 80px;
+    margin-bottom: 10px;
     background-color: var(--detail-blue);
 }
 

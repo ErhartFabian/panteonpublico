@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
 import './css/InfoPago.css'
+import axios from 'axios';
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,7 @@ function InfoPago() {
     const URLFinado = 'https://panteonpachuca.herokuapp.com/api/readFinado';
 
     const responsablesFinados = {
-        idFosa: 1111
+        idFosa: 1234
     };
 
     useEffect(()=>{
@@ -46,7 +47,7 @@ function InfoPago() {
     },[]);
 
     //Para acceder a los datos de la fosa
-    console.log(dataFosa);
+    console.log(dataFosa[0]);
     console.log(dataResponsables);
     console.log(dataFinado);
 

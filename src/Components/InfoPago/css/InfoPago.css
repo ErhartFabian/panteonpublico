@@ -106,6 +106,9 @@
     outline: none;
     box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
 }
+.inputselect:disabled{
+    background: rgb(235,235,228);
+}
 
 input::placeholder {
     font-size: 1rem;
@@ -136,7 +139,11 @@ input::placeholder {
     padding: 0 20px 0 10px;
     transition: .3s ease all;
     border: none;
+    text-align: center;
     border-bottom: 1px solid #5757577E;
+}
+.input:disabled {
+    background: rgb(235,235,228);
 }
 .mensaje_error{
     height: 45px;
@@ -176,3 +183,17 @@ input::placeholder {
 #Acta{
     margin: 0 auto 0 40px;
 }
+
+.vistacotenedor{
+    background: #fff;
+    border: 1px solid white; /*Revisar porque sin esto deja un espacio en blanco*/
+    background-color: #e5e5f7;
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
+}
+.vista{
+    width: 800px;
+    margin: auto;
+    background-color: #fff;
+}
+

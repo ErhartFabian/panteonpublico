@@ -6,7 +6,7 @@ import ReactToPrint from "react-to-print";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
-export default function DocPdf () {
+export default function DocPdf ({Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa}) {
     let componentRef = useRef();
     return (
       <>
@@ -27,7 +27,12 @@ export default function DocPdf () {
           />
   
           <div style={{ display: "none" }}>
-              <ComponentToPrint ref={(el) => (componentRef = el)} />
+              <ComponentToPrint 
+                Print_cuartel = {Campo_cuartel}
+                Print_clase = {Campo_clase}
+                Print_lote = {Campo_lote}
+                Print_fosa = {Campo_fosa}
+                ref={(el) => (componentRef = el)} />
           </div>
   
         </div>
@@ -38,14 +43,13 @@ export default function DocPdf () {
 class ComponentToPrint extends React.Component {
     render() {
       return (
-        <div id="boleta">
+    <div id="boleta">
         <div className="datos1">
             <div className="titulos">
-                <h2>Municipio de Pachuca de Soto- Secretaria de
-                <br></br>
+                <h2 id="Tboleta">Municipio de Pachuca de Soto - Secretaria de
                 Servicios Públicos Municipales
                 </h2>
-                <h3 id="Tboleta">Boleta de Anualidad Panteon Municipal</h3>
+                <h3 id="Sboleta">Boleta de Anualidad Panteon Municipal</h3>
             </div>
             <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
         </div>
@@ -69,10 +73,10 @@ class ComponentToPrint extends React.Component {
             <h3 id="Tfosa">Información de la fosa</h3>
         </div>
         <div className="informacionfosa">
-        <p>Cuartel: <b>1</b> </p> 
-        <p>Clase: <b>1</b> </p>
-        <p>Lote: <b>1</b>  </p>
-        <p>Fosa: <b>1</b> </p>
+        <p>Cuartel: <b>{this.props.Print_cuartel}</b> </p> 
+        <p>Clase: <b>{this.props.Print_clase}</b> </p>
+        <p>Lote: <b> {this.props.Print_lote}</b>  </p>
+        <p>Fosa: <b>{this.props.Print_fosa}  </b> </p>
         </div>
         <div className="informacionfosa2">
             <div className="datosfosa">

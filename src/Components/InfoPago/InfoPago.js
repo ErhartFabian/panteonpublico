@@ -10,14 +10,24 @@ import { getValue } from '@testing-library/user-event/dist/utils';
 
 function InfoPago() {
 
-    const [msjerror,setMsjerror] =useState(false); //Componente para habilitar el mensaje de error
+    const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
-    const [disabledCuartel,setDisabledCuartel] = useState(true); //Componente para activar el campo cuartel
-    const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
-    const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
-    const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
-   
+    const [disabledCuartel,setDisabledCuartel] = useState(true); //Estado para activar el campo cuartel
+    const [disabledClase,setDisabledClase] = useState(true); //Estado para activar el campo clase
+    const [disabledFosa,setDisabledFosa] = useState(true);//Estado para activar el campo fosa
+    const [disabledLote,setDisabledLote] = useState(true);//Estado para activar el campo lote
 
+    const [Titular,setTitular] = useState('');
+   
+    const [Cuartel, setCuartel] = useState(""); //Estado para reiniciar el select cuartel
+    const [data] = useState([1, 2, 3, 4]); //Valores cuartel
+
+    const [Lote, setLote] = useState("");
+
+    const [Clase, setClase] = useState(""); //Estado para reiniciar el select clase
+    const [valorclase] = useState([1, 2, 3, 4]); //valores clase
+
+    const [Fosa,setFosa] = useState("");
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -27,39 +37,34 @@ function InfoPago() {
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    const [Titular,setTitular] = useState('');
-
-    const [datosfosa,setDatosFosa] = useState({
-        cuartel:"",
+    /*const [datosfosa,setDatosFosa] = useState({
+        //cuartel:"",
         lote:"",
-        clase: "",
+        //clase: "", 
         fosa:"",
-    });
+    });*/
 
-    if(Titular === ""){
+    /*if(Titular === ""){
         datosfosa.lote = "";
         datosfosa.fosa = ""
-    }
+    }*/
    
-    if(datosfosa.cuartel === ""){
+    /*if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
             datosfosa.fosa = ""
-        }
-
-    if(datosfosa.lote === ""){
-            datosfosa.fosa = "";
-        }
+        }*/
     
-    if(datosfosa.clase === ""){
+    /*if(datosfosa.clase === ""){
         datosfosa.fosa = "";
-    }
+    }*/
 
-    const handleChange = e =>{
+    /*const handleChange = e =>{
         setDatosFosa({
             ...datosfosa, 
             [e.target.name]:e.target.value,
         });
-    }
+    }*/
+    /*Permitir solo letras*/
     const onlyLetters = e =>{
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
         setTitular(result);
@@ -73,11 +78,9 @@ function InfoPago() {
 
     const handleSubmit = e =>{
         e.preventDefault();
-        handleChange(e);  
     }
 
-    const selectcuartel = e =>{
-        handleChange(e);
+    const enablecuartel = e =>{
         if(Titular !==""){
             setDisabledCuartel(false);
         }
@@ -112,17 +115,34 @@ function InfoPago() {
         </div>
         );
     };
-    
+
+    /*useEffect para reiniciar los campos cada vez que un valor se quite */
     useEffect(()=>{
-        if(Titular !=="" && datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
-        && datosfosa.fosa !==""){
+        if(Titular === ""){
+            setCuartel('');
+        }
+        if(Cuartel === ""){
+            setLote('');
+        }
+        if(Lote === ""){
+            setClase('');
+        }
+        if(Clase === ""){
+            setFosa('');
+        }
+       
+    },[Titular,Cuartel,Lote,Clase])
+
+    useEffect(()=>{
+        if(Titular !=="" && Cuartel !=="" &&  Lote !=="" && Clase !==""
+        && Fosa !==""){
             setMostrarOpciones(true);
         }
         else{
             setBuscar(false);
             setMostrarOpciones(false)
         }
-    },[Titular, datosfosa.cuartel,datosfosa.lote,datosfosa.clase,datosfosa.fosa])
+    },[Titular, Cuartel, Lote, Clase, Fosa])
 
     //Loader
     /*useEffect(()=>{
@@ -132,8 +152,8 @@ function InfoPago() {
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
         setLoading(true)
-        if(datosfosa.cuartel !== "" && datosfosa.lote !== ""
-        && datosfosa.clase !=="" && datosfosa.fosa !== ""){
+        if(Titular !=="" && Cuartel !== "" && Lote !== ""
+        && Clase !=="" && Fosa !== ""){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
             setLoading(false);
@@ -165,7 +185,7 @@ function InfoPago() {
                     name="Titular" 
                     value={Titular}
                     onChange={onlyLetters}
-                    onBlur={selectcuartel}
+                    onBlur={enablecuartel}
                     />
                 </div>
 
@@ -176,10 +196,11 @@ function InfoPago() {
                     className='inputselect'
                     id="selectcuartel"
                     name="cuartel" 
-                    onChange={handleChange}
+                    value={Cuartel}
+                    onChange={(e) => setCuartel(e.target.value)}
                     onBlur={(e)=>{
-                        handleChange(e);
-                        if(datosfosa.cuartel !==""){
+                        
+                        if( Cuartel !==""){
                             setDisabledLote(false);
                         }
                         else{
@@ -188,12 +209,17 @@ function InfoPago() {
                             setDisabledLote(true);     
                         }
                     }}
-                    defaultValue={datosfosa.cuartel}>
-                        <option value="">---</option>
+                    >
+                         {/*Aplique un map para poder resetear el select */}
+                        <option value ="">---</option>
+                        {data && data.map((item, index) => {
+                            return <option key={index}>{item}</option>;
+                        })}
+                        {/*<option value="">---</option>
                         <option value="1">Cuartel 1</option>
                         <option value="2">Cuartel 2</option>
                         <option value="3">Cuartel 3</option>
-                        <option value="4">Cuartel 4</option>
+                        <option value="4">Cuartel 4</option>*/}
                     </select>
                 </div>
 
@@ -205,13 +231,13 @@ function InfoPago() {
                     placeholder='Ingrese numero de lote' 
                     type="number" 
                     name="lote" 
-                    value={datosfosa.lote}
-                    onChange={handleChange}
+                    value={Lote}
+                    onChange={(e) => setLote(e.target.value)}
                     min="1"
                     onKeyPress={preventMinus}
                     onBlur={(e)=>{
-                        handleChange(e);
-                        if(datosfosa.lote !==""){
+                        
+                        if(Lote !==""){
                             setDisabledClase(false);                            
                         }
                         else{
@@ -229,25 +255,28 @@ function InfoPago() {
                     id="selectclase"
                     className='inputselect' 
                     name="clase" 
-                    onChange={handleChange}
+                    value={Clase}
+                    onChange={(e) => setClase(e.target.value)}
                     onBlur={(e)=>{
                        
-                        handleChange(e);
-                        if(datosfosa.clase !==""){
+                        if(Clase !==""){
                             setDisabledFosa(false);
                         }
                         else{
                             setDisabledFosa(true);
-                            
-                            
                         }
                     }}
-                    defaultValue={datosfosa.clase}>
-                        <option value="">---</option>
+                    >
+                        {/*Aplique un map para poder resetear el select */}
+                        <option  value="">---</option>
+                            {valorclase && valorclase.map((item, index) => {
+                                return <option key={index}>{item}</option>;
+                            })}
+                        {/*<option value="">---</option>
                         <option value="1">Clase 1</option>
                         <option value="2">Clase 2</option>
                         <option value="3">Clase 3</option>
-                        <option value="4">Clase 4</option>
+                        <option value="4">Clase 4</option>*/}
                     </select>
                 </div>
 
@@ -260,8 +289,8 @@ function InfoPago() {
                     type="number" 
                     min="1"
                     name="fosa" 
-                    value={datosfosa.fosa}
-                    onChange={handleChange} 
+                    value={Fosa}
+                    onChange={(e) => setFosa(e.target.value)}
                     onKeyPress={preventMinus}
                     />
                 </div>
@@ -290,10 +319,10 @@ function InfoPago() {
                     {buscar && mostrarOpciones ? 
                     <DocPdf 
                     Campo_titular={Titular}
-                    Campo_cuartel = {datosfosa.cuartel}
-                    Campo_clase = {datosfosa.clase}
-                    Campo_lote = {datosfosa.lote}
-                    Campo_fosa = {datosfosa.fosa}     
+                    Campo_cuartel = {Cuartel}
+                    Campo_clase = {Clase}
+                    Campo_lote = {Lote}
+                    Campo_fosa = {Fosa}     
                     /> : null}
                 </div>            
             </form>
@@ -303,10 +332,10 @@ function InfoPago() {
             {verComprobante && mostrarOpciones ? 
             <Boleta 
             campo_titular={Titular}
-            campo_cuartel={datosfosa.cuartel}
-            campo_clase ={datosfosa.clase}
-            campo_lote={datosfosa.lote}
-            campo_fosa={datosfosa.fosa}
+            campo_cuartel={Cuartel}
+            campo_clase ={Clase}
+            campo_lote={Lote}
+            campo_fosa={Fosa}
             /> : null}
         </div>
         </div>

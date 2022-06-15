@@ -52,7 +52,7 @@ class ComponentToPrint extends React.Component {
                 <h2 id="Tboleta">Municipio de Pachuca de Soto - Secretaria de
                 Servicios Públicos Municipales
                 </h2>
-                <h3 id="Sboleta">Boleta de Anualidad Panteon Municipal</h3>
+                <h3 id="Sboleta">Boleta de Anualidad Panteón Municipal</h3>
             </div>
             <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
         </div>
@@ -87,7 +87,7 @@ class ComponentToPrint extends React.Component {
                 <p>Capilla Individual</p>
             </div>
             <div className="datosfosa2">
-                <p id="Ultimapersona">Ultima persona inhumada:</p>
+                <p id="Ultimapersona">Última persona inhumada:</p>
                 <div className="boxFinado">
                     <p>{this.props.Print_finado}</p>
                     <div><p>{this.props.Print_inhumacionFinado}</p></div>

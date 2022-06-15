@@ -16,7 +16,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Navbar />
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Mapa />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/InfoPago" element={<InfoPago/>} />
       <Route path="/Busqueda" element={<Busqueda />} />

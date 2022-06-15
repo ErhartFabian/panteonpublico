@@ -44,25 +44,25 @@ function Mapa() {
         lote:"1",
         clase: "1",
         fosa:"1",
-        coordenadas:[20.1281, -98.76437]
+        coordenadas:[0, 0]
     })
 
     const arrFosas = [
         {cuartel: "1", lote: "1", clase: "1", fosa: "1", coordenadas: [20.1281, -98.76447] },
-        {cuartel: "1", lote: "2", clase: "2", fosa: "1", coordenadas: [20.1282, -98.76457] },
-        {cuartel: "1", lote: "1", clase: "3", fosa: "1", coordenadas: [20.1283, -98.76467] },
+        {cuartel: "1", lote: "1", clase: "2", fosa: "1", coordenadas: [20.1282, -98.76457] },
+        {cuartel: "1", lote: "2", clase: "3", fosa: "1", coordenadas: [20.1283, -98.76467] },
         {cuartel: "1", lote: "2", clase: "4", fosa: "1", coordenadas: [20.1284, -98.76477] },
         {cuartel: "2", lote: "1", clase: "1", fosa: "1", coordenadas: [20.1285, -98.76487] },
-        {cuartel: "2", lote: "2", clase: "2", fosa: "1", coordenadas: [20.1286, -98.76497] },
-        {cuartel: "2", lote: "1", clase: "3", fosa: "1", coordenadas: [20.1287, -98.76507] },
+        {cuartel: "2", lote: "1", clase: "2", fosa: "1", coordenadas: [20.1286, -98.76497] },
+        {cuartel: "2", lote: "2", clase: "3", fosa: "1", coordenadas: [20.1287, -98.76507] },
         {cuartel: "2", lote: "2", clase: "4", fosa: "1", coordenadas: [20.1288, -98.76517] },
         {cuartel: "3", lote: "1", clase: "1", fosa: "1", coordenadas: [20.1289, -98.76527] },
-        {cuartel: "3", lote: "2", clase: "2", fosa: "1", coordenadas: [20.1290, -98.76537] },
-        {cuartel: "3", lote: "1", clase: "3", fosa: "1", coordenadas: [20.1291, -98.76547] },
+        {cuartel: "3", lote: "1", clase: "2", fosa: "1", coordenadas: [20.1290, -98.76537] },
+        {cuartel: "3", lote: "2", clase: "3", fosa: "1", coordenadas: [20.1291, -98.76547] },
         {cuartel: "3", lote: "2", clase: "4", fosa: "1", coordenadas: [20.1292, -98.76557] },
         {cuartel: "4", lote: "1", clase: "1", fosa: "1", coordenadas: [20.1293, -98.76567] },
-        {cuartel: "4", lote: "2", clase: "2", fosa: "1", coordenadas: [20.1294, -98.76577] },
-        {cuartel: "4", lote: "1", clase: "3", fosa: "1", coordenadas: [20.1295, -98.76587] },
+        {cuartel: "4", lote: "1", clase: "2", fosa: "1", coordenadas: [20.1294, -98.76577] },
+        {cuartel: "4", lote: "2", clase: "3", fosa: "1", coordenadas: [20.1295, -98.76587] },
         {cuartel: "4", lote: "2", clase: "4", fosa: "1", coordenadas: [20.1296, -98.76597] },
     ]
 
@@ -145,7 +145,7 @@ function Mapa() {
             });
 
             if(fosaActual) {
-                alert("Las coordenadas son: " + fosaActual.coordenadas);
+                // alert("Las coordenadas son: " + fosaActual.coordenadas);
                 setFosaAct(fosaActual);
             }
             else

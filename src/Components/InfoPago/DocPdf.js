@@ -56,7 +56,7 @@ class ComponentToPrint extends React.Component {
         </div>
         <div className="titular">
             <div id="datostitular">
-                <p>Titular de la concesión: Juana Perez Hernández</p>
+                <p>Titular de la concesión: {this.props.Print_titular}</p>
                 <p>Col. Santa Julia calle 5 de Mayo #113</p>
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>

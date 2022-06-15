@@ -64,6 +64,7 @@ function InfoPago() {
             [e.target.name]:e.target.value,
         });
     }*/
+
     /*Permitir solo letras*/
     const onlyLetters = e =>{
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
@@ -198,7 +199,7 @@ function InfoPago() {
                     name="cuartel" 
                     value={Cuartel}
                     onChange={(e) => setCuartel(e.target.value)}
-                    onBlur={(e)=>{
+                    onBlur={()=>{
                         
                         if( Cuartel !==""){
                             setDisabledLote(false);

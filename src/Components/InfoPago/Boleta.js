@@ -47,8 +47,8 @@ export default function Boleta(props) {
                 </div>
                 <div className="datosfosa2">
                     <p id="Ultimapersona">Ultima persona inhumada:</p>
-                    <p>Finado Hérnandez Hernández</p>
-                    <div><p>01/Enero/2022</p></div>
+                    <p>{props.campo_finado}</p>
+                    <div><p>{props.campo_inhumacionFinado}</p></div>
                 </div>
             </div>
             <h3 id="adeudos">Adeudos por Ejercicio Fiscal</h3>

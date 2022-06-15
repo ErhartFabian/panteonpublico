@@ -32,7 +32,9 @@ export default function DocPdf (props) {
                 Print_clase = {props.Campo_clase}
                 Print_lote = {props.Campo_lote}
                 Print_fosa = {props.Campo_fosa}
-                Print_nombre = {props.Campo_nombre}
+                Print_responsable = {props.Campo_titular}
+                Print_finado = {props.Campo_finado}
+                Print_inhumacionFinado = {props.Campo_inhumacionFinado}
                 ref={(el) => (componentRef = el)} />
           </div>
   
@@ -56,7 +58,7 @@ class ComponentToPrint extends React.Component {
         </div>
         <div className="titular">
             <div id="datostitular">
-                <p>Titular de la concesión: {this.props.Print_titular}</p>
+                <p>Titular de la concesión: {this.props.Print_responsable}</p>
                 <p>Col. Santa Julia calle 5 de Mayo #113</p>
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>
@@ -86,8 +88,8 @@ class ComponentToPrint extends React.Component {
             </div>
             <div className="datosfosa2">
                 <p id="Ultimapersona">Ultima persona inhumada:</p>
-                <p>Finado Hérnandez Hernández</p>
-                <div><p>01/Enero/2022</p></div>
+                <p>{this.props.Print_finado}</p>
+                <div><p>{this.props.Print_inhumacionFinado}</p></div>
             </div>
         </div>
         <h3 id="adeudos">Adeudos por Ejercicio Fiscal</h3>

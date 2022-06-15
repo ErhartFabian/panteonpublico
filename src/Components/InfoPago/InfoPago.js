@@ -7,11 +7,13 @@ import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
+import { ExitToApp } from '@material-ui/icons';
 
 function InfoPago() {
 
     const [callAPI, setCallAPI] = useState(false);
     const [dataFosa, setDataFosa] = useState();
+    const [fechaInhumacion, setFechaInhumacion] = useState();
 
     const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
@@ -40,12 +42,12 @@ function InfoPago() {
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    const [datosfosa, setDatosFosa] = useState({
-        cuartel:"",
-        lote:"",
-        clase: "", 
-        fosa:"",
-    });
+    // const [datosfosa, setDatosFosa] = useState({
+    //     cuartel:"",
+    //     lote:"",
+    //     clase: "", 
+    //     fosa:"",
+    // });
 
     /*if(Titular === ""){
         datosfosa.lote = "";
@@ -61,12 +63,12 @@ function InfoPago() {
         datosfosa.fosa = "";
     }*/
 
-    const handleChange = e =>{
-        setDatosFosa({
-            ...datosfosa, 
-            [e.target.name]:e.target.value,
-        });
-    }
+    // const handleChange = e =>{
+    //     setDatosFosa({
+    //         ...datosfosa, 
+    //         [e.target.name]:e.target.value,
+    //     });
+    // }
 
     /*Permitir solo letras*/
     const onlyLetters = e =>{
@@ -79,6 +81,31 @@ function InfoPago() {
             e.preventDefault();
         }
     };
+
+    const id = Cuartel + Clase + Lote + Fosa;
+        console.log(id);
+
+    const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
+        
+
+    // useEffect(()=>{
+    //     async function getData(){
+    //         try{
+    //             const response = await axios.get(URLFosainfo);
+    //             setDataFosa(response.data);
+    //             console.log(response.data[0][0]);
+    //             console.log(response)
+    //             if(response.status !== 200){
+    //                 alert('Los datos ingresados no coinciden con nuestros datos');
+    //             }
+    //         }catch(error){
+    //             alert(error);
+    //         }
+    //     }
+        
+    //     getData();
+    // },[callAPI]);
+
 
     const handleSubmit = e =>{
         e.preventDefault();
@@ -141,6 +168,7 @@ function InfoPago() {
         if(Titular !=="" && Cuartel !=="" &&  Lote !=="" && Clase !==""
         && Fosa !==""){
             setMostrarOpciones(true);
+            setCallAPI(true);
         }
         else{
             setBuscar(false);
@@ -154,41 +182,126 @@ function InfoPago() {
     },[buscar])*/
     
 
-        const id = 1234;
-        // datosfosa.cuartel + datosfosa.clase + datosfosa.lote + datosfosa.fosa;
-
-        const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
-        
-
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
 
         async function getData(){
-            try{
-                const response = await axios.get(URLFosainfo);
-                setDataFosa(response.data);
-                console.log(response.data);
-            }catch(error){
-                alert(error);
+            const response = await axios.get(URLFosainfo)
+            setDataFosa(response.data);
+            console.log(response.data[0][0]);
+            console.log('tipo de fecha'+typeof(response.data[2][0].dia_inhumacion));
+                  
+                // setLoading(true)
+                // if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
+                // && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
+                //     setBuscar(true);
+                //     setMsjerror(false);/*Ocultar mensaje de error */
+                //     setLoading(false);
+                //     setCallAPI(true);
+                // }
+                // else{
+                //     setLoading(false);
+                //     setBuscar(false);
+                //     setMsjerror(true);/*Ver mensaje de error */
+                // }    
+            if(response.status !== 200){
+                alert('Los datos ingresados no coinciden con nuestros datos');
             }
+            // }catch(error){
+            //     alert(error);
+            // }
         }
+        
+        getData()
+            .then( result =>{
+            setLoading(true);
+            //Funciona para saber si existe ese responsable e itera sobre cada nombre de cada objeto de los responsables
+            let i=0;
+            let compareName, responsableExiste;
+            while(i < dataFosa[1].length){
+                console.log('i: '+ i );
+                console.log(compareName = Titular.localeCompare(dataFosa[1][i].nombre) == 0)
+                if(compareName = Titular.localeCompare(dataFosa[1][i].nombre) == 0){
+                    responsableExiste = 1;
+                }
+                i++;
+            }
 
-        getData();
+            if(responsableExiste == 1 && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
+            && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
+                setBuscar(true);
+                setMsjerror(false);/*Ocultar mensaje de error */
+                setLoading(false);
+                setCallAPI(true);
 
-        setLoading(true)
-        if(Titular !=="" && Cuartel !== "" && Lote !== ""
-        && Clase !=="" && Fosa !== ""){
-            setBuscar(true);
-            setMsjerror(false);/*Ocultar mensaje de error */
-            setLoading(false);
-            setCallAPI(true);
-        }
-        else{
-            setLoading(false);
-            setBuscar(false);
-            setMsjerror(true);/*Ver mensaje de error */
-        }    
+                //Falta convertir a fecha corta y obtener ese finado
+                let j=0, ultimaFecha=0, fechaCorta;
+                while(j < dataFosa[2].length){
+                    console.log('j: '+ j);
+                    ultimaFecha = new Date(dataFosa[2][0].dia_inhumacion);
+                    let fecha = new Date(dataFosa[2][j].dia_inhumacion);
+                    console.log(fecha);
+                    if(ultimaFecha < fecha){
+                        ultimaFecha = fecha;
+                        fechaCorta = ultimaFecha.toString();
+                    }
+                    j++;
+                }
 
+                console.log('ultimaFecha: '+ultimaFecha);
+
+                setFechaInhumacion(fechaCorta);
+                console.log('fecha: ' + fechaInhumacion);
+            }
+            else{
+                setLoading(false);
+                setBuscar(false);
+                setMsjerror(true);/*Ver mensaje de error */
+            }
+        });
+       
+        // let getData = new Promise(function(resolve, reject){
+        //     const response = axios.get(URLFosainfo)
+        //     setDataFosa(response.data);
+        //     resolve(dataFosa);
+        //     reject(console.log('hubo fallo'));
+        //     console.log(response.data[0][0]);
+        //     console.log(response)
+        // })
+
+        // getData
+        //     .then(dataFosa => {
+        //         setLoading(true)
+        //         if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
+        //         && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
+        //             setBuscar(true);
+        //             setMsjerror(false);/*Ocultar mensaje de error */
+        //             setLoading(false);
+        //             setCallAPI(true);
+        //         }
+        //         else{
+        //             setLoading(false);
+        //             setBuscar(false);
+        //             setMsjerror(true);/*Ver mensaje de error */
+        //         }
+        //     })
+        //     .catch(error => {
+        //         alert(error);
+        //     })
+
+        // setLoading(true)
+        // if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
+        // && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
+        //     setBuscar(true);
+        //     setMsjerror(false);/*Ocultar mensaje de error */
+        //     setLoading(false);
+        //     setCallAPI(true);
+        // }
+        // else{
+        //     setLoading(false);
+        //     setBuscar(false);
+        //     setMsjerror(true);/*Ver mensaje de error */
+        // }    
     }
 
 
@@ -225,7 +338,7 @@ function InfoPago() {
                     name="cuartel" 
                     value={Cuartel}
                     onChange={(e) => setCuartel(e.target.value)}
-                    onBlur={(e)=>{
+                    onBlur={()=>{
                         
                         if( Cuartel !==""){
                             setDisabledLote(false);
@@ -312,8 +425,7 @@ function InfoPago() {
                         else{
                             setDisabledClase(true);
                         
-                            handleChange(e);
-                            if(datosfosa.clase !==""){
+                            if(Clase !==""){
                                 setDisabledFosa(false);
                             }
                             else{
@@ -399,7 +511,9 @@ function InfoPago() {
                     Campo_cuartel = {Cuartel}
                     Campo_clase = {Clase}
                     Campo_lote = {Lote}
-                    Campo_fosa = {Fosa}     
+                    Campo_fosa = {Fosa}
+                    Campo_finado = {dataFosa[2][0].nombre}     
+                    Campo_inhumacionFinado = {fechaInhumacion}
                     /> : null}
                 </div>            
             </form>
@@ -413,6 +527,8 @@ function InfoPago() {
                 campo_clase ={Clase}
                 campo_lote={Lote}
                 campo_fosa={Fosa}
+                campo_finado = {dataFosa[2][0].nombre}  
+                campo_inhumacionFinado = {fechaInhumacion}
                 /> : null}
             </div>
         </div>

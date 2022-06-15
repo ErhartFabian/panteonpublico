@@ -1,8 +1,23 @@
-import React from "react";
+import React,{useRef} from "react";
 import './Servicios.css';
 
 
 function Servicios() {
+    const InhyEx = useRef(null);
+    const Construcción = useRef(null);
+    const HorCre = useRef(null);
+    const ServFun = useRef(null);
+
+    const movetoInhyEx = () => InhyEx.current.scrollIntoView({ behavior: 'smooth' });
+    const movetoConstrucción = () => Construcción.current.scrollIntoView({ behavior: 'smooth' });
+    const movetoHorCre = () => HorCre.current.scrollIntoView({ behavior: 'smooth' });
+    const movetoServFun = () => ServFun.current.scrollIntoView({ behavior: 'smooth' });
+
+
+    /* const executeScroll = () => Construcción.current.scrollIntoView(); */
+
+
+
 
     return (
         <div id="Page">
@@ -13,16 +28,16 @@ function Servicios() {
                     Los precios están agrupados por:
                 </p>
                 <ul>
-                    <li>
+                    <li onClick={movetoInhyEx}>
                         Inhumación y exhumación de cadáveres y restos Primera/Segunda Sección del Panteón
                     </li>
-                    <li>
+                    <li onClick={movetoConstrucción}>
                         Construcción o instalación de monumentos o criptas
                     </li>
-                    <li>
+                    <li onClick={movetoHorCre} >
                         Horno crematorio
                     </li>
-                    <li>
+                    <li onClick={movetoServFun} >
                         Servicios Funerarios
                     </li>
                 </ul>
@@ -32,10 +47,10 @@ function Servicios() {
                 {/* Tabla */}
                 <div className="tabla-servicios">
 
-                    <div className='rg-container'>
+                    <div className='rg-container' ref={InhyEx} >
                         <table className='rg-table' summary='Hed'>
                             <caption className='rg-header'>
-                                <span className='rg-hed'>Inhumación y exhumación de cadáveres y restos Primera Sección del Panteón</span>
+                                <span className='rg-hed' >Inhumación y exhumación de cadáveres y restos Primera Sección del Panteón</span>
                             </caption>
                             <thead>
                                 <tr>
@@ -134,7 +149,7 @@ function Servicios() {
                         </table>
 
                     </div>
-                    <div className='rg-container'>
+                    <div className='rg-container' ref={Construcción} >
                         <table className='rg-table' summary='Hed'>
                             <caption className='rg-header'>
                                 <span className='rg-hed'>Construcción o instalación de monumentos o criptas</span>
@@ -179,7 +194,7 @@ function Servicios() {
                             </tbody>
                         </table>
                     </div>
-                    <div className='rg-container'>
+                    <div className='rg-container' ref={HorCre}>
                         <table className='rg-table' summary='Hed'>
                             <caption className='rg-header'>
                                 <span className='rg-hed'>Horno crematorio</span>
@@ -206,7 +221,7 @@ function Servicios() {
                             </tbody>
                         </table>
                     </div>
-                    <div className='rg-container'>
+                    <div className='rg-container'ref={ServFun} >
                         <table className='rg-table' summary='Hed'>
                             <caption className='rg-header'>
                                 <span className='rg-hed'>Servicios Funerarios</span>

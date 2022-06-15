@@ -11,7 +11,7 @@ export default function Boleta(props) {
                     <h2 id="Tboleta">Municipio de Pachuca de Soto - Secretaria de
                     Servicios Públicos Municipales
                     </h2>
-                    <h3 id="Sboleta">Boleta de Anualidad Panteon Municipal</h3>
+                    <h3 id="Sboleta">Boleta de Anualidad Panteón Municipal</h3>
                 </div>
                 <div><img id="logo" src={ayuntamiento} alt="logo"/></div>
             </div>
@@ -46,7 +46,7 @@ export default function Boleta(props) {
                     <p>Capilla Individual</p>
                 </div>
                 <div className="datosfosa2">
-                    <p id="Ultimapersona">Ultima persona inhumada:</p>
+                    <p id="Ultimapersona">Última persona inhumada:</p>
                     <div className="boxFinado">
                         <p>{props.campo_finado}</p>
                         <div><p>{props.campo_inhumacionFinado}</p></div>

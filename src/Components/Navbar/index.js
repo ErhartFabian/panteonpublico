@@ -16,7 +16,7 @@ function Navbar() {
     return (
         <React.Fragment>
             <Nav className="nav">
-                <NavLogo to= "/Home">
+                <NavLogo to= "/">
                     <img src={logoImg} id="logoImg" />
                     <h2>Presidencia Municipal de Pachuca de Soto</h2>
                 </NavLogo>
@@ -25,7 +25,7 @@ function Navbar() {
 
                 <NavMenu>
                     <NavLink
-                        to="/Mapa"
+                        to="/"
                         activtestyle={{ color: '#bfbfbf' }}
                     >
                         Mapa Topográfico

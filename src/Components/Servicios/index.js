@@ -38,7 +38,7 @@ function Servicios() {
                         Horno crematorio
                     </li>
                     <li onClick={movetoServFun} >
-                        Servicios Funerarios
+                        Servicios funerarios
                     </li>
                 </ul>
             </div>

@@ -61,12 +61,13 @@ function InfoPago() {
         datosfosa.fosa = "";
     }*/
 
-    /*const handleChange = e =>{
+    const handleChange = e =>{
         setDatosFosa({
             ...datosfosa, 
             [e.target.name]:e.target.value,
         });
-    }*/
+    }
+
     /*Permitir solo letras*/
     const onlyLetters = e =>{
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
@@ -153,8 +154,26 @@ function InfoPago() {
     },[buscar])*/
     
 
+        const id = 1234;
+        // datosfosa.cuartel + datosfosa.clase + datosfosa.lote + datosfosa.fosa;
+
+        const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
+        
+
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
+
+        async function getData(){
+            try{
+                const response = await axios.get(URLFosainfo);
+                setDataFosa(response.data);
+                console.log(response.data);
+            }catch(error){
+                alert(error);
+            }
+        }
+
+        getData();
 
         setLoading(true)
         if(Titular !=="" && Cuartel !== "" && Lote !== ""
@@ -171,6 +190,7 @@ function InfoPago() {
         }    
 
     }
+
 
     return (
         <div>
@@ -229,7 +249,7 @@ function InfoPago() {
                         <option value="4">Cuartel 4</option>*/}
                     </select>
                 </div>
-                <h1 id="name">Comprobante de pago</h1>
+                {/* <h1 id="name">Comprobante de pago</h1>
                 <div className='dato'>
                     <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
                     <select 
@@ -237,7 +257,7 @@ function InfoPago() {
                     id="selectcuartel"
                     name="cuartel" 
                     onChange={handleChange}
-                    onBlur={selectclase}
+                    // onBlur={selectclase}
                     defaultValue={datosfosa.cuartel}>
                         <option value="">---</option>
                         <option value="1">Cuartel 1</option>
@@ -245,9 +265,9 @@ function InfoPago() {
                         <option value="3">Cuartel 3</option>
                         <option value="4">Cuartel 4</option>
                     </select>
-                </div>
+                </div> */}
 
-                <div className='dato'>
+                {/* <div className='dato'>
                     <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
                     <input 
                     disabled = {disabledLote}
@@ -270,7 +290,7 @@ function InfoPago() {
                         }
                     }}
                     />
-                </div>
+                </div> */}
 
                 <div className='dato'>
                     <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 

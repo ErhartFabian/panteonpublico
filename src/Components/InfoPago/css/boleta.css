@@ -65,7 +65,7 @@
     border-radius: 1rem;
     border-color: #201e1e;
     text-align: center;
-    margin-top: 45px;
+    /* margin-top: 45px; */
     padding: 8px 20px 0 30px;
   }
 
@@ -185,4 +185,16 @@
   h2{
       font-family: Arial, Helvetica, sans-serif;
      
+  }
+
+  .Name_titular{
+    width: 100%;
+  }
+  
+  .boxFinado{
+    display: flex;
+  }
+
+  .boxFinado p{
+    margin-right: 30px;
   }

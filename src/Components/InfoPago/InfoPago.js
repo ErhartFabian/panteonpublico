@@ -2,13 +2,17 @@ import React, {useState, useEffect} from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
 import './css/InfoPago.css'
+import axios from 'axios';
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
-import { getValue } from '@testing-library/user-event/dist/utils';
+import { ExitToApp } from '@material-ui/icons';
 
 function InfoPago() {
+
+    const [dataFosa, setDataFosa] = useState();
+    const [fechaInhumacion, setFechaInhumacion] = useState();
 
     const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
@@ -37,12 +41,12 @@ function InfoPago() {
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    /*const [datosfosa,setDatosFosa] = useState({
-        //cuartel:"",
-        lote:"",
-        //clase: "", 
-        fosa:"",
-    });*/
+    // const [datosfosa, setDatosFosa] = useState({
+    //     cuartel:"",
+    //     lote:"",
+    //     clase: "", 
+    //     fosa:"",
+    // });
 
     /*if(Titular === ""){
         datosfosa.lote = "";
@@ -58,12 +62,12 @@ function InfoPago() {
         datosfosa.fosa = "";
     }*/
 
-    /*const handleChange = e =>{
-        setDatosFosa({
-            ...datosfosa, 
-            [e.target.name]:e.target.value,
-        });
-    }*/
+    // const handleChange = e =>{
+    //     setDatosFosa({
+    //         ...datosfosa, 
+    //         [e.target.name]:e.target.value,
+    //     });
+    // }
 
     /*Permitir solo letras*/
     const onlyLetters = e =>{
@@ -76,6 +80,13 @@ function InfoPago() {
             e.preventDefault();
         }
     };
+
+    const id = Cuartel + Clase + Lote + Fosa;
+        //console.log(id);
+
+    const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
+        
+
 
     const handleSubmit = e =>{
         e.preventDefault();
@@ -111,7 +122,7 @@ function InfoPago() {
             }}
             >
             <FontAwesomeIcon className='icono' icon={faReceipt} />
-                {verComprobante &&  buscar ? "Ocultar comprobante" : "Ver Comprobante"} 
+                {verComprobante &&  buscar ? "Ocultar ficha de pago" : "Ver ficha de pago"} 
             </Button>
         </div>
         );
@@ -150,32 +161,51 @@ function InfoPago() {
         setLoading(true);
     },[buscar])*/
     
+
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
-        setLoading(true)
-        if(Titular !=="" && Cuartel !== "" && Lote !== ""
-        && Clase !=="" && Fosa !== ""){
-            setBuscar(true);
-            setMsjerror(false);/*Ocultar mensaje de error */
-            setLoading(false);
+
+        async function getData(){
+            setLoading(true);
+            try{
+                const response = await axios.get(URLFosainfo)
+                setDataFosa(response.data);
+                //console.log(response.data);
+                if(response.status !== 200 || !response.data[0].length){
+                    setMsjerror(true);
+                    setLoading(false);
+                    setBuscar(false);
+                }else{
+                    setLoading(false);
+                    setBuscar(true);
+                    setMsjerror(false)
+                    //Para obtener la fecha corta de la inhumación
+                    let fechaCortaInhumacion;
+                    fechaCortaInhumacion = response.data[2][0].dia_inhumacion.slice(0,10);
+                    setFechaInhumacion(fechaCortaInhumacion);
+                }
+            }catch(error){
+                //console.log(error);
+                setMsjerror(true);
+                setLoading(false);
+                setBuscar(false);
+            }
         }
-        else{
-            setLoading(false);
-            setBuscar(false);
-            setMsjerror(true);/*Ver mensaje de error */
-        }    
+        getData()
+        
     }
 
+
     return (
-        <div >
-        <div className="container-infopago">
+        <div>
+            <div className="container-infopago">
             <div className="instrutions-infopago">
-                <h2>Comprobante de Pago</h2>
+                <h2>Ficha de Pago</h2>
                 {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
                 <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
             </div>
             <form onSubmit={handleSubmit} className='informacion'>
-                <h1 id="name">Comprobante de pago</h1>
+                <h1 id="name">Ficha de pago</h1>
 
                 <div className='dato'>
                     <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
@@ -223,13 +253,55 @@ function InfoPago() {
                         <option value="4">Cuartel 4</option>*/}
                     </select>
                 </div>
+                {/* <h1 id="name">Comprobante de pago</h1>
+                <div className='dato'>
+                    <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
+                    <select 
+                    className='inputselect'
+                    id="selectcuartel"
+                    name="cuartel" 
+                    onChange={handleChange}
+                    // onBlur={selectclase}
+                    defaultValue={datosfosa.cuartel}>
+                        <option value="">---</option>
+                        <option value="1">Cuartel 1</option>
+                        <option value="2">Cuartel 2</option>
+                        <option value="3">Cuartel 3</option>
+                        <option value="4">Cuartel 4</option>
+                    </select>
+                </div> */}
+
+                {/* <div className='dato'>
+                    <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
+                    <input 
+                    disabled = {disabledLote}
+                    className='input'
+                    placeholder='Ingrese numero de lote' 
+                    type="number" 
+                    name="lote" 
+                    value={datosfosa.lote}
+                    onChange={handleChange}
+                    min="1"
+                    onKeyPress={preventMinus}
+                    onBlur={(e)=>{
+                        handleChange(e);
+                        if(datosfosa.lote !==""){
+                            setDisabledClase(false);                            
+                        }
+                        else{
+                            setDisabledClase(true);
+                        
+                        }
+                    }}
+                    />
+                </div> */}
 
                 <div className='dato'>
                     <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
                     <input 
                     disabled = {disabledLote}
                     className='input'
-                    placeholder='Ingrese numero de lote' 
+                    placeholder='Ingrese número de lote' 
                     type="number" 
                     name="lote" 
                     value={Lote}
@@ -244,8 +316,15 @@ function InfoPago() {
                         else{
                             setDisabledClase(true);
                         
+                            if(Clase !==""){
+                                setDisabledFosa(false);
+                            }
+                            else{
+                                setDisabledFosa(true);
+                            }
                         }
-                    }}
+                        }
+                    } 
                     />
                 </div>
 
@@ -286,7 +365,7 @@ function InfoPago() {
                     <input 
                     disabled = {disabledFosa}
                     className='input'
-                    placeholder='Ingrese el numero de fosa' 
+                    placeholder='Ingrese el número de fosa' 
                     type="number" 
                     min="1"
                     name="fosa" 
@@ -314,7 +393,7 @@ function InfoPago() {
                     disableElevation
                     onClick={handleClick}
                     >
-                        Buscar comprobante 
+                        Buscar Ficha de Pago 
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
                     {buscar && mostrarOpciones ? 
@@ -323,22 +402,26 @@ function InfoPago() {
                     Campo_cuartel = {Cuartel}
                     Campo_clase = {Clase}
                     Campo_lote = {Lote}
-                    Campo_fosa = {Fosa}     
+                    Campo_fosa = {Fosa}
+                    Campo_finado = {dataFosa[2][0].nombre}     
+                    Campo_inhumacionFinado = {fechaInhumacion}
                     /> : null}
                 </div>            
             </form>
         </div>
         <div className= 'vistacotenedor'>
-        <div className='vista'>
-            {verComprobante && mostrarOpciones ? 
-            <Boleta 
-            campo_titular={Titular}
-            campo_cuartel={Cuartel}
-            campo_clase ={Clase}
-            campo_lote={Lote}
-            campo_fosa={Fosa}
-            /> : null}
-        </div>
+            <div className='vista'>
+                {verComprobante && mostrarOpciones ? 
+                <Boleta 
+                campo_titular={Titular}
+                campo_cuartel={Cuartel}
+                campo_clase ={Clase}
+                campo_lote={Lote}
+                campo_fosa={Fosa}
+                campo_finado = {dataFosa[2][0].nombre}  
+                campo_inhumacionFinado = {fechaInhumacion}
+                /> : null}
+            </div>
         </div>
     </div>
     )

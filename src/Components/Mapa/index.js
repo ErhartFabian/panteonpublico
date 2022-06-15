@@ -186,7 +186,7 @@ function Mapa() {
                         // disabled = {disabledLote}
                         id='lote'
                         className='input'
-                        placeholder='Ingrese numero de lote' 
+                        placeholder='Ingrese número de lote' 
                         type="text" 
                         name="lote" 
                         value={datosfosa.lote}
@@ -244,7 +244,7 @@ function Mapa() {
                         // disabled = {disabledFosa}
                         id='fosal'
                         className='input'
-                        placeholder='Ingrese el numero de fosa' 
+                        placeholder='Ingrese el número de fosa' 
                         type="number" 
                         name="fosa" 
                         value={datosfosa.fosa}
@@ -266,7 +266,7 @@ function Mapa() {
 
                     { msjerror && <div className="mensaje_error">
                         <p>
-                            <b>Error:</b> Por favor, llena todos los campos.
+                            <b>Error:</b> Por favor, llene todos los campos.
                         </p>
                     </div>}
 

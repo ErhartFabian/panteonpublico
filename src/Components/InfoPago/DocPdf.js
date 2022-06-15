@@ -6,7 +6,7 @@ import ReactToPrint from "react-to-print";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
-export default function DocPdf ({Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa}) {
+export default function DocPdf (props) {
     let componentRef = useRef();
     return (
       <>
@@ -28,10 +28,11 @@ export default function DocPdf ({Campo_cuartel,Campo_clase,Campo_lote,Campo_fosa
   
           <div style={{ display: "none" }}>
               <ComponentToPrint 
-                Print_cuartel = {Campo_cuartel}
-                Print_clase = {Campo_clase}
-                Print_lote = {Campo_lote}
-                Print_fosa = {Campo_fosa}
+                Print_cuartel = {props.Campo_cuartel}
+                Print_clase = {props.Campo_clase}
+                Print_lote = {props.Campo_lote}
+                Print_fosa = {props.Campo_fosa}
+                Print_nombre = {props.Campo_nombre}
                 ref={(el) => (componentRef = el)} />
           </div>
   

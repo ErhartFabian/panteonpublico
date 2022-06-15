@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
-import { getValue } from '@testing-library/user-event/dist/utils';
 
 
 /*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
@@ -21,8 +20,6 @@ function InfoPago() {
     const [dataFosa, setDataFosa] = useState();
     const [dataResponsables, setDataResponsables] = useState();
     const [dataFinado, setDataFinado] = useState();
-
-    const URLFosainfo = 'http://localhost:3001/panteon';
 
 
     // const URLDataFosa = 'https://panteonpachuca.herokuapp.com/api/test';
@@ -63,8 +60,7 @@ function InfoPago() {
     const [disabledClase,setDisabledClase] = useState(true); //Componente para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Componente para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Componente para activar el campo lote
-
-    
+    const [callAPI,setCallAPI] = useState(false);
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -74,28 +70,11 @@ function InfoPago() {
      /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    useEffect(()=>{
-        // URLFosainfo += "?id=";
-        const getData = async () => {
-            try{
-                const response = await axios.get(URLFosainfo);
-                setDataFosa(response.data);
-            }catch(error){
-                console.log(error);
-                alert('Esos datos no existn');
-            }
-        }
-        getData();
-    },[setBuscar])
-
-    console.log('fosa:' + URLFosainfo);
-    console.log(dataFosa);
-
     const [datosfosa,setDatosFosa] = useState({
         cuartel:"",
         lote:"",
         clase: "",
-        fosa:"",
+        fosa:""
     });
 
     if(datosfosa.cuartel === ""){
@@ -125,6 +104,28 @@ function InfoPago() {
             e.preventDefault();
         }
     };
+
+    const id = 1234;
+    // datosfosa.cuartel + datosfosa.clase + datosfosa.lote + datosfosa.fosa;
+
+    const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
+
+    // Para traer los datos de la API
+    useEffect(()=>{
+      async function getData(){
+          try{
+              const response = await axios.get(URLFosainfo);
+              setDataFosa(response.data);
+              console.log('Sí hubo conexión con la API');
+              console.log(dataFosa);
+          }catch(error){
+              console.log(error);
+              alert('Esos datos no existen');
+          }
+      }
+
+      getData();
+    },[callAPI]);
     
     //Función que checara si se elimino un campo de inputs para habilitar o deshabilitar las opciones 
     /*function comprobardatos () {
@@ -180,6 +181,7 @@ function InfoPago() {
     };
     
     useEffect(()=>{
+        
         if(datosfosa.cuartel!=="" && datosfosa.lote!=="" && datosfosa.clase!==""
         && datosfosa.fosa !==""){
             setMostrarOpciones(true);
@@ -195,171 +197,175 @@ function InfoPago() {
         setLoading(true);
     },[buscar])*/
     
+
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
+
         setLoading(true)
-        if(datosfosa.cuartel !== "" && datosfosa.lote !== ""
-        && datosfosa.clase !=="" && datosfosa.fosa !== ""){
+        if(datosfosa.cuartel == dataFosa[0][0].cuartel && datosfosa.lote == dataFosa[0][0].lote 
+        && datosfosa.clase == dataFosa[0][0].clase  && datosfosa.fosa == dataFosa[0][0].Fosa ){
             setBuscar(true);
             setMsjerror(false);/*Ocultar mensaje de error */
             setLoading(false);
+            setCallAPI(true);
         }
         else{
             setLoading(false);
             setBuscar(false);
             setMsjerror(true);/*Ver mensaje de error */
         }    
+
     }
 
+    console.log(datosfosa);
+    console.log('fosa:' + URLFosainfo);
+    console.log('data:' + dataFosa[0][0]);
+    
+    // console.log(dataFosa[1]);
     
     return (
         <div >
-        <div className="container-infopago">
-            <div className="instrutions-infopago">
-                <h2>Comprobante de Pago</h2>
-                {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
-                <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
-            </div>
-            <form onSubmit={handleSubmit} className='informacion'>
-                <h1 id="name">Comprobante de pago</h1>
-                <div className='dato'>
-                    <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
-                    <select 
-                    className='inputselect'
-                    id="selectcuartel"
-                    name="cuartel" 
-                    onChange={handleChange}
-                    onBlur={selectclase}
-                    defaultValue={datosfosa.cuartel}>
-                        <option value="">---</option>
-                        <option value="1">Cuartel 1</option>
-                        <option value="2">Cuartel 2</option>
-                        <option value="3">Cuartel 3</option>
-                        <option value="4">Cuartel 4</option>
-                    </select>
+            <div className="container-infopago">
+                <div className="instrutions-infopago">
+                    <h2>Comprobante de Pago</h2>
+                    {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
+                    <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
                 </div>
+                <form onSubmit={handleSubmit} className='informacion'>
+                    <h1 id="name">Comprobante de pago</h1>
+                    <div className='dato'>
+                        <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
+                        <select 
+                        className='inputselect'
+                        id="selectcuartel"
+                        name="cuartel" 
+                        onChange={handleChange}
+                        onBlur={selectclase}
+                        defaultValue={datosfosa.cuartel}>
+                            <option value="">---</option>
+                            <option value="1">Cuartel 1</option>
+                            <option value="2">Cuartel 2</option>
+                            <option value="3">Cuartel 3</option>
+                            <option value="4">Cuartel 4</option>
+                        </select>
+                    </div>
 
-                <div className='dato'>
-                    <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
-                    <input 
-                    disabled = {disabledLote}
-                    className='input'
-                    placeholder='Ingrese numero de lote' 
-                    type="number" 
-                    name="lote" 
-                    value={datosfosa.lote}
-                    onChange={handleChange}
-                    min="1"
-                    onKeyPress={preventMinus}
-                    onBlur={(e)=>{
-                        handleChange(e);
-                        if(datosfosa.lote !==""){
-                            setDisabledClase(false);                            
-                        }
-                        else{
-                            setDisabledClase(true);
+                    <div className='dato'>
+                        <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
+                        <input 
+                        disabled = {disabledLote}
+                        className='input'
+                        placeholder='Ingrese numero de lote' 
+                        type="number" 
+                        name="lote" 
+                        value={datosfosa.lote}
+                        onChange={handleChange}
+                        min="1"
+                        onKeyPress={preventMinus}
+                        onBlur={(e)=>{
+                            handleChange(e);
+                            if(datosfosa.lote !==""){
+                                setDisabledClase(false);                            
+                            }
+                            else{
+                                setDisabledClase(true);
+                            
+                            }
+                        }}
+                        />
+                    </div>
+
+                    <div className='dato'>
+                        <label htmlFor="nclase" id="labelclase" className='stylelabel'>Clase </label> 
+                        <select
+                        disabled = {disabledClase}
+                        id="selectclase"
+                        className='inputselect' 
+                        name="clase" 
+                        onChange={handleChange}
+                        onBlur={(e)=>{
                         
-                        }
-                    }}
-                    />
-                </div>
+                            handleChange(e);
+                            if(datosfosa.clase !==""){
+                                setDisabledFosa(false);
+                            }
+                            else{
+                                setDisabledFosa(true);
 
-                <div className='dato'>
-                    <label htmlFor="nclase" id="labelclase" className='stylelabel'>Clase </label> 
-                    <select
-                    disabled = {disabledClase}
-                    id="selectclase"
-                    className='inputselect' 
-                    name="clase" 
-                    onChange={handleChange}
-                    onBlur={(e)=>{
-                       
-                        handleChange(e);
-                        if(datosfosa.clase !==""){
-                            setDisabledFosa(false);
-                        }
-                        else{
-                            setDisabledFosa(true);
-                            
-                            
-                        }
-                    }}
-                    defaultValue={datosfosa.clase}>
-                        <option value="">---</option>
-                        <option value="1">Clase 1</option>
-                        <option value="2">Clase 2</option>
-                        <option value="3">Clase 3</option>
-                        <option value="4">Clase 4</option>
-                    </select>
-                </div>
 
-                <div className='dato'>
-                    <label htmlFor="fosa" id='labelfosa' className='stylelabel'>Fosa </label> 
-                    <input 
-                    disabled = {disabledFosa}
-                    className='input'
-                    placeholder='Ingrese el numero de fosa' 
-                    type="number" 
-                    min="1"
-                    name="fosa" 
-                    value={datosfosa.fosa}
-                    onChange={handleChange} 
-                    onKeyPress={preventMinus}
-                    />
-                </div>
-                {loading && <Loader/>}
-                { msjerror && <div className="mensaje_error">
-                    <p>
-                        <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
-                    </p>
-                </div>}
+                            }
+                        }}
+                        defaultValue={datosfosa.clase}>
+                            <option value="">---</option>
+                            <option value="1">Clase 1</option>
+                            <option value="2">Clase 2</option>
+                            <option value="3">Clase 3</option>
+                            <option value="4">Clase 4</option>
+                            <option value="5">Clase 5</option>
+                        </select>
+                    </div>
 
-                <div className="generador">
-                    {/*boton de buscar comprobante*/}
-                    <Button
-                    id="boton"
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="medium"
-                    disableElevation
-                    onClick={handleClick}
-                    >
-                        Buscar comprobante 
-                    </Button>
-                    <Comprobante disabled={!mostrarOpciones}/>
-                    {buscar && mostrarOpciones ? 
-                    <DocPdf 
-                    Campo_cuartel = {datosfosa.cuartel}
-                    Campo_clase = {datosfosa.clase}
-                    Campo_lote = {datosfosa.lote}
-                    Campo_fosa = {datosfosa.fosa}                
+                    <div className='dato'>
+                        <label htmlFor="fosa" id='labelfosa' className='stylelabel'>Fosa </label> 
+                        <input 
+                        disabled = {disabledFosa}
+                        className='input'
+                        placeholder='Ingrese el numero de fosa' 
+                        type="number" 
+                        min="1"
+                        name="fosa" 
+                        value={datosfosa.fosa}
+                        onChange={handleChange} 
+                        onKeyPress={preventMinus}
+                        />
+                    </div>
+                    {loading && <Loader/>}
+                    { msjerror && <div className="mensaje_error">
+                        <p>
+                            <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
+                        </p>
+                    </div>}
+
+                    <div className="generador">
+                        {/*boton de buscar comprobante*/}
+                        <Button
+                        id="boton"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        disableElevation
+                        onClick={handleClick}
+                        >
+                            Buscar comprobante 
+                        </Button>
+                        <Comprobante disabled={!mostrarOpciones}/>
+                        {buscar && mostrarOpciones ? 
+                        <DocPdf 
+                        Campo_cuartel = {datosfosa.cuartel}
+                        Campo_clase = {datosfosa.clase}
+                        Campo_lote = {datosfosa.lote}
+                        Campo_fosa = {datosfosa.fosa}
+                        Campo_nombre = {dataFosa[1].responsable[0].nombre}                
+                        /> : null}
+                    </div>            
+                </form>
+            </div>
+            <div className= 'vistacotenedor'>
+                <div className='vista'>
+                    {verComprobante && mostrarOpciones ? 
+                    <Boleta 
+                    cuartel = {dataFosa[1].cuartel}
+                    clase = {dataFosa[1].clase}
+                    finado = {dataFosa[1].finado}
+                    fosa = {dataFosa[1].Fosa}
+                    lote = {dataFosa[1].lote}
+                    adeudo = {dataFosa[1].adeudo}
+                    responsable = {dataFosa[1].responsable[0].nombre}
                     /> : null}
-                </div>            
-            </form>
-            {verComprobante ? 
-            <Boleta 
-            cuartel = {dataFosa[1].cuartel}
-            clase = {dataFosa[1].clase}
-            finado = {dataFosa[1].finado}
-            fosa = {dataFosa[1].Fosa}
-            lote = {dataFosa[1].lote}
-            adeudo = {dataFosa[1].adeudo}
-            responsable = {dataFosa[1].responsable[0].nombre}
-            /> : null}
+                </div>
+            </div>
         </div>
-        <div className= 'vistacotenedor'>
-        <div className='vista'>
-            {verComprobante && mostrarOpciones ? 
-            <Boleta 
-            campo_cuartel={datosfosa.cuartel}
-            campo_clase ={datosfosa.clase}
-            campo_lote={datosfosa.lote}
-            campo_fosa={datosfosa.fosa}
-            /> : null}
-        </div>
-        </div>
-    </div>
     )
 }
 

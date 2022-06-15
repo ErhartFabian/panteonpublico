@@ -17,8 +17,8 @@ export default function Boleta(props) {
             </div>
             <div className="titular">
                 <div id="datostitular">
-                    <p>Titular de la concesión: {props.campo_titular}</p>
-                    <p>Col. Santa Julia calle 5 de Mayo #113</p>
+                    <p className="Name_titular">Titular de la concesión: {props.campo_titular}</p>
+                    {/* <p>Col. Santa Julia calle 5 de Mayo #113</p> */}
                     <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                     <div> <p>R.F.C</p></div>
                 </div>
@@ -27,10 +27,10 @@ export default function Boleta(props) {
                     <p>PM001997</p>
                 </div>
             </div>
-            <div className="responsable2">
+            {/* <div className="responsable2">
                 <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
                 <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
-            </div>
+            </div> */}
             <div>
                 <h3 id="Tfosa">Información de la fosa</h3>
             </div>
@@ -47,8 +47,10 @@ export default function Boleta(props) {
                 </div>
                 <div className="datosfosa2">
                     <p id="Ultimapersona">Ultima persona inhumada:</p>
-                    <p>{props.campo_finado}</p>
-                    <div><p>{props.campo_inhumacionFinado}</p></div>
+                    <div className="boxFinado">
+                        <p>{props.campo_finado}</p>
+                        <div><p>{props.campo_inhumacionFinado}</p></div>
+                    </div>
                 </div>
             </div>
             <h3 id="adeudos">Adeudos por Ejercicio Fiscal</h3>
@@ -64,9 +66,9 @@ export default function Boleta(props) {
                 <tbody>
                     <tr>
                         <td className="columnafecha">2020</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
-                        <td className="columna">0</td>
+                        <td className="columna">$0</td>
+                        <td className="columna">$0</td>
+                        <td className="columna">$0</td>
                     </tr> 
                     <tr>
                         <td className="columnafecha">2021</td>
@@ -76,7 +78,7 @@ export default function Boleta(props) {
                         </tr>
                     <tr>
                         <td className="columnafecha">2022</td>
-                        <td className="columna">${props.adeudo}</td>
+                        <td className="columna"> ${props.adeudo == undefined  ? 0 : props.adeudo}</td>
                         <td className="columna">$0</td>
                         <td className="columna">$0</td>
                     </tr>
@@ -84,13 +86,10 @@ export default function Boleta(props) {
                 <tfoot>
                     <tr>
                         <td colSpan="1"> Monto a pagar: </td>
-                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${props.adeudo}.00 Ciento ochenta y tres pesos</b></td>
+                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${props.adeudo}.00</b></td>
                     </tr>
                 </tfoot>
             </table>
-            <div>
-                <h2>Referencia Bancaria</h2>
-            </div>
         </div>
     );
 }

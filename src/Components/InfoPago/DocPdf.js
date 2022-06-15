@@ -13,7 +13,7 @@ export default function DocPdf (props) {
         <div>
           {/* button to trigger printing of target component */}
           <ReactToPrint
-            documentTitle="Comprobante de pago"
+            documentTitle="Ficha de pago"
             trigger={() => 
             <Button
             type="submit"
@@ -58,8 +58,8 @@ class ComponentToPrint extends React.Component {
         </div>
         <div className="titular">
             <div id="datostitular">
-                <p>Titular de la concesión: {this.props.Print_responsable}</p>
-                <p>Col. Santa Julia calle 5 de Mayo #113</p>
+                <p className="Name_titular">Titular de la concesión: {this.props.Print_responsable}</p>
+                {/* <p>Col. Santa Julia calle 5 de Mayo #113</p> */}
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>
             </div>
@@ -68,10 +68,10 @@ class ComponentToPrint extends React.Component {
                 <p>PM001997</p>
             </div>
         </div>
-        <div className="responsable2">
+        {/* <div className="responsable2">
             <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
             <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
-        </div>
+        </div> */}
         <div>
             <h3 id="Tfosa">Información de la fosa</h3>
         </div>
@@ -88,8 +88,10 @@ class ComponentToPrint extends React.Component {
             </div>
             <div className="datosfosa2">
                 <p id="Ultimapersona">Ultima persona inhumada:</p>
-                <p>{this.props.Print_finado}</p>
-                <div><p>{this.props.Print_inhumacionFinado}</p></div>
+                <div className="boxFinado">
+                    <p>{this.props.Print_finado}</p>
+                    <div><p>{this.props.Print_inhumacionFinado}</p></div>
+                </div>
             </div>
         </div>
         <h3 id="adeudos">Adeudos por Ejercicio Fiscal</h3>
@@ -127,7 +129,7 @@ class ComponentToPrint extends React.Component {
             <tfoot>
                 <tr>
                     <td colSpan="1"> Monto a pagar: </td>
-                    <td bgcolor="#EEEEEE" colSpan="4"> <b>$183.00 (Ciento ochenta y tres pesos 00/100 M.N</b></td>
+                    <td bgcolor="#EEEEEE" colSpan="4"> <b>$0.00</b></td>
                 </tr>
             </tfoot>
         </table>

@@ -11,7 +11,6 @@ import { ExitToApp } from '@material-ui/icons';
 
 function InfoPago() {
 
-    const [callAPI, setCallAPI] = useState(false);
     const [dataFosa, setDataFosa] = useState();
     const [fechaInhumacion, setFechaInhumacion] = useState();
 
@@ -83,28 +82,10 @@ function InfoPago() {
     };
 
     const id = Cuartel + Clase + Lote + Fosa;
-        console.log(id);
+        //console.log(id);
 
     const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
         
-
-    // useEffect(()=>{
-    //     async function getData(){
-    //         try{
-    //             const response = await axios.get(URLFosainfo);
-    //             setDataFosa(response.data);
-    //             console.log(response.data[0][0]);
-    //             console.log(response)
-    //             if(response.status !== 200){
-    //                 alert('Los datos ingresados no coinciden con nuestros datos');
-    //             }
-    //         }catch(error){
-    //             alert(error);
-    //         }
-    //     }
-        
-    //     getData();
-    // },[callAPI]);
 
 
     const handleSubmit = e =>{
@@ -141,7 +122,7 @@ function InfoPago() {
             }}
             >
             <FontAwesomeIcon className='icono' icon={faReceipt} />
-                {verComprobante &&  buscar ? "Ocultar comprobante" : "Ver Comprobante"} 
+                {verComprobante &&  buscar ? "Ocultar ficha de pago" : "Ver ficha de pago"} 
             </Button>
         </div>
         );
@@ -168,7 +149,6 @@ function InfoPago() {
         if(Titular !=="" && Cuartel !=="" &&  Lote !=="" && Clase !==""
         && Fosa !==""){
             setMostrarOpciones(true);
-            setCallAPI(true);
         }
         else{
             setBuscar(false);
@@ -186,122 +166,33 @@ function InfoPago() {
     const  handleClick = () => {
 
         async function getData(){
-            const response = await axios.get(URLFosainfo)
-            setDataFosa(response.data);
-            console.log(response.data[0][0]);
-            console.log('tipo de fecha'+typeof(response.data[2][0].dia_inhumacion));
-                  
-                // setLoading(true)
-                // if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
-                // && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
-                //     setBuscar(true);
-                //     setMsjerror(false);/*Ocultar mensaje de error */
-                //     setLoading(false);
-                //     setCallAPI(true);
-                // }
-                // else{
-                //     setLoading(false);
-                //     setBuscar(false);
-                //     setMsjerror(true);/*Ver mensaje de error */
-                // }    
-            if(response.status !== 200){
-                alert('Los datos ingresados no coinciden con nuestros datos');
-            }
-            // }catch(error){
-            //     alert(error);
-            // }
-        }
-        
-        getData()
-            .then( result =>{
             setLoading(true);
-            //Funciona para saber si existe ese responsable e itera sobre cada nombre de cada objeto de los responsables
-            let i=0;
-            let compareName, responsableExiste;
-            while(i < dataFosa[1].length){
-                console.log('i: '+ i );
-                console.log(compareName = Titular.localeCompare(dataFosa[1][i].nombre) == 0)
-                if(compareName = Titular.localeCompare(dataFosa[1][i].nombre) == 0){
-                    responsableExiste = 1;
+            try{
+                const response = await axios.get(URLFosainfo)
+                setDataFosa(response.data);
+                //console.log(response.data);
+                if(response.status !== 200 || !response.data[0].length){
+                    setMsjerror(true);
+                    setLoading(false);
+                    setBuscar(false);
+                }else{
+                    setLoading(false);
+                    setBuscar(true);
+                    setMsjerror(false)
+                    //Para obtener la fecha corta de la inhumación
+                    let fechaCortaInhumacion;
+                    fechaCortaInhumacion = response.data[2][0].dia_inhumacion.slice(0,10);
+                    setFechaInhumacion(fechaCortaInhumacion);
                 }
-                i++;
-            }
-
-            if(responsableExiste == 1 && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
-            && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
-                setBuscar(true);
-                setMsjerror(false);/*Ocultar mensaje de error */
-                setLoading(false);
-                setCallAPI(true);
-
-                //Falta convertir a fecha corta y obtener ese finado
-                let j=0, ultimaFecha=0, fechaCorta;
-                while(j < dataFosa[2].length){
-                    console.log('j: '+ j);
-                    ultimaFecha = new Date(dataFosa[2][0].dia_inhumacion);
-                    let fecha = new Date(dataFosa[2][j].dia_inhumacion);
-                    console.log(fecha);
-                    if(ultimaFecha < fecha){
-                        ultimaFecha = fecha;
-                        fechaCorta = ultimaFecha.toString();
-                    }
-                    j++;
-                }
-
-                console.log('ultimaFecha: '+ultimaFecha);
-
-                setFechaInhumacion(fechaCorta);
-                console.log('fecha: ' + fechaInhumacion);
-            }
-            else{
+            }catch(error){
+                //console.log(error);
+                setMsjerror(true);
                 setLoading(false);
                 setBuscar(false);
-                setMsjerror(true);/*Ver mensaje de error */
             }
-        });
-       
-        // let getData = new Promise(function(resolve, reject){
-        //     const response = axios.get(URLFosainfo)
-        //     setDataFosa(response.data);
-        //     resolve(dataFosa);
-        //     reject(console.log('hubo fallo'));
-        //     console.log(response.data[0][0]);
-        //     console.log(response)
-        // })
-
-        // getData
-        //     .then(dataFosa => {
-        //         setLoading(true)
-        //         if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
-        //         && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
-        //             setBuscar(true);
-        //             setMsjerror(false);/*Ocultar mensaje de error */
-        //             setLoading(false);
-        //             setCallAPI(true);
-        //         }
-        //         else{
-        //             setLoading(false);
-        //             setBuscar(false);
-        //             setMsjerror(true);/*Ver mensaje de error */
-        //         }
-        //     })
-        //     .catch(error => {
-        //         alert(error);
-        //     })
-
-        // setLoading(true)
-        // if(Titular !=="" && Cuartel == dataFosa[0][0].cuartel && Lote == dataFosa[0][0].lote 
-        // && Clase == dataFosa[0][0].clase && Fosa == dataFosa[0][0].fosa){
-        //     setBuscar(true);
-        //     setMsjerror(false);/*Ocultar mensaje de error */
-        //     setLoading(false);
-        //     setCallAPI(true);
-        // }
-        // else{
-        //     setLoading(false);
-        //     setBuscar(false);
-        //     setMsjerror(true);/*Ver mensaje de error */
-        // }    
+        }
+        getData()
+        
     }
 
 
@@ -309,12 +200,12 @@ function InfoPago() {
         <div>
             <div className="container-infopago">
             <div className="instrutions-infopago">
-                <h2>Comprobante de Pago</h2>
+                <h2>Ficha de Pago</h2>
                 {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
                 <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
             </div>
             <form onSubmit={handleSubmit} className='informacion'>
-                <h1 id="name">Comprobante de pago</h1>
+                <h1 id="name">Ficha de pago</h1>
 
                 <div className='dato'>
                     <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
@@ -410,7 +301,7 @@ function InfoPago() {
                     <input 
                     disabled = {disabledLote}
                     className='input'
-                    placeholder='Ingrese numero de lote' 
+                    placeholder='Ingrese número de lote' 
                     type="number" 
                     name="lote" 
                     value={Lote}
@@ -474,7 +365,7 @@ function InfoPago() {
                     <input 
                     disabled = {disabledFosa}
                     className='input'
-                    placeholder='Ingrese el numero de fosa' 
+                    placeholder='Ingrese el número de fosa' 
                     type="number" 
                     min="1"
                     name="fosa" 
@@ -502,7 +393,7 @@ function InfoPago() {
                     disableElevation
                     onClick={handleClick}
                     >
-                        Buscar comprobante 
+                        Buscar Ficha de Pago 
                     </Button>
                     <Comprobante disabled={!mostrarOpciones}/>
                     {buscar && mostrarOpciones ? 

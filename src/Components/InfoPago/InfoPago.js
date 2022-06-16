@@ -7,12 +7,13 @@ import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
-import { ExitToApp } from '@material-ui/icons';
 
 function InfoPago() {
 
     const [dataFosa, setDataFosa] = useState();
     const [fechaInhumacion, setFechaInhumacion] = useState();
+    //Para no mostrar ficha de pago cuando no hay boleta
+    const [vistaComprobante, setvistaComprobante] = useState(false);
 
     const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
@@ -160,25 +161,33 @@ function InfoPago() {
     /*useEffect(()=>{
         setLoading(true);
     },[buscar])*/
+
+
+    console.log("vistaComprobante: " + vistaComprobante);
     
 
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
 
+        //Evita guarda el estaod de ficha de pago cada que se no se regresa el valor de verComprobante
+        setVerComprobante(false);
+
         async function getData(){
             setLoading(true);
             try{
                 const response = await axios.get(URLFosainfo)
-                setDataFosa(response.data);
                 //console.log(response.data);
                 if(response.status !== 200 || !response.data[0].length){
                     setMsjerror(true);
                     setLoading(false);
                     setBuscar(false);
+                    setvistaComprobante(false)
                 }else{
+                    setDataFosa(response.data);
                     setLoading(false);
                     setBuscar(true);
                     setMsjerror(false)
+                    setvistaComprobante(true)
                     //Para obtener la fecha corta de la inhumación
                     let fechaCortaInhumacion;
                     fechaCortaInhumacion = response.data[2][0].dia_inhumacion.slice(0,10);
@@ -186,6 +195,8 @@ function InfoPago() {
                 }
             }catch(error){
                 //console.log(error);
+
+                setvistaComprobante(false)
                 setMsjerror(true);
                 setLoading(false);
                 setBuscar(false);
@@ -403,13 +414,14 @@ function InfoPago() {
                     Campo_clase = {Clase}
                     Campo_lote = {Lote}
                     Campo_fosa = {Fosa}
-                    Campo_finado = {dataFosa[2][0].nombre}     
+                    //Por si no hay finados en la fosa
+                    Campo_finado = {dataFosa[2][0].nombre == undefined ? "No hay finado" : dataFosa[2][0].nombre}     
                     Campo_inhumacionFinado = {fechaInhumacion}
                     /> : null}
                 </div>            
             </form>
         </div>
-        <div className= 'vistacotenedor'>
+        <div className= 'vistacotenedor' style={{display: vistaComprobante ? null : 'none'}}>
             <div className='vista'>
                 {verComprobante && mostrarOpciones ? 
                 <Boleta 
@@ -418,7 +430,7 @@ function InfoPago() {
                 campo_clase ={Clase}
                 campo_lote={Lote}
                 campo_fosa={Fosa}
-                campo_finado = {dataFosa[2][0].nombre}  
+                campo_finado = {dataFosa[2][0].nombre == undefined ? "No hay finado" : dataFosa[2][0].nombre}  
                 campo_inhumacionFinado = {fechaInhumacion}
                 /> : null}
             </div>

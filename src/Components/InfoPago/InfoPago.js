@@ -378,7 +378,7 @@ function InfoPago() {
                 {loading && <Loader/>}
                 { msjerror && <div className="mensaje_error">
                     <p>
-                        <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
+                        <b>Error:</b> No se encontró el comprobante correspondiente. Por favor, revise nuevamente los datos.
                     </p>
                 </div>}
 

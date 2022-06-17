@@ -14,15 +14,19 @@ function InfoPago() {
     const [fechaInhumacion, setFechaInhumacion] = useState();
     //Para no mostrar ficha de pago cuando no hay boleta
     const [vistaComprobante, setvistaComprobante] = useState(false);
+    const [finadosArray, setFinadosArray] = useState([]);
+    const [titularesArray, setTitularesArray] = useState([]);
+    
 
     const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
-    const [disabledCuartel,setDisabledCuartel] = useState(true); //Estado para activar el campo cuartel
+    const [disabledCuartel,setDisabledCuartel] = useState(false); //Estado para activar el campo cuartel
     const [disabledClase,setDisabledClase] = useState(true); //Estado para activar el campo clase
     const [disabledFosa,setDisabledFosa] = useState(true);//Estado para activar el campo fosa
     const [disabledLote,setDisabledLote] = useState(true);//Estado para activar el campo lote
-
-    const [Titular,setTitular] = useState('');
+    const [disableTitularFinado, setDisableTitularFinado] = useState(true);
+    const [disableFichaPago, setDisableFichaPago] = useState(true);
+    const [titular,setTitular] = useState("");
    
     const [Cuartel, setCuartel] = useState(""); //Estado para reiniciar el select cuartel
     const [data] = useState([1, 2, 3, 4]); //Valores cuartel
@@ -33,6 +37,8 @@ function InfoPago() {
     const [valorclase] = useState([1, 2, 3, 4]); //valores clase
 
     const [Fosa,setFosa] = useState("");
+    const [finadoSelect, setFinadoSelect] = useState("");
+    const [nombreFinado, setNombreFinado] = useState("");
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
     const [mostrarOpciones,setMostrarOpciones] = useState (false);
@@ -93,17 +99,18 @@ function InfoPago() {
         e.preventDefault();
     }
 
-    const enablecuartel = e =>{
-        if(Titular !==""){
-            setDisabledCuartel(false);
-        }
-        else{
-            setDisabledCuartel(true);
-            setDisabledLote(true);
-            setDisabledClase(true);   
-            setDisabledLote(true);     
-        }
-    }
+    //  Ya no es necesario
+    // const enablecuartel = e =>{
+    //     if(Cuartel !==""){
+    //         setDisabledCuartel(false);
+    //     }
+    //     else{
+    //         setDisabledCuartel(true);
+    //         setDisabledLote(true);
+    //         setDisabledClase(true);   
+    //         setDisabledLote(true);     
+    //     }
+    // }
     
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = ()=>{
@@ -131,9 +138,9 @@ function InfoPago() {
 
     /*useEffect para reiniciar los campos cada vez que un valor se quite */
     useEffect(()=>{
-        if(Titular === ""){
-            setCuartel('');
-        }
+        // if(Titular === ""){
+        //     setCuartel('');
+        // }
         if(Cuartel === ""){
             setLote('');
         }
@@ -143,19 +150,35 @@ function InfoPago() {
         if(Clase === ""){
             setFosa('');
         }
-       
-    },[Titular,Cuartel,Lote,Clase])
+        if(Fosa === ""){
+            setFinadoSelect('');
+        }
+        if(finadoSelect === ""){
+            setTitular('');
+        }
+            
+    },[Cuartel,Lote,Clase,Fosa, ])
 
     useEffect(()=>{
-        if(Titular !=="" && Cuartel !=="" &&  Lote !=="" && Clase !==""
-        && Fosa !==""){
+        //Titular !=="" &&
+        if(Cuartel !=="" &&  Lote !=="" && Clase !==""
+        && Fosa !==""){ //&& finadoSelect !== ""){
             setMostrarOpciones(true);
         }
         else{
             setBuscar(false);
             setMostrarOpciones(false)
         }
-    },[Titular, Cuartel, Lote, Clase, Fosa])
+
+        if(titular !== "" && finadoSelect !== ""){
+            setDisableFichaPago(false);
+        }
+        else{
+            setDisableFichaPago(true);
+        }
+
+
+    },[Cuartel, Lote, Clase, Fosa, titular, finadoSelect])
 
     //Loader
     /*useEffect(()=>{
@@ -166,45 +189,75 @@ function InfoPago() {
     console.log("vistaComprobante: " + vistaComprobante);
     
 
+    function handleGenerarFicha(){
+        //Para obtener la fecha corta de la inhumación
+        let fechaCortaInhumacion;
+        fechaCortaInhumacion = dataFosa[2][finadoSelect] === undefined ? 'No hay datos' : dataFosa[2][finadoSelect].dia_inhumacion.slice(0,10);
+        setFechaInhumacion(fechaCortaInhumacion);
+
+        let nombreFinado;
+        nombreFinado = dataFosa[2][finadoSelect] === undefined ? 'No hay datos' : dataFosa[2][finadoSelect].nombre;
+        setNombreFinado(nombreFinado);
+        
+        setBuscar(true);
+    }
+
+
      /*Función que habilitara los botonees de ver y descargar del documento*/
     const  handleClick = () => {
 
-        //Evita guarda el estaod de ficha de pago cada que se no se regresa el valor de verComprobante
+        //Evita guardar el estado de ficha de pago cada que se no se regresa el valor de verComprobante
         setVerComprobante(false);
 
         async function getData(){
             setLoading(true);
             try{
                 const response = await axios.get(URLFosainfo)
-                //console.log(response.data);
+                console.log(response);
                 if(response.status !== 200 || !response.data[0].length){
                     setMsjerror(true);
                     setLoading(false);
                     setBuscar(false);
                     setvistaComprobante(false)
+
+                    setDisableTitularFinado(true);
                 }else{
                     setDataFosa(response.data);
                     setLoading(false);
-                    setBuscar(true);
+                    //setBuscar(true);
                     setMsjerror(false)
                     setvistaComprobante(true)
-                    //Para obtener la fecha corta de la inhumación
-                    let fechaCortaInhumacion;
-                    fechaCortaInhumacion = response.data[2][0].dia_inhumacion.slice(0,10);
-                    setFechaInhumacion(fechaCortaInhumacion);
+                    
+                    let finadosArr = response.data[2].map((finado) =>{
+                        return finado.nombre ; 
+                    })
+
+                    let titularesArr = response.data[1].map(titular => {
+                        return titular.nombre
+                    })
+
+                    setFinadosArray(finadosArr);
+                    setTitularesArray(titularesArr);
+                    setDisableTitularFinado(false);
+
+                    console.log('response data[2]: ' + response.data[2]);
+                    console.log(fechaInhumacion);
+                    console.log(finadosArray);
                 }
             }catch(error){
-                //console.log(error);
-
                 setvistaComprobante(false)
                 setMsjerror(true);
                 setLoading(false);
                 setBuscar(false);
+                setDisableTitularFinado(true);
             }
         }
+
         getData()
-        
+        console.log(fechaInhumacion);
+        console.log(finadosArray);
     }
+
 
 
     return (
@@ -219,19 +272,6 @@ function InfoPago() {
                 <h1 id="name">Ficha de pago</h1>
 
                 <div className='dato'>
-                    <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
-                    <input 
-                    className='input'
-                    placeholder='Ingrese nombre de titular' 
-                    type="text" 
-                    name="Titular" 
-                    value={Titular}
-                    onChange={onlyLetters}
-                    onBlur={enablecuartel}
-                    />
-                </div>
-
-                <div className='dato'>
                     <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
                     <select 
                     disabled={disabledCuartel}
@@ -240,6 +280,7 @@ function InfoPago() {
                     name="cuartel" 
                     value={Cuartel}
                     onChange={(e) => setCuartel(e.target.value)}
+                    //onBlur={enablecuartel}
                     onBlur={()=>{
                         
                         if( Cuartel !==""){
@@ -257,55 +298,10 @@ function InfoPago() {
                         {data && data.map((item, index) => {
                             return <option key={index}>{item}</option>;
                         })}
-                        {/*<option value="">---</option>
-                        <option value="1">Cuartel 1</option>
-                        <option value="2">Cuartel 2</option>
-                        <option value="3">Cuartel 3</option>
-                        <option value="4">Cuartel 4</option>*/}
+        
                     </select>
                 </div>
-                {/* <h1 id="name">Comprobante de pago</h1>
-                <div className='dato'>
-                    <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
-                    <select 
-                    className='inputselect'
-                    id="selectcuartel"
-                    name="cuartel" 
-                    onChange={handleChange}
-                    // onBlur={selectclase}
-                    defaultValue={datosfosa.cuartel}>
-                        <option value="">---</option>
-                        <option value="1">Cuartel 1</option>
-                        <option value="2">Cuartel 2</option>
-                        <option value="3">Cuartel 3</option>
-                        <option value="4">Cuartel 4</option>
-                    </select>
-                </div> */}
-
-                {/* <div className='dato'>
-                    <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
-                    <input 
-                    disabled = {disabledLote}
-                    className='input'
-                    placeholder='Ingrese numero de lote' 
-                    type="number" 
-                    name="lote" 
-                    value={datosfosa.lote}
-                    onChange={handleChange}
-                    min="1"
-                    onKeyPress={preventMinus}
-                    onBlur={(e)=>{
-                        handleChange(e);
-                        if(datosfosa.lote !==""){
-                            setDisabledClase(false);                            
-                        }
-                        else{
-                            setDisabledClase(true);
-                        
-                        }
-                    }}
-                    />
-                </div> */}
+               
 
                 <div className='dato'>
                     <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
@@ -318,7 +314,6 @@ function InfoPago() {
                     value={Lote}
                     onChange={(e) => setLote(e.target.value)}
                     min="1"
-                    onKeyPress={preventMinus}
                     onBlur={(e)=>{
                         
                         if(Lote !==""){
@@ -386,37 +381,96 @@ function InfoPago() {
                     />
                 </div>
 
+                <div className='dato'>
+                    <label htmlFor="finado" id="labelfinado" className='stylelabel'>Finado </label> 
+                    <select
+                        disabled = {disableTitularFinado}
+                        id="selectfinado"
+                        className='inputselect' 
+                        name="finado"   
+                        onChange={(e) => setFinadoSelect(e.target.value)}
+                    >
+                        <option  value="" >---</option>
+                        {finadosArray === undefined ? <option>No hay datos</option> :
+                            finadosArray.map((finado, index)=>{
+                                return <option key={index} value={index} >{finado}</option>
+                            })
+                        }
+                    </select>
+                </div>
+
+                <div className='dato'>
+                    <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
+                    <select
+                        disabled = {disableTitularFinado}
+                        id="Titular"
+                        className="inputselect"
+                        onChange={(e) => setTitular(e.target.value)}
+                    >
+                        <option  value="" >---</option>
+                        {titularesArray === undefined   ? <option>No hay datos</option> : 
+                            titularesArray.map((titular, index) => {
+                                return <option key={index} value={titular} >{titular}</option>
+                            })
+                        }
+                    </select>
+                    {/* <input 
+                    className='input'
+                    placeholder='Ingrese nombre de titular' 
+                    type="text" 
+                    name="Titular" 
+                    value={Titular}
+                    onChange={onlyLetters}
+                    onBlur={enablecuartel}
+                    /> */}
+                </div>
                 {loading && <Loader/>}
                 { msjerror && <div className="mensaje_error">
                     <p>
-                        <b>Error:</b> No se encontro el comprobante correspondiente, por favor revise nuevamente los datos.
+                        <b>Error:</b> No se encontró el comprobante correspondiente, por favor revise nuevamente los datos.
                     </p>
                 </div>}
 
                 <div className="generador">
                     {/*boton de buscar comprobante*/}
                     <Button
-                    id="boton"
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="medium"
-                    disableElevation
-                    onClick={handleClick}
+                        id="boton"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        disableElevation
+                        onClick={handleClick}
                     >
-                        Buscar Ficha de Pago 
+                        Buscar Fosa 
                     </Button>
+                    <Button
+                        disabled = {disableFichaPago}
+                        style = {{
+                            display: !disableFichaPago ? null : 'none'
+                        }}
+                        id="boton"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        disableElevation
+                        onClick={handleGenerarFicha}
+                    >
+                        Generar Ficha de Pago 
+                    </Button>
+                    
                     <Comprobante disabled={!mostrarOpciones}/>
                     {buscar && mostrarOpciones ? 
                     <DocPdf 
-                    Campo_titular={Titular}
-                    Campo_cuartel = {Cuartel}
-                    Campo_clase = {Clase}
-                    Campo_lote = {Lote}
-                    Campo_fosa = {Fosa}
-                    //Por si no hay finados en la fosa
-                    Campo_finado = {dataFosa[2][0].nombre == undefined ? "No hay finado" : dataFosa[2][0].nombre}     
-                    Campo_inhumacionFinado = {fechaInhumacion}
+                        Campo_titular={titular}
+                        Campo_cuartel = {Cuartel}
+                        Campo_clase = {Clase}
+                        Campo_lote = {Lote}
+                        Campo_fosa = {Fosa}
+                        //Por si no hay finados en la fosa
+                        Campo_finado = {nombreFinado}     
+                        Campo_inhumacionFinado = {fechaInhumacion}
                     /> : null}
                 </div>            
             </form>
@@ -425,12 +479,12 @@ function InfoPago() {
             <div className='vista'>
                 {verComprobante && mostrarOpciones ? 
                 <Boleta 
-                campo_titular={Titular}
+                campo_titular={titular}
                 campo_cuartel={Cuartel}
                 campo_clase ={Clase}
                 campo_lote={Lote}
                 campo_fosa={Fosa}
-                campo_finado = {dataFosa[2][0].nombre == undefined ? "No hay finado" : dataFosa[2][0].nombre}  
+                campo_finado = {nombreFinado}  
                 campo_inhumacionFinado = {fechaInhumacion}
                 /> : null}
             </div>

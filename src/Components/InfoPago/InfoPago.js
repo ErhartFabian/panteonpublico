@@ -157,7 +157,7 @@ function InfoPago() {
             setTitular('');
         }
             
-    },[Cuartel,Lote,Clase,Fosa, ])
+    },[Cuartel,Lote,Clase,Fosa])
 
     useEffect(()=>{
         //Titular !=="" &&
@@ -391,11 +391,13 @@ function InfoPago() {
                         onChange={(e) => setFinadoSelect(e.target.value)}
                     >
                         <option  value="" >---</option>
-                        {finadosArray === undefined ? <option>No hay datos</option> :
-                            finadosArray.map((finado, index)=>{
+                        {
+                            vistaComprobante ? finadosArray === undefined ? <option>No hay datos</option> :
+                                finadosArray.map((finado, index)=>{
                                 return <option key={index} value={index} >{finado}</option>
-                            })
+                            }) : null
                         }
+                        
                     </select>
                 </div>
 
@@ -408,10 +410,11 @@ function InfoPago() {
                         onChange={(e) => setTitular(e.target.value)}
                     >
                         <option  value="" >---</option>
-                        {titularesArray === undefined   ? <option>No hay datos</option> : 
-                            titularesArray.map((titular, index) => {
-                                return <option key={index} value={titular} >{titular}</option>
-                            })
+                        {
+                            vistaComprobante ? titularesArray === undefined ? <option>No hay datos</option> : 
+                                titularesArray.map((titular, index) => {
+                                    return <option key={index} value={titular} >{titular}</option>
+                                }) : null
                         }
                     </select>
                     {/* <input 

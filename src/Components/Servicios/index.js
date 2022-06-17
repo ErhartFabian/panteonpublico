@@ -13,12 +13,6 @@ function Servicios() {
     const movetoHorCre = () => HorCre.current.scrollIntoView({ behavior: 'smooth' });
     const movetoServFun = () => ServFun.current.scrollIntoView({ behavior: 'smooth' });
 
-
-    /* const executeScroll = () => Construcción.current.scrollIntoView(); */
-
-
-
-
     return (
         <div id="Page">
             <div className="instructions_servicios">

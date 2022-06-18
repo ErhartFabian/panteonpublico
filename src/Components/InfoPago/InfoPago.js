@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
-import './css/InfoPago.css'
+// import './css/InfoPago.css'
+import './css/Pago2.css'
 import axios from 'axios';
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faReceipt} from '@fortawesome/free-solid-svg-icons';
+import {faLessThanEqual, faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
 
 function InfoPago() {
@@ -16,7 +17,7 @@ function InfoPago() {
     const [vistaComprobante, setvistaComprobante] = useState(false);
     const [finadosArray, setFinadosArray] = useState([]);
     const [titularesArray, setTitularesArray] = useState([]);
-    
+    const [montos, setMontos] = useState();
 
     const [msjerror,setMsjerror] =useState(false); //Estado para habilitar el mensaje de error
     const [loading,setLoading] =useState(false);//Activar/desactivar el loading 
@@ -239,10 +240,12 @@ function InfoPago() {
                     setFinadosArray(finadosArr);
                     setTitularesArray(titularesArr);
                     setDisableTitularFinado(false);
+                    setMontos(response.data[3]);
 
                     console.log('response data[2]: ' + response.data[2]);
                     console.log(fechaInhumacion);
                     console.log(finadosArray);
+                    console.log('adeudos: ' + montos[0].ano);
                 }
             }catch(error){
                 setvistaComprobante(false)
@@ -254,245 +257,288 @@ function InfoPago() {
         }
 
         getData()
+        console.log('msjerror: ' + msjerror);
         console.log(fechaInhumacion);
         console.log(finadosArray);
+        console.log('vistaComprobante' + vistaComprobante);
+        console.log('disableTitularFinado' + disableTitularFinado)
+    }
+
+    function handleReset(){
+        setLote("");
+        setFosa("");
+        setvistaComprobante(false)
+        setDisableTitularFinado(true);
     }
 
 
-
     return (
-        <div>
+        <div className='container'>
             <div className="container-infopago">
-            <div className="instrutions-infopago">
-                <h2>Ficha de Pago</h2>
-                {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
-                <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
-            </div>
-            <form onSubmit={handleSubmit} className='informacion'>
-                <h1 id="name">Ficha de pago</h1>
-
-                <div className='dato'>
-                    <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
-                    <select 
-                    disabled={disabledCuartel}
-                    className='inputselect'
-                    id="selectcuartel"
-                    name="cuartel" 
-                    value={Cuartel}
-                    onChange={(e) => setCuartel(e.target.value)}
-                    //onBlur={enablecuartel}
-                    onBlur={()=>{
-                        
-                        if( Cuartel !==""){
-                            setDisabledLote(false);
-                        }
-                        else{
-                            setDisabledLote(true);
-                            setDisabledClase(true);   
-                            setDisabledLote(true);     
-                        }
-                    }}
-                    >
-                         {/*Aplique un map para poder resetear el select */}
-                        <option value ="">---</option>
-                        {data && data.map((item, index) => {
-                            return <option key={index}>{item}</option>;
-                        })}
-        
-                    </select>
-                </div>
-               
-
-                <div className='dato'>
-                    <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
-                    <input 
-                    disabled = {disabledLote}
-                    className='input'
-                    placeholder='Ingrese número de lote' 
-                    type="number" 
-                    name="lote" 
-                    value={Lote}
-                    onChange={(e) => setLote(e.target.value)}
-                    min="1"
-                    onBlur={(e)=>{
-                        
-                        if(Lote !==""){
-                            setDisabledClase(false);                            
-                        }
-                        else{
-                            setDisabledClase(true);
-                        
-                            if(Clase !==""){
-                                setDisabledFosa(false);
-                            }
-                            else{
-                                setDisabledFosa(true);
-                            }
-                        }
-                        }
-                    } 
-                    />
+            
+                <div className="instructions-infopago">
+                    <h2 className='instructions-title'>Información</h2>
+                    {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
+                    <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
                 </div>
 
-                <div className='dato'>
-                    <label htmlFor="nclase" id="labelclase" className='stylelabel'>Clase </label> 
-                    <select
-                    disabled = {disabledClase}
-                    id="selectclase"
-                    className='inputselect' 
-                    name="clase" 
-                    value={Clase}
-                    onChange={(e) => setClase(e.target.value)}
-                    onBlur={(e)=>{
-                       
-                        if(Clase !==""){
-                            setDisabledFosa(false);
-                        }
-                        else{
-                            setDisabledFosa(true);
-                        }
-                    }}
-                    >
-                        {/*Aplique un map para poder resetear el select */}
-                        <option  value="">---</option>
-                            {valorclase && valorclase.map((item, index) => {
-                                return <option key={index}>{item}</option>;
-                            })}
-                        {/*<option value="">---</option>
-                        <option value="1">Clase 1</option>
-                        <option value="2">Clase 2</option>
-                        <option value="3">Clase 3</option>
-                        <option value="4">Clase 4</option>*/}
-                    </select>
-                </div>
+                <div className='form-inforpago'>
 
-                <div className='dato'>
-                    <label htmlFor="fosa" id='labelfosa' className='stylelabel'>Fosa </label> 
-                    <input 
-                    disabled = {disabledFosa}
-                    className='input'
-                    placeholder='Ingrese el número de fosa' 
-                    type="number" 
-                    min="1"
-                    name="fosa" 
-                    value={Fosa}
-                    onChange={(e) => setFosa(e.target.value)}
-                    onKeyPress={preventMinus}
-                    />
-                </div>
+                    <form onSubmit={handleSubmit} className='informacion'>
+                        <h1 id="name" className='titulo'>Ficha de pago</h1>
 
-                <div className='dato'>
-                    <label htmlFor="finado" id="labelfinado" className='stylelabel'>Finado </label> 
-                    <select
-                        disabled = {disableTitularFinado}
-                        id="selectfinado"
-                        className='inputselect' 
-                        name="finado"   
-                        onChange={(e) => setFinadoSelect(e.target.value)}
-                    >
-                        <option  value="" >---</option>
-                        {
-                            vistaComprobante ? finadosArray === undefined ? <option>No hay datos</option> :
-                                finadosArray.map((finado, index)=>{
-                                return <option key={index} value={index} >{finado}</option>
-                            }) : null
-                        }
-                        
-                    </select>
-                </div>
+                        <div className='dato'>
+                            <label htmlFor="ncuartel" className='stylelabel' id="labelcuartel">Cuartel </label> 
+                                <select 
+                                    disabled={vistaComprobante}
+                                    className='inputselect'
+                                    id="selectcuartel"
+                                    name="cuartel" 
 
-                <div className='dato'>
-                    <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
-                    <select
-                        disabled = {disableTitularFinado}
-                        id="Titular"
-                        className="inputselect"
-                        onChange={(e) => setTitular(e.target.value)}
-                    >
-                        <option  value="" >---</option>
-                        {
-                            vistaComprobante ? titularesArray === undefined ? <option>No hay datos</option> : 
-                                titularesArray.map((titular, index) => {
-                                    return <option key={index} value={titular} >{titular}</option>
+                                    value={Cuartel}
+                                    onChange={(e) => setCuartel(e.target.value)}
+                                    //onBlur={enablecuartel}
+                                    onBlur={()=>{
+
+                                        if( Cuartel !==""){
+                                            setDisabledLote(false);
+                                        }
+                                        else{
+                                            setDisabledLote(true);
+                                            setDisabledClase(true);   
+                                            setDisabledLote(true);     
+                                        }
+                                    }}
+                                    >
+                                     {/*Aplique un map para poder resetear el select */}
+                                    <option value ="">---</option>
+                                    {data && data.map((item, index) => {
+                                        return <option key={index}>{item}</option>;
+                                    })}
+                                </select>
+                        </div>
+                                
+
+                        <div className='dato'>
+                            <label htmlFor="lote" id='labelote' className='stylelabel'>Lote </label> 
+                            <input 
+                                disabled = {vistaComprobante}
+                                className='input'
+                                placeholder='Ingrese número de lote' 
+                                type="number" 
+                                name="lote" 
+                                value={Lote}
+                                onChange={(e) => setLote(e.target.value)}
+                                min="1"
+                                onBlur={(e)=>{
+
+                                    if(Lote !==""){
+                                        setDisabledClase(false);                            
+                                    }
+                                    else{
+                                        setDisabledClase(true);
+                                    
+                                        if(Clase !==""){
+                                            setDisabledFosa(false);
+                                        }
+                                        else{
+                                            setDisabledFosa(true);
+                                        }
+                                    }
+                                    }
+                                } 
+                                />
+                        </div>
+
+                        <div className='dato'>
+                            <label htmlFor="nclase" id="labelclase" className='stylelabel'>Clase </label> 
+                            <select
+                                disabled = {vistaComprobante}
+                                id="selectclase"
+                                className='inputselect' 
+                                name="clase" 
+                                value={Clase}
+                                onChange={(e) => setClase(e.target.value)}
+                                onBlur={(e)=>{
+                                
+                                    if(Clase !==""){
+                                        setDisabledFosa(false);
+                                    }
+                                    else{
+                                        setDisabledFosa(true);
+                                    }
+                                }}
+                            >
+                                    {/*Aplique un map para poder resetear el select */}
+                                    <option  value="">---</option>
+                                        {valorclase && valorclase.map((item, index) => {
+                                            return <option key={index}>{item}</option>;
+                                        })}
+                                    {/*<option value="">---</option>
+                                    <option value="1">Clase 1</option>
+                                    <option value="2">Clase 2</option>
+                                    <option value="3">Clase 3</option>
+                                    <option value="4">Clase 4</option>*/}
+                            </select>
+                        </div>
+
+                        <div className='dato'>
+                            <label htmlFor="fosa" id='labelfosa' className='stylelabel'>Fosa </label> 
+                            <input 
+                                disabled = {vistaComprobante}
+                                className='input'
+                                placeholder='Ingrese el número de fosa' 
+                                type="number" 
+                                min="1"
+                                name="fosa" 
+                                value={Fosa}
+                                onChange={(e) => setFosa(e.target.value)}
+                                onKeyPress={preventMinus}
+                            />
+                        </div>
+
+                        <div 
+                            className='dato'
+                            style={{
+                                display: disableTitularFinado ? 'none' : null
+                            }}
+                        >
+                            <label htmlFor="finado" id="labelfinado" className='stylelabel'>Finado </label> 
+                            <select
+                                //disabled = {disableTitularFinado}
+                                id="selectfinado"
+                                className='inputselect' 
+                                name="finado"   
+                                onChange={(e) => setFinadoSelect(e.target.value)}
+                            >
+                            <option  value="" >---</option>
+                            {
+                                vistaComprobante ? finadosArray === undefined ? <option>No hay datos</option> :
+                                    finadosArray.map((finado, index)=>{
+                                    return <option key={index} value={index} >{finado}</option>
                                 }) : null
-                        }
-                    </select>
-                    {/* <input 
-                    className='input'
-                    placeholder='Ingrese nombre de titular' 
-                    type="text" 
-                    name="Titular" 
-                    value={Titular}
-                    onChange={onlyLetters}
-                    onBlur={enablecuartel}
-                    /> */}
-                </div>
-                {loading && <Loader/>}
-                { msjerror && <div className="mensaje_error">
-                    <p>
-                        <b>Error:</b> No se encontró el comprobante correspondiente, por favor revise nuevamente los datos.
-                    </p>
-                </div>}
+                            }
 
-                <div className="generador">
-                    {/*boton de buscar comprobante*/}
-                    <Button
-                        id="boton"
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        size="medium"
-                        disableElevation
-                        onClick={handleClick}
-                    >
-                        Buscar Fosa 
-                    </Button>
-                    <Button
-                        disabled = {disableFichaPago}
-                        style = {{
-                            display: !disableFichaPago ? null : 'none'
-                        }}
-                        id="boton"
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        size="medium"
-                        disableElevation
-                        onClick={handleGenerarFicha}
-                    >
-                        Generar Ficha de Pago 
-                    </Button>
-                    
-                    <Comprobante disabled={!mostrarOpciones}/>
-                    {buscar && mostrarOpciones ? 
-                    <DocPdf 
-                        Campo_titular={titular}
-                        Campo_cuartel = {Cuartel}
-                        Campo_clase = {Clase}
-                        Campo_lote = {Lote}
-                        Campo_fosa = {Fosa}
-                        //Por si no hay finados en la fosa
-                        Campo_finado = {nombreFinado}     
-                        Campo_inhumacionFinado = {fechaInhumacion}
+                            </select>
+                        </div>
+
+                        <div 
+                            className='dato'
+                            style={{
+                                display: disableTitularFinado ? 'none' : null
+                            }}
+                        >
+                            <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
+                            <select
+                                //disabled = {disableTitularFinado}
+                                id="Titular"
+                                className="inputselect"
+                                onChange={(e) => setTitular(e.target.value)}
+                            >
+                            <option  value="" >---</option>
+                            {
+                                vistaComprobante ? titularesArray === undefined ? <option>No hay datos</option> : 
+                                    titularesArray.map((titular, index) => {
+                                        return <option key={index} value={titular} >{titular}</option>
+                                    }) : null
+                            }
+                            </select>
+                        
+                        </div>
+                        
+                        {loading && <Loader/>}
+                        
+                        { msjerror && <div className="mensaje_error">
+                            <p>
+                                <b>Error:</b> No se encontró el comprobante correspondiente, por favor revise nuevamente los datos.
+                            </p>
+                        </div>}
+
+                        <div className="generador">
+                            {/*boton de buscar comprobante*/}
+                            <Button
+                                id="boton"
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                size="medium"
+                                disableElevation
+                                style={{
+                                    display: vistaComprobante ? 'none' : null
+                                }}
+                                onClick={handleClick}
+                            >
+                                Buscar Fosa 
+                            </Button>
+
+                            <Button
+                                id="boton"
+                                type="reset"
+                                variant="contained"
+                                color="primary"
+                                size="medium"
+                                disableElevation
+                                style={{
+                                    display: !vistaComprobante ? 'none' : null
+                                }}
+                                onClick={handleReset}
+                            >
+                                Buscar Nueva Ficha 
+                            </Button>
+
+                            <Button
+                                disabled = {disableFichaPago}
+                                style = {{
+                                    display: !disableFichaPago ? null : 'none'
+                                }}
+                                id="boton"
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                size="medium"
+                                disableElevation
+                                onClick={handleGenerarFicha}
+                            >
+                                Generar Ficha de Pago 
+                            </Button>
+                            
+                            <Comprobante disabled={!mostrarOpciones}/>
+                            
+                            {buscar && mostrarOpciones ? 
+
+                            <DocPdf 
+                                Campo_titular={titular}
+                                Campo_cuartel = {Cuartel}
+                                Campo_clase = {Clase}
+                                Campo_lote = {Lote}
+                                Campo_fosa = {Fosa}
+                                //Por si no hay finados en la fosa
+                                Campo_finado = {nombreFinado}     
+                                Campo_inhumacionFinado = {fechaInhumacion}
+                                Montos = {montos}
+                            /> : null}
+                        </div>            
+                    </form>
+                </div>
+
+            </div>
+        
+            <div className= 'vistacotenedor' style={{display: vistaComprobante ? null : 'none'}}>
+                <div className='vista'>
+                    {verComprobante && mostrarOpciones ? 
+                    <Boleta 
+                        campo_titular={titular}
+                        campo_cuartel={Cuartel}
+                        campo_clase ={Clase}
+                        campo_lote={Lote}
+                        campo_fosa={Fosa}
+                        campo_finado = {nombreFinado}  
+                        campo_inhumacionFinado = {fechaInhumacion}
+                        Montos = {montos}
                     /> : null}
-                </div>            
-            </form>
-        </div>
-        <div className= 'vistacotenedor' style={{display: vistaComprobante ? null : 'none'}}>
-            <div className='vista'>
-                {verComprobante && mostrarOpciones ? 
-                <Boleta 
-                campo_titular={titular}
-                campo_cuartel={Cuartel}
-                campo_clase ={Clase}
-                campo_lote={Lote}
-                campo_fosa={Fosa}
-                campo_finado = {nombreFinado}  
-                campo_inhumacionFinado = {fechaInhumacion}
-                /> : null}
+                </div>
             </div>
         </div>
-    </div>
     )
 }
 

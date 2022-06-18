@@ -98,7 +98,7 @@ class ComponentToPrint extends React.Component {
         <table className="tabladatos">
             <thead>
                 <tr>
-                    <th className="encabezados">Ejercicio </th>
+                    <th className="encabezados">Ejercicios </th>
                     <th className="encabezados">Anualidad </th>
                     <th className="encabezados">Actualización </th>
                     <th className="encabezados">Multa </th>

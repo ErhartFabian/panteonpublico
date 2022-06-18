@@ -1,0 +1,96 @@
+
+:root {
+    --detail-blue: #3866F2;
+}
+
+/* @font-face {
+    font-family: 'Helvetica-Nue';
+    src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);
+    } */
+
+body{
+    background-color: #e5e5f7;
+    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+    background-size: 15px 15px;
+    font-family: 'Helvetica-Nue',Arial;
+}
+
+.container{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 80vw;
+    /* outline: 1px solid black; */
+    margin: 10% auto;
+    padding: 1.5em;
+}
+
+.titulo{
+    grid-column: 1 / 3;
+    font-size: 2em;
+    padding-bottom: 0.5em;
+}
+
+.container-infopago{
+    /* outline: 1px solid red; */
+    box-shadow: 0px 0px 20px 5px #000;
+    width: 100%;
+}
+
+.container-infopago > *{
+    padding: 1em;
+}
+
+.instructions-infopago{
+    background-color: #eee;
+    text-align: center;
+    padding: 2em;
+}
+
+.instructions-title{
+    margin-bottom: 30px;
+}
+
+.form-inforpago{
+    background-color: #fff;
+}
+
+.form-inforpago form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-inforpago form .dato{
+    margin: 0;
+    padding: 0.5em;
+}
+
+/*Yo lo agregué*/
+.generador{
+    display: flex;
+    justify-content: space-around;
+    grid-column: 1 / 3;
+    margin-top: 20px;
+    /* padding: 1em; */
+}
+
+.form-inforpago form input,
+.form-inforpago form select{
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-bottom: 1px solid var(--detail-blue);
+    outline: none;
+    color: #706C6C;
+}
+
+.mensaje_error{
+    grid-column: 1 / 3;
+}
+
+@media (min-width: 900px) {
+    .container-infopago{
+        display: grid;
+        grid-template-columns: auto 80%;
+    }
+}

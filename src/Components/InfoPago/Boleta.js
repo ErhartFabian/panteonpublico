@@ -10,9 +10,9 @@ export default function Boleta(props) {
 
         let sumaAdeudos = 0; 
         
-        props.Montos.forEach(()=>{
-            if ( props.Montos[0].status === 1){
-                sumaAdeudos = sumaAdeudos + Number(props.Montos[0].monto);
+        props.Montos.forEach((element)=>{
+            if ( element.status === 0){
+                sumaAdeudos = sumaAdeudos + Number(element.monto);
             }
         })
             

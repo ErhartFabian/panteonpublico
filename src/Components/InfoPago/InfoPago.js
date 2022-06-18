@@ -245,7 +245,7 @@ function InfoPago() {
                     console.log('response data[2]: ' + response.data[2]);
                     console.log(fechaInhumacion);
                     console.log(finadosArray);
-                    console.log('adeudos: ' + montos[0].ano);
+                    //console.log('adeudos: ' + montos[0].ano);
                 }
             }catch(error){
                 setvistaComprobante(false)

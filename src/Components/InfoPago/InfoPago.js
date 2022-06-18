@@ -173,6 +173,8 @@ function InfoPago() {
 
         if(titular !== "" && finadoSelect !== ""){
             setDisableFichaPago(false);
+            setVerComprobante(false);
+            setBuscar(false);
         }
         else{
             setDisableFichaPago(true);
@@ -512,7 +514,6 @@ function InfoPago() {
                                 Campo_clase = {Clase}
                                 Campo_lote = {Lote}
                                 Campo_fosa = {Fosa}
-                                //Por si no hay finados en la fosa
                                 Campo_finado = {nombreFinado}     
                                 Campo_inhumacionFinado = {fechaInhumacion}
                                 Montos = {montos}

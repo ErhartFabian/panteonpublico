@@ -50,11 +50,6 @@ body {
     gap: 2rem;
 }
 
-/* #name{
-    text-align: center;
-    font-weight: 100;
-    font-display: swap;
-} */
 
 .stylelabel{
     display: block;
@@ -62,18 +57,6 @@ body {
     min-height: 35px;
 	cursor: pointer;  
 }
-/* #labelcuartel{
-    padding-right:180px;
-}
-#labelclase{
-    padding-right: 190px;
-}
-#labelfosa{
-    margin-right: 170px;
-}
-#labelote{
-    margin-right: 170px;
-} */
 
 .dato-mapa{
     font-size: 20px;
@@ -89,16 +72,7 @@ body {
     outline: none;
     box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
 }
-/* 
-#pago{
-    padding-right: 90px;
-}
-#fosa{
-    padding-right: 90px;
-}
-#fechaPago{
-    padding-right: 90px;
-} */
+
 .datepicker{
     font-size: 18px;
     border: 3px solid transparent;
@@ -141,22 +115,6 @@ body {
     margin-left: 10px;
 }
 
-/* .input:focus,
-.input:not(:placeholder-shown) {
-    color: #4D4646;
-} */
-
-/* .input:focus{
-    border: 1px solid #04293A;
-} */
-.generador{
-    display: flex;
-    justify-content: center;
-}
-/* #boton{
-    margin-right: 80px;
-    background-color: var(--detail-blue);
-} */
 
 .icono{
     padding-right: 10px;

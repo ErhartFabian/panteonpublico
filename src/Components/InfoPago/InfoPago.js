@@ -200,7 +200,7 @@ function InfoPago() {
         <div >
             <div className="container-infopago">
                 <div className="instrutions-infopago">
-                    <h2>Ficha de Pago</h2>
+                    <h2>Instrucciones</h2>
                     {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
                     <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
                 </div>
@@ -242,7 +242,7 @@ function InfoPago() {
                             }}
                         >
                             {/*Aplique un map para poder resetear el select */}
-                            <option value="">---</option>
+                            <option value="">Selecciona cuartel</option>
                             {data && data.map((item, index) => {
                                 return <option key={index}>{item}</option>;
                             })}
@@ -348,7 +348,7 @@ function InfoPago() {
                             }}
                         >
                             {/*Aplique un map para poder resetear el select */}
-                            <option value="">---</option>
+                            <option value="">Selecciona clase</option>
                             {valorclase && valorclase.map((item, index) => {
                                 return <option key={index}>{item}</option>;
                             })}

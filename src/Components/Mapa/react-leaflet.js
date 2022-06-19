@@ -1,10 +1,10 @@
 import React, { Component, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+/* import 'leaflet/dist/leaflet.css'; */
 import { MarkerIcon } from './react-leaflet-icon.js';
 
 class MapView extends Component {
-  handleChange(e){
+  handleChange(e){A
     this.state.map.flyTo(this.props.fosa.coordenadas, 10);
   }
 
@@ -22,10 +22,6 @@ class MapView extends Component {
     return (
       <MapContainer whenCreated={map => this.setState({ map })} center={[20.1281, -98.76437]} zoom={17} style={{
         position: "relative",
-       /*  minWidth: "700px",
-        width: "60%",
-        height: "100%",
-        aspectRatio: "1 / .7" */
         width: "70vw",
         height: "90.9vh",
       }}>

@@ -4,7 +4,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaf
 import { MarkerIcon } from './react-leaflet-icon.js';
 
 class MapView extends Component {
-  handleChange(e){A
+  handleChange(e){
     this.state.map.flyTo(this.props.fosa.coordenadas, 10);
   }
 

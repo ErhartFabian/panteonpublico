@@ -1,6 +1,6 @@
 import React, { Component, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import './dist/leaflet.css';
 import { MarkerIcon } from './react-leaflet-icon.js';
 
 class MapView extends Component {

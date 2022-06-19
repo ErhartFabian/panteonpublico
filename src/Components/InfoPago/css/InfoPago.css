@@ -56,13 +56,13 @@
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
 }
 
-#name{
+/* #name{
     text-align: center;
     font-weight: 100;
     font-display: swap;
     font-size: 30px;
     padding: 10px 10px 10px 10px;
-}
+} */
 
 .stylelabel{
     display: block;
@@ -71,7 +71,7 @@
 	cursor: pointer;  
 }
 
-#labelcuartel{
+/* #labelcuartel{
     padding-right: 180px;
 }
 #labelclase{
@@ -86,7 +86,7 @@
 #labeltitular{
     margin-right: 170px;
 
-}
+} */
 
 
 .dato{
@@ -121,10 +121,10 @@
     background: rgb(235,235,228);
 }
 
-input::placeholder {
+.container-infopago input::placeholder {
     font-size: 1rem;
   }
-#pago{
+/* #pago{
     padding-right: 90px;
 }
 #fosa{
@@ -132,7 +132,7 @@ input::placeholder {
 }
 #fechaPago{
     padding-right: 90px;
-}
+} */
 .datepicker{
     font-size: 18px;
     border: 3px solid transparent;
@@ -140,7 +140,7 @@ input::placeholder {
     transition: .3s ease all;
     border-bottom: 1px solid #5757577E;
 }
-.input{
+.container-infopago.input{
     color: #706C6C;
     font-size: 18px;
     /*Eliminar para coincidir con el formato
@@ -154,7 +154,7 @@ input::placeholder {
     border-bottom: 1px solid #5757577E;
     margin-bottom: 20px;
 }
-.input:disabled {
+.container-infopago.input:disabled {
     background: rgb(235,235,228);
 }
 .mensaje_error{
@@ -185,11 +185,11 @@ input::placeholder {
     display: flex;
     justify-content: center;
 }
-#boton{
+/* #boton{
     margin-right: 80px;
     margin-bottom: 10px;
     background-color: var(--detail-blue);
-}
+} */
 
 .icono{
     padding-right: 10px;

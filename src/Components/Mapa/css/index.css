@@ -6,9 +6,6 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -21,67 +18,51 @@ body {
       monospace;
   }
   
-  /* .busqueda{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-      background-color: aqua;
-  }
-  .pantalla {
-      height: calc(100vh - 95px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #e5e5f7;
-      background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
-      background-size: 15px 15px;
-  
-  } */
-  
   .container-mapa {
+    height: 90vh;
+    width: 100vw;
     display: flex;
-    padding: 3em 4em;
-    justify-content: space-between;
-    gap: 5em;
+    flex-direction: row-reverse;
+    /* padding: 3em 4em; */
+    /* justify-content: space-between; */
     align-items: center;
     flex-wrap: wrap;
     background-color: #e5e5f7;
     background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
     background-size: 15px 15px;
     min-height: calc(100vh - 85px);
-    display: flex;
     align-items: center;
   }
+.container-mapa form{   
+    height: 100%; 
+    width: 30%; 
+    padding: 2rem 3rem;
+}
 
- .containermapa{
-    width: 40vw;
-} 
 
 .informacion-mapa{
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
-    padding: 4em 2em;
-    gap: 3rem;
+    padding: 2rem 0.5rem;
+    gap: 2rem;
 }
 
-#name{
+/* #name{
     text-align: center;
     font-weight: 100;
     font-display: swap;
-}
+} */
 
 .stylelabel{
     display: block;
-	font-weight: 500;
+	/* font-weight: 500; */
     min-height: 35px;
 	cursor: pointer;  
 }
-#labelcuartel{
+/* #labelcuartel{
     padding-right:180px;
 }
 #labelclase{
@@ -92,39 +73,23 @@ body {
 }
 #labelote{
     margin-right: 170px;
-}
+} */
 
 .dato-mapa{
-    font-weight: 400;
     font-size: 20px;
-    text-align:left;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    background:transparent;
     flex-wrap: wrap;
+    gap: .2rem;
 }
 
-.inputselect{
-    width: 200px;
-	background: #fff;
-	border-radius: 3px;
-	height: 35px;
-	line-height: 35px;
-	padding: 0 40px 0 20px;
-	transition: .3s ease all;
-    text-align: center;
-	border: 3px solid transparent;
-    font-size: 15px;
-}
 .inputselect:focus{
     border: 3px solid #0075FF;
     outline: none;
     box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
 }
-
-input::placeholder {
-    font-size: 1rem;
-  }
+/* 
 #pago{
     padding-right: 90px;
 }
@@ -133,7 +98,7 @@ input::placeholder {
 }
 #fechaPago{
     padding-right: 90px;
-}
+} */
 .datepicker{
     font-size: 18px;
     border: 3px solid transparent;
@@ -141,17 +106,25 @@ input::placeholder {
     transition: .3s ease all;
     border-bottom: 1px solid #5757577E;
 }
-.input{
-    color: #706C6C;
+.container-mapa input{
+    color: #697a8d;
     font-size: 18px;
-    /*Eliminar para coincidir con el formato
-     border: 3px solid transparent; */
-    height: 30px;
-    line-height: 30px;
-    padding: 0 20px 0 10px;
+    padding: 0.4375rem 0.875rem;
     transition: .3s ease all;
     border: none;
-    border-bottom: 1px solid #5757577E;
+    border: 1px solid #d9dee3;
+    border-radius: 0.375rem;
+    min-height: 40px;
+}
+.container-mapa select{
+    color: #697a8d;
+    font-size: 18px;
+    padding: 0.4375rem 0.875rem;
+    transition: .3s ease all;
+    border: none;
+    border: 1px solid #d9dee3;
+    border-radius: 0.375rem;
+    min-height: 40px;
 }
 .mensaje_error{
     height: 45px;
@@ -180,10 +153,10 @@ input::placeholder {
     display: flex;
     justify-content: center;
 }
-#boton{
+/* #boton{
     margin-right: 80px;
     background-color: var(--detail-blue);
-}
+} */
 
 .icono{
     padding-right: 10px;

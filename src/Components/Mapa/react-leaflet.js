@@ -22,9 +22,12 @@ class MapView extends Component {
     return (
       <MapContainer whenCreated={map => this.setState({ map })} center={[20.1281, -98.76437]} zoom={17} style={{
         position: "relative",
-        minWidth: "700px",
-        width: "45%",
-        aspectRatio: "1 / .7"
+       /*  minWidth: "700px",
+        width: "60%",
+        height: "100%",
+        aspectRatio: "1 / .7" */
+        width: "70vw",
+        height: "90.9vh",
       }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

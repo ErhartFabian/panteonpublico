@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import {Home} from './Components';
 import {Navbar} from './Components';
-import {Busqueda} from './Components';
 import {FormaContacto} from './Components';
 import {Mapa} from './Components';
 import InfoPago from './Components/InfoPago/InfoPago';
@@ -18,7 +15,6 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Mapa />} />
       <Route path="/InfoPago" element={<InfoPago/>} />
-      <Route path="/Busqueda" element={<Busqueda />} />
       <Route path="/Contacto" element={<FormaContacto />} />
       <Route path="/Servicios" element={<Servicios />} />
     </Routes>

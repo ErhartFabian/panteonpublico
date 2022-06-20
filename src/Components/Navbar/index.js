@@ -6,8 +6,6 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavBtn,
-    NavBtnLink,
 } from "./NavbarElements";
 import logoImg from './logoImg.png'
 
@@ -30,12 +28,6 @@ function Navbar() {
                     >
                         Mapa Topográfico
                     </NavLink>
-                   {/*  <NavLink
-                        to="/Avisos"
-                        activtestyle={{ color: '#bfbfbf' }}
-                    >
-                        Avisos
-                    </NavLink> */}
                     <NavLink
                         to="/Servicios"
                         activtestyle={{ color: '#bfbfbf' }}
@@ -48,12 +40,6 @@ function Navbar() {
                     >
                         Información de Pago
                     </NavLink>
-                    {/* <NavLink
-                        to="/Busqueda"
-                        activtestyle={{ color: '#bfbfbf' }}
-                    >
-                        Búsqueda
-                    </NavLink> */}
                     <NavLink
                         to="/Contacto"
                         activtestyle={{ color: '#bfbfbf' }}

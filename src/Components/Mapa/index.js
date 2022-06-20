@@ -5,11 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import MapView from './react-leaflet.js';
 import * as serviceWorker from './serviceWorker';
-/*import Datepicker,{registerLocale} from 'react-datepicker' Componente fecha y hora */
-/*import "react-datepicker/dist/react-datepicker.css";*/
-/*import es from 'date-fns/locale/es'*/
 
-/*registerLocale("es",es);*/
 
 function Mapa() {
 

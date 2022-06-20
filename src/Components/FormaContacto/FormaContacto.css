@@ -62,7 +62,6 @@
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
     height: calc(80vh - 85px);
-    /* overflow-y: scroll; */
 }
 
 .form__title {

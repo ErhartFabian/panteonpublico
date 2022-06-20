@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
 // import './css/InfoPago.css'
@@ -42,11 +42,11 @@ function InfoPago() {
     const [nombreFinado, setNombreFinado] = useState("");
 
     //Estado para habilitar y deshabilitar los botones si el usario borra un dato de los campos
-    const [mostrarOpciones,setMostrarOpciones] = useState (false);
+    const [mostrarOpciones, setMostrarOpciones] = useState(false);
 
     /*Estado para mostrar y ocultar comprobante*/
-    const [verComprobante,setVerComprobante] = useState(false);
-     /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
+    const [verComprobante, setVerComprobante] = useState(false);
+    /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
     // const [datosfosa, setDatosFosa] = useState({
@@ -60,12 +60,12 @@ function InfoPago() {
         datosfosa.lote = "";
         datosfosa.fosa = ""
     }*/
-   
+
     /*if(datosfosa.cuartel === ""){
             datosfosa.lote = "";
             datosfosa.fosa = ""
         }*/
-    
+
     /*if(datosfosa.clase === ""){
         datosfosa.fosa = "";
     }*/
@@ -78,7 +78,7 @@ function InfoPago() {
     // }
 
     /*Permitir solo letras*/
-    const onlyLetters = e =>{
+    const onlyLetters = e => {
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
         setTitular(result);
     }
@@ -90,13 +90,13 @@ function InfoPago() {
     };
 
     const id = Cuartel + Clase + Lote + Fosa;
-        //console.log(id);
+    //console.log(id);
 
     const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
-        
 
 
-    const handleSubmit = e =>{
+
+    const handleSubmit = e => {
         e.preventDefault();
     }
 
@@ -114,26 +114,26 @@ function InfoPago() {
     // }
     
     /*Componente que contiene los botones de visualizar y descargar documento */
-    const Comprobante = ()=>{
-        return(
+    const Comprobante = () => {
+        return (
             <div className='generador'>
-            <Button 
-             /*Habilitar boton*/
-            disabled={!buscar}
-            id="boton"
-            type="submit"
-            variant="contained" 
-            color="primary"
-            size="medium"
-            disableElevation
-            onClick={()=>{
-                setVerComprobante(!verComprobante);
-            }}
-            >
-            <FontAwesomeIcon className='icono' icon={faReceipt} />
-                {verComprobante &&  buscar ? "Ocultar ficha de pago" : "Ver ficha de pago"} 
-            </Button>
-        </div>
+                <Button
+                    /*Habilitar boton*/
+                    disabled={!buscar}
+                    id="boton"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    disableElevation
+                    onClick={() => {
+                        setVerComprobante(!verComprobante);
+                    }}
+                >
+                    <FontAwesomeIcon className='icono' icon={faReceipt} />
+                    {verComprobante && buscar ? "Ocultar ficha de pago" : "Ver ficha de pago"}
+                </Button>
+            </div>
         );
     };
 
@@ -145,10 +145,10 @@ function InfoPago() {
         if(Cuartel === ""){
             setLote('');
         }
-        if(Lote === ""){
+        if (Lote === "") {
             setClase('');
         }
-        if(Clase === ""){
+        if (Clase === "") {
             setFosa('');
         }
         if(Fosa === ""){
@@ -166,7 +166,7 @@ function InfoPago() {
         && Fosa !==""){ //&& finadoSelect !== ""){
             setMostrarOpciones(true);
         }
-        else{
+        else {
             setBuscar(false);
             setMostrarOpciones(false)
         }
@@ -214,7 +214,7 @@ function InfoPago() {
 
         async function getData(){
             setLoading(true);
-            try{
+            try {
                 const response = await axios.get(URLFosainfo)
                 console.log(response);
                 if(response.status !== 200 || !response.data[0].length){

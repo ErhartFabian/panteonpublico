@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile} from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,9 @@ import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
 export default function DocPdf (props) {
+
     let componentRef = useRef();
+
     return (
       <>
         <div>
@@ -35,6 +37,7 @@ export default function DocPdf (props) {
                 Print_responsable = {props.Campo_titular}
                 Print_finado = {props.Campo_finado}
                 Print_inhumacionFinado = {props.Campo_inhumacionFinado}
+                Print_montos = {props.Montos}
                 ref={(el) => (componentRef = el)} />
           </div>
   
@@ -44,6 +47,29 @@ export default function DocPdf (props) {
   }
 
 class ComponentToPrint extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            adeudo: 0
+        };
+    }
+    //const [adeudo, setAdeudo] = useState(0);
+    
+    
+    componentDidMount(){ 
+        let sumaAdeudos = 0; 
+        
+        this.props.Print_montos.forEach((element)=>{
+            if ( element.status === 0){
+                sumaAdeudos = sumaAdeudos + Number(element.monto);
+            }
+        })
+        
+        console.log(sumaAdeudos);
+        this.setState({adeudo: this.state.adeudo + sumaAdeudos});
+    }
+   
     render() {
       return (
     <div id="boleta">
@@ -98,14 +124,26 @@ class ComponentToPrint extends React.Component {
         <table className="tabladatos">
             <thead>
                 <tr>
-                    <th className="encabezados">Ejercicio </th>
-                    <th className="encabezados">Anualidad </th>
-                    <th className="encabezados">Actualización </th>
-                    <th className="encabezados">Multa </th>
+                    <th className="encabezados">Ejercicio</th>
+                    <th className="encabezados">Monto</th>
+                    <th className="encabezados">Concepto</th>
+                    <th className="encabezados">Estatus</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                {
+                    this.props.Print_montos.map((element) => {
+                        return (
+                            <tr key={element.idFosa}>
+                                <td className="columnafecha">{element.ano}</td>
+                                <td className="columna">{element.monto}</td>
+                                <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>
+                                <td className="columna">{element.status === 0 ? 'No pagado' : 'Pagado'}</td>
+                            </tr>
+                        );
+                    })
+                }
+                {/* <tr>
                     <td className="columnafecha">2020</td>
                     <td className="columna">0</td>
                     <td className="columna">0</td>
@@ -124,12 +162,12 @@ class ComponentToPrint extends React.Component {
                     <td className="columna">0</td>
                     <td className="columna">0</td>
                     <td className="columna">0</td>
-                </tr>
+                </tr> */}
             </tbody>
             <tfoot>
                 <tr>
                     <td colSpan="1"> Monto a pagar: </td>
-                    <td bgcolor="#EEEEEE" colSpan="4"> <b>$0.00</b></td>
+                    <td bgcolor="#EEEEEE" colSpan="4"> <b>${this.state.adeudo}</b></td>
                 </tr>
             </tfoot>
         </table>

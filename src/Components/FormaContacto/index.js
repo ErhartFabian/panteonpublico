@@ -49,12 +49,12 @@ function FormaContacto() {
 
                 <div className="form__container">
                     <div className="form__group">
-                        <input type="text" id="nombre" className="form__input" placeholder=" " name="user_name" required />
+                        <input type="text" id="nombre" maxLength={50} className="form__input" placeholder=" " name="user_name" required />
                         <label htmlFor="nombre" className="form__label">Nombre</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="email" id="correo"  className="form__input" placeholder=" " name="user_email" required />
+                        <input type="email" id="correo"  maxLength={64} className="form__input" placeholder=" " name="user_email" required />
                         <label htmlFor="correo" className="form__label">Correo</label>
                         <span className="form__line"></span>
                     </div>
@@ -64,7 +64,7 @@ function FormaContacto() {
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <textarea type="text" id="area-mensaje" className="form__input" placeholder=" " name="message" maxLength={150} required></textarea>
+                        <textarea type="text" id="area-mensaje" maxLength={160} className="form__input" placeholder=" " name="message" required></textarea>
                         <label htmlFor="area-mensaje" className="form__label">Mensaje</label>
                         <span className="form__line"></span>
                     </div>

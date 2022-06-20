@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import './leaflet/dist/leaflet.css';
 import { MarkerIcon } from './react-leaflet-icon.js';
 
 class MapView extends Component {
-  handleClick(e){
-    this.setState({ currentLocation: e.latlng });
-  }
-  
   handleChange(e){
-    e.flyTo(this.props.fosa.coordenadas);
+    this.state.map.flyTo(this.props.fosa.coordenadas, 10);
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: { lat: 38.71, lng: -0.48 },
+      currentLocation: null,
       zoom: 12,
+      map: null
     }
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   render() {
     return (
-      <MapContainer center={[20.1281, -98.76437]} zoom={17} onClick={this.handleClick} onChange={this.handleChange} style={{
+      <MapContainer whenCreated={map => this.setState({ map })} center={[20.1281, -98.76437]} zoom={17} style={{
         position: "relative",
         minWidth: "700px",
         width: "45%",
@@ -34,9 +30,9 @@ class MapView extends Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
-        <Marker position={this.props.fosa.coordenadas} icon={MarkerIcon}>
+        <Marker position={this.props.fosa.coordenadas} icon={MarkerIcon} onChange={this.handleChange}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Cuartel: {this.props.fosa.cuartel} Lote: {this.props.fosa.lote} Clase: {this.props.fosa.clase} Fosa: {this.props.fosa.fosa}
           </Popup>
       </Marker>
       </MapContainer>

@@ -15,10 +15,9 @@ function Navbar() {
         <React.Fragment>
             <Nav className="nav">
                 <NavLogo to= "/">
-                    <img src={logoImg} id="logoImg" />
+                    <img src={logoImg} id="logoImg" alt="logo" />
                     <h2>Presidencia Municipal de Pachuca de Soto</h2>
-                </NavLogo>
-                
+                </NavLogo> 
                 <Bars />
 
                 <NavMenu>

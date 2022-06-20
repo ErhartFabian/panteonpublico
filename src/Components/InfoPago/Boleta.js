@@ -18,7 +18,7 @@ export default function Boleta(props) {
             
         console.log(sumaAdeudos);
         setAdeudo(sumaAdeudos.toFixed(2));
-    })
+    }, [props.Montos]);
 
     console.log('Length montos: ' + props.Montos.length);
     return (

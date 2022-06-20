@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
-//import './css/InfoPago.css'
 import './css/Pago2.css'
 import axios from 'axios';
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faLessThanEqual, faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
-
 function InfoPago() {
 
     const [dataFosa, setDataFosa] = useState();
@@ -49,34 +46,7 @@ function InfoPago() {
     /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    // const [datosfosa, setDatosFosa] = useState({
-    //     cuartel:"",
-    //     lote:"",
-    //     clase: "", 
-    //     fosa:"",
-    // });
-
-    /*if(Titular === ""){
-        datosfosa.lote = "";
-        datosfosa.fosa = ""
-    }*/
-
-    /*if(datosfosa.cuartel === ""){
-            datosfosa.lote = "";
-            datosfosa.fosa = ""
-        }*/
-
-    /*if(datosfosa.clase === ""){
-        datosfosa.fosa = "";
-    }*/
-
-    // const handleChange = e =>{
-    //     setDatosFosa({
-    //         ...datosfosa, 
-    //         [e.target.name]:e.target.value,
-    //     });
-    // }
-
+   
     /*Permitir solo letras*/
     const onlyLetters = e => {
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
@@ -99,19 +69,6 @@ function InfoPago() {
     const handleSubmit = e => {
         e.preventDefault();
     }
-
-    //  Ya no es necesario
-    // const enablecuartel = e =>{
-    //     if(Cuartel !==""){
-    //         setDisabledCuartel(false);
-    //     }
-    //     else{
-    //         setDisabledCuartel(true);
-    //         setDisabledLote(true);
-    //         setDisabledClase(true);   
-    //         setDisabledLote(true);     
-    //     }
-    // }
     
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = () => {
@@ -140,9 +97,7 @@ function InfoPago() {
 
     /*useEffect para reiniciar los campos cada vez que un valor se quite */
     useEffect(()=>{
-        // if(Titular === ""){
-        //     setCuartel('');
-        // }
+
         if(Cuartel === ""){
             setLote('');
         }
@@ -159,7 +114,7 @@ function InfoPago() {
             setTitular('');
         }
             
-    },[Cuartel,Lote,Clase,Fosa])
+    },[Cuartel,Lote,Clase,Fosa,finadoSelect])
 
     useEffect(()=>{
         //Titular !=="" &&
@@ -186,18 +141,7 @@ function InfoPago() {
 
 
     },[Cuartel, Lote, Clase, Fosa, titular, finadoSelect])
-
-    //Loader
-    /*useEffect(()=>{
-        setLoading(true);
-    },[buscar])*/
-
-
-    // console.log("vistaComprobante: " + vistaComprobante);
-    console.log("buscar: " + buscar)
-    // console.log("disableFichaPago: " + disableFichaPago);
-    // console.log("verComporbante: " + verComprobante);
-    
+   
 
     function handleGenerarFicha(){
         //Para obtener la fecha corta de la inhumación
@@ -266,11 +210,7 @@ function InfoPago() {
         }
 
         getData()
-        // console.log('msjerror: ' + msjerror);
-        // console.log(fechaInhumacion);
-        // console.log(finadosArray);
-        // console.log('vistaComprobante' + vistaComprobante);
-        // console.log('disableTitularFinado' + disableTitularFinado)
+
     }
 
     function handleReset(){

@@ -1,5 +1,5 @@
-import React, { Component, useRef } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import React, { Component } from 'react';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import './leaflet/dist/leaflet.css';
 import { MarkerIcon } from './react-leaflet-icon.js';
 

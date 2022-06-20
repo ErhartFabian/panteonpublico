@@ -15,7 +15,7 @@ function Servicios() {
     return (
         <div id="Page">
             <div className="instructions_servicios">
-                <img src="https://cdn-icons-png.flaticon.com/512/1311/1311144.png" height="100px" >
+                <img src="https://cdn-icons-png.flaticon.com/512/1311/1311144.png" height="100px" alt="logo-servicios" >
                 </img>
                 <p> A continuación puede observar la lista de todos los servicios del cementerio</p>
                 {/* Los precios estan agrupados por */}

@@ -18,12 +18,10 @@ export default function Boleta(props) {
                 }
             })
             
-            console.log(sumaAdeudos);
             setAdeudo(sumaAdeudos.toFixed(2));
         }
     })
 
-    console.log('Length montos: ' + props.Montos.length);
     return (
         <div id="boleta">
             <div className="datos1">

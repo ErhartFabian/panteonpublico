@@ -52,7 +52,6 @@ function InfoPago() {
     
 
     const id = Cuartel + Clase + Lote + Fosa;
-    //console.log(id);
 
     const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
 
@@ -157,7 +156,6 @@ function InfoPago() {
             setLoading(true);
             try {
                 const response = await axios.get(URLFosainfo)
-                console.log(response);
                 if(response.status !== 200 || !response.data[0].length){
                     setMsjerror(true);
                     setLoading(false);

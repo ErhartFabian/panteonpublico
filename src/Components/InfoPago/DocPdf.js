@@ -71,7 +71,6 @@ class ComponentToPrint extends React.Component {
                 }
             })
             
-            console.log(sumaAdeudos);
             this.setState({adeudo: this.state.adeudo + sumaAdeudos});
         }
     }

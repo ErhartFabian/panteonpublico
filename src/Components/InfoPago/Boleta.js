@@ -82,9 +82,9 @@ export default function Boleta(props) {
                 </thead>
                 <tbody>
                     {
-                        props.Montos.map((element) => {
+                        props.Montos.map((element, index) => {
                             return (
-                                <tr key={element.idFosa}>
+                                <tr key={index}>
                                     <td className="columnafecha">{element.ano}</td>
                                     <td className="columna">{element.monto}</td>
                                     <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>

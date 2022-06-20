@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Boleta from './Boleta';
 import DocPdf from './DocPdf';
-// import './css/InfoPago.css'
+//import './css/InfoPago.css'
 import './css/Pago2.css'
 import axios from 'axios';
 import Button from "@material-ui/core/Button";
@@ -116,10 +116,12 @@ function InfoPago() {
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = () => {
         return (
-            <div className='generador'>
-                <Button
+            <Button
                     /*Habilitar boton*/
-                    disabled={!buscar}
+                    //disabled={!buscar}
+                    style = {{
+                        display: buscar ? null : 'none'
+                    }}
                     id="boton"
                     type="submit"
                     variant="contained"
@@ -129,11 +131,10 @@ function InfoPago() {
                     onClick={() => {
                         setVerComprobante(!verComprobante);
                     }}
-                >
+            >
                     <FontAwesomeIcon className='icono' icon={faReceipt} />
                     {verComprobante && buscar ? "Ocultar ficha de pago" : "Ver ficha de pago"}
-                </Button>
-            </div>
+            </Button>
         );
     };
 
@@ -174,10 +175,13 @@ function InfoPago() {
         if(titular !== "" && finadoSelect !== ""){
             setDisableFichaPago(false);
             setVerComprobante(false);
-            setBuscar(false);
         }
         else{
             setDisableFichaPago(true);
+        }
+
+        if(titular !== "" || finadoSelect !== ""){
+            setBuscar(false);
         }
 
 
@@ -189,7 +193,10 @@ function InfoPago() {
     },[buscar])*/
 
 
-    console.log("vistaComprobante: " + vistaComprobante);
+    // console.log("vistaComprobante: " + vistaComprobante);
+    console.log("buscar: " + buscar)
+    // console.log("disableFichaPago: " + disableFichaPago);
+    // console.log("verComporbante: " + verComprobante);
     
 
     function handleGenerarFicha(){
@@ -244,9 +251,9 @@ function InfoPago() {
                     setDisableTitularFinado(false);
                     setMontos(response.data[3]);
 
-                    console.log('response data[2]: ' + response.data[2]);
-                    console.log(fechaInhumacion);
-                    console.log(finadosArray);
+                    // console.log('response data[2]: ' + response.data[2]);
+                    // console.log(fechaInhumacion);
+                    // console.log(finadosArray);
                     //console.log('adeudos: ' + montos[0].ano);
                 }
             }catch(error){
@@ -259,11 +266,11 @@ function InfoPago() {
         }
 
         getData()
-        console.log('msjerror: ' + msjerror);
-        console.log(fechaInhumacion);
-        console.log(finadosArray);
-        console.log('vistaComprobante' + vistaComprobante);
-        console.log('disableTitularFinado' + disableTitularFinado)
+        // console.log('msjerror: ' + msjerror);
+        // console.log(fechaInhumacion);
+        // console.log(finadosArray);
+        // console.log('vistaComprobante' + vistaComprobante);
+        // console.log('disableTitularFinado' + disableTitularFinado)
     }
 
     function handleReset(){
@@ -490,9 +497,9 @@ function InfoPago() {
 
                             <Button
                                 disabled = {disableFichaPago}
-                                style = {{
-                                    display: !disableFichaPago ? null : 'none'
-                                }}
+                                // style = {{
+                                //     display: !disableFichaPago ? null : 'none'
+                                // }}
                                 id="boton"
                                 type="submit"
                                 variant="contained"
@@ -524,7 +531,7 @@ function InfoPago() {
 
             </div>
         
-            <div className= 'vistacotenedor' style={{display: vistaComprobante ? null : 'none'}}>
+            <div className= 'vistacotenedor' style={{display: buscar ? null : 'none'}}>
                 <div className='vista'>
                     {verComprobante && mostrarOpciones ? 
                     <Boleta 

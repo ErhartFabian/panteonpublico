@@ -1,0 +1,29 @@
+.backgnd{
+    width: 100vw;
+    height: 90vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mensaje{
+    text-align: center;
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.enlaceInicio{
+    font-size: 1em;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    text-shadow: 1px 2px 4px black;
+}
+
+.enlaceInicio:hover{
+    color: #6e7b86;
+}
+
+

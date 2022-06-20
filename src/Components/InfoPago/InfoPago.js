@@ -35,7 +35,7 @@ function InfoPago() {
     const [Lote, setLote] = useState("");
 
     const [Clase, setClase] = useState(""); //Estado para reiniciar el select clase
-    const [valorclase] = useState([1, 2, 3, 4]); //valores clase
+    const [valorclase] = useState([1, 2, 3, 4, 5]); //valores clase
 
     const [Fosa,setFosa] = useState("");
     const [finadoSelect, setFinadoSelect] = useState("");
@@ -49,69 +49,17 @@ function InfoPago() {
     /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-    // const [datosfosa, setDatosFosa] = useState({
-    //     cuartel:"",
-    //     lote:"",
-    //     clase: "", 
-    //     fosa:"",
-    // });
-
-    /*if(Titular === ""){
-        datosfosa.lote = "";
-        datosfosa.fosa = ""
-    }*/
-
-    /*if(datosfosa.cuartel === ""){
-            datosfosa.lote = "";
-            datosfosa.fosa = ""
-        }*/
-
-    /*if(datosfosa.clase === ""){
-        datosfosa.fosa = "";
-    }*/
-
-    // const handleChange = e =>{
-    //     setDatosFosa({
-    //         ...datosfosa, 
-    //         [e.target.name]:e.target.value,
-    //     });
-    // }
-
-    /*Permitir solo letras*/
-    const onlyLetters = e => {
-        const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
-        setTitular(result);
-    }
-    /*Prevenir valores menores que 0 */
-    const preventMinus = (e) => {
-        if (e.code === 'Minus') {
-            e.preventDefault();
-        }
-    };
+    
 
     const id = Cuartel + Clase + Lote + Fosa;
-    //console.log(id);
 
     const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
-
 
 
     const handleSubmit = e => {
         e.preventDefault();
     }
 
-    //  Ya no es necesario
-    // const enablecuartel = e =>{
-    //     if(Cuartel !==""){
-    //         setDisabledCuartel(false);
-    //     }
-    //     else{
-    //         setDisabledCuartel(true);
-    //         setDisabledLote(true);
-    //         setDisabledClase(true);   
-    //         setDisabledLote(true);     
-    //     }
-    // }
     
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = () => {
@@ -140,9 +88,7 @@ function InfoPago() {
 
     /*useEffect para reiniciar los campos cada vez que un valor se quite */
     useEffect(()=>{
-        // if(Titular === ""){
-        //     setCuartel('');
-        // }
+        
         if(Cuartel === ""){
             setLote('');
         }
@@ -162,7 +108,6 @@ function InfoPago() {
     },[Cuartel,Lote,Clase,Fosa])
 
     useEffect(()=>{
-        //Titular !=="" &&
         if(Cuartel !=="" &&  Lote !=="" && Clase !==""
         && Fosa !==""){ //&& finadoSelect !== ""){
             setMostrarOpciones(true);
@@ -184,20 +129,8 @@ function InfoPago() {
             setBuscar(false);
         }
 
-
     },[Cuartel, Lote, Clase, Fosa, titular, finadoSelect])
 
-    //Loader
-    /*useEffect(()=>{
-        setLoading(true);
-    },[buscar])*/
-
-
-    // console.log("vistaComprobante: " + vistaComprobante);
-    console.log("buscar: " + buscar)
-    // console.log("disableFichaPago: " + disableFichaPago);
-    // console.log("verComporbante: " + verComprobante);
-    
 
     function handleGenerarFicha(){
         //Para obtener la fecha corta de la inhumación
@@ -223,7 +156,6 @@ function InfoPago() {
             setLoading(true);
             try {
                 const response = await axios.get(URLFosainfo)
-                console.log(response);
                 if(response.status !== 200 || !response.data[0].length){
                     setMsjerror(true);
                     setLoading(false);
@@ -238,23 +170,22 @@ function InfoPago() {
                     setMsjerror(false)
                     setvistaComprobante(true)
                     
-                    let finadosArr = response.data[2].map((finado) =>{
-                        return finado.nombre ; 
-                    })
+                    if(response.data[2].length){
+                        let finadosArr = response.data[2].map((finado) =>{
+                            return finado.nombre ; 
+                        })
+
+                        setFinadosArray(finadosArr);
+                    }
 
                     let titularesArr = response.data[1].map(titular => {
                         return titular.nombre
                     })
 
-                    setFinadosArray(finadosArr);
                     setTitularesArray(titularesArr);
                     setDisableTitularFinado(false);
                     setMontos(response.data[3]);
 
-                    // console.log('response data[2]: ' + response.data[2]);
-                    // console.log(fechaInhumacion);
-                    // console.log(finadosArray);
-                    //console.log('adeudos: ' + montos[0].ano);
                 }
             }catch(error){
                 setvistaComprobante(false)
@@ -266,11 +197,6 @@ function InfoPago() {
         }
 
         getData()
-        // console.log('msjerror: ' + msjerror);
-        // console.log(fechaInhumacion);
-        // console.log(finadosArray);
-        // console.log('vistaComprobante' + vistaComprobante);
-        // console.log('disableTitularFinado' + disableTitularFinado)
     }
 
     function handleReset(){
@@ -306,7 +232,6 @@ function InfoPago() {
 
                                     value={Cuartel}
                                     onChange={(e) => setCuartel(e.target.value)}
-                                    //onBlur={enablecuartel}
                                     onBlur={()=>{
 
                                         if( Cuartel !==""){
@@ -383,11 +308,7 @@ function InfoPago() {
                                         {valorclase && valorclase.map((item, index) => {
                                             return <option key={index}>{item}</option>;
                                         })}
-                                    {/*<option value="">---</option>
-                                    <option value="1">Clase 1</option>
-                                    <option value="2">Clase 2</option>
-                                    <option value="3">Clase 3</option>
-                                    <option value="4">Clase 4</option>*/}
+                                   
                             </select>
                         </div>
 
@@ -402,7 +323,6 @@ function InfoPago() {
                                 name="fosa" 
                                 value={Fosa}
                                 onChange={(e) => setFosa(e.target.value)}
-                                onKeyPress={preventMinus}
                             />
                         </div>
 
@@ -420,9 +340,10 @@ function InfoPago() {
                                 name="finado"   
                                 onChange={(e) => setFinadoSelect(e.target.value)}
                             >
+
                             <option  value="" >---</option>
                             {
-                                vistaComprobante ? finadosArray === undefined ? <option>No hay datos</option> :
+                                vistaComprobante ? finadosArray.length === 0 ? <option value="">No hay datos</option> :
                                     finadosArray.map((finado, index)=>{
                                     return <option key={index} value={index} >{finado}</option>
                                 }) : null
@@ -439,14 +360,13 @@ function InfoPago() {
                         >
                             <label htmlFor="Titular" id='labeltitular' className='stylelabel'>Titular</label> 
                             <select
-                                //disabled = {disableTitularFinado}
                                 id="Titular"
                                 className="inputselect"
                                 onChange={(e) => setTitular(e.target.value)}
                             >
                             <option  value="" >---</option>
                             {
-                                vistaComprobante ? titularesArray === undefined ? <option>No hay datos</option> : 
+                                vistaComprobante ? titularesArray.length === 0 ? <option value="">No hay datos</option> : 
                                     titularesArray.map((titular, index) => {
                                         return <option key={index} value={titular} >{titular}</option>
                                     }) : null
@@ -497,9 +417,6 @@ function InfoPago() {
 
                             <Button
                                 disabled = {disableFichaPago}
-                                // style = {{
-                                //     display: !disableFichaPago ? null : 'none'
-                                // }}
                                 id="boton"
                                 type="submit"
                                 variant="contained"

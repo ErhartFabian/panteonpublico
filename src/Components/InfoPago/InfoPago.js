@@ -5,7 +5,9 @@ import './css/Pago2.css'
 import axios from 'axios';
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faReceipt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
+
 function InfoPago() {
 
     const [dataFosa, setDataFosa] = useState();
@@ -46,7 +48,6 @@ function InfoPago() {
     /*Estado para buscar el comprobante y habilitar los botones de ver y descargar del documento*/
     const [buscar, setBuscar] = useState(false);
 
-   
     /*Permitir solo letras*/
     const onlyLetters = e => {
         const result = e.target.value.replace(/[^a-zA-ZÁ-ÿ\s]/gi, '');
@@ -69,13 +70,13 @@ function InfoPago() {
     const handleSubmit = e => {
         e.preventDefault();
     }
+
+
     
     /*Componente que contiene los botones de visualizar y descargar documento */
     const Comprobante = () => {
         return (
             <Button
-                    /*Habilitar boton*/
-                    //disabled={!buscar}
                     style = {{
                         display: buscar ? null : 'none'
                     }}
@@ -97,7 +98,9 @@ function InfoPago() {
 
     /*useEffect para reiniciar los campos cada vez que un valor se quite */
     useEffect(()=>{
-
+        // if(Titular === ""){
+        //     setCuartel('');
+        // }
         if(Cuartel === ""){
             setLote('');
         }
@@ -141,7 +144,18 @@ function InfoPago() {
 
 
     },[Cuartel, Lote, Clase, Fosa, titular, finadoSelect])
-   
+
+    //Loader
+    /*useEffect(()=>{
+        setLoading(true);
+    },[buscar])*/
+
+
+    // console.log("vistaComprobante: " + vistaComprobante);
+    console.log("buscar: " + buscar)
+    // console.log("disableFichaPago: " + disableFichaPago);
+    // console.log("verComporbante: " + verComprobante);
+    
 
     function handleGenerarFicha(){
         //Para obtener la fecha corta de la inhumación
@@ -210,7 +224,11 @@ function InfoPago() {
         }
 
         getData()
-
+        // console.log('msjerror: ' + msjerror);
+        // console.log(fechaInhumacion);
+        // console.log(finadosArray);
+        // console.log('vistaComprobante' + vistaComprobante);
+        // console.log('disableTitularFinado' + disableTitularFinado)
     }
 
     function handleReset(){

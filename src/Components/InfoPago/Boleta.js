@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ayuntamiento from './imagenes/ayuntamiento.png';
 import './css/boleta.css'
 
 export default function Boleta(props) {
+
+    const [adeudo, setAdeudo] = useState(0);
     
+    useEffect(() => {
+
+        let sumaAdeudos = 0; 
+        
+        props.Montos.forEach((element)=>{
+            if ( element.status === 0){
+                sumaAdeudos = sumaAdeudos + Number(element.monto);
+            }
+        })
+            
+        console.log(sumaAdeudos);
+        setAdeudo(sumaAdeudos.toFixed(2));
+    })
+
+    console.log('Length montos: ' + props.Montos.length);
     return (
         <div id="boleta">
             <div className="datos1">
@@ -57,20 +74,32 @@ export default function Boleta(props) {
             <table className="tabladatos">
                 <thead>
                     <tr>
-                        <th className="encabezados">Ejercicio </th>
-                        <th className="encabezados">Anualidad </th>
-                        <th className="encabezados">Actualización </th>
-                        <th className="encabezados">Multa </th>
+                        <th className="encabezados">Ejercicio</th>
+                        <th className="encabezados">Monto</th>
+                        <th className="encabezados">Concepto</th>
+                        <th className="encabezados">Estatus</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="columnafecha">2020</td>
-                        <td className="columna">$0</td>
-                        <td className="columna">$0</td>
-                        <td className="columna">$0</td>
-                    </tr> 
-                    <tr>
+                    {
+                        props.Montos.map((element) => {
+                            return (
+                                <tr key={element.idFosa}>
+                                    <td className="columnafecha">{element.ano}</td>
+                                    <td className="columna">{element.monto}</td>
+                                    <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>
+                                    <td className="columna">{element.status === 0 ? 'No pagado' : 'Pagado'}</td>
+                                </tr>
+                            );
+                        })
+                    }
+                    {/* <tr>
+                        <td className="columnafecha">{props.Montos[0].ano}</td>
+                        <td className="columna">{props.Montos[0].monto}</td>
+                        <td className="columna">{props.Montos[0].commet === null ? 'Indefinido' : props.Montos[0].commet}</td>
+                        <td className="columna">{props.Montos[0].status === 0 ? 'No pagado' : 'Pagado'}</td>
+                    </tr>  */}
+                    {/* <tr>
                         <td className="columnafecha">2021</td>
                         <td className="datos4">$0</td>
                         <td className="datos4">$0</td>
@@ -81,12 +110,12 @@ export default function Boleta(props) {
                         <td className="columna"> ${props.adeudo == undefined  ? 0 : props.adeudo}</td>
                         <td className="columna">$0</td>
                         <td className="columna">$0</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colSpan="1"> Monto a pagar: </td>
-                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${props.adeudo}.00</b></td>
+                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${adeudo}</b></td>
                     </tr>
                 </tfoot>
             </table>

@@ -21,7 +21,7 @@ body{
     align-items: center; */
     width: 90vw;
     /* outline: 1px solid black; */
-    margin: 10% auto;
+    margin: 5% auto;
     font-size: 18px;
 }
 
@@ -33,7 +33,9 @@ body{
 
 .container-infopago{
     /* outline: 1px solid red; */
-    box-shadow: 0px 0px 20px 5px #000;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    /* margin: 7% auto; */
     width: 100%;
 }
 
@@ -57,10 +59,10 @@ body{
     background-color: #fff;
 }
 
-.form-inforpago form{
+/* .form-inforpago form{
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
+} */
 
 .form-inforpago form .dato{
     margin: 0;

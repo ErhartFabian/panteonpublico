@@ -9,18 +9,19 @@ export default function Boleta(props) {
     useEffect(() => {
 
         let sumaAdeudos = 0; 
-        
-        props.Montos.forEach((element)=>{
-            if ( element.status === 0){
-                sumaAdeudos = sumaAdeudos + Number(element.monto);
-            }
-        })
-            
-        console.log(sumaAdeudos);
-        setAdeudo(sumaAdeudos.toFixed(2));
-    }, [props.Montos]);
 
-    console.log('Length montos: ' + props.Montos.length);
+        if(props.Montos !== undefined ){
+
+            props.Montos.forEach((element)=>{
+                if ( element.status === 0){
+                    sumaAdeudos = sumaAdeudos + Number(element.monto);
+                }
+            })
+            
+            setAdeudo(sumaAdeudos.toFixed(2));
+        }
+    })
+
     return (
         <div id="boleta">
             <div className="datos1">
@@ -35,7 +36,6 @@ export default function Boleta(props) {
             <div className="titular">
                 <div id="datostitular">
                     <p className="Name_titular">Titular de la concesión: {props.campo_titular}</p>
-                    {/* <p>Col. Santa Julia calle 5 de Mayo #113</p> */}
                     <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                     <div> <p>R.F.C</p></div>
                 </div>
@@ -44,10 +44,6 @@ export default function Boleta(props) {
                     <p>PM001997</p>
                 </div>
             </div>
-            {/* <div className="responsable2">
-                <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
-                <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
-            </div> */}
             <div>
                 <h3 id="Tfosa">Información de la fosa</h3>
             </div>
@@ -82,6 +78,7 @@ export default function Boleta(props) {
                 </thead>
                 <tbody>
                     {
+                        props.Montos === undefined ? null : 
                         props.Montos.map((element, index) => {
                             return (
                                 <tr key={index}>
@@ -93,24 +90,6 @@ export default function Boleta(props) {
                             );
                         })
                     }
-                    {/* <tr>
-                        <td className="columnafecha">{props.Montos[0].ano}</td>
-                        <td className="columna">{props.Montos[0].monto}</td>
-                        <td className="columna">{props.Montos[0].commet === null ? 'Indefinido' : props.Montos[0].commet}</td>
-                        <td className="columna">{props.Montos[0].status === 0 ? 'No pagado' : 'Pagado'}</td>
-                    </tr>  */}
-                    {/* <tr>
-                        <td className="columnafecha">2021</td>
-                        <td className="datos4">$0</td>
-                        <td className="datos4">$0</td>
-                        <td className="datos4">$0</td>
-                        </tr>
-                    <tr>
-                        <td className="columnafecha">2022</td>
-                        <td className="columna"> ${props.adeudo == undefined  ? 0 : props.adeudo}</td>
-                        <td className="columna">$0</td>
-                        <td className="columna">$0</td>
-                    </tr> */}
                 </tbody>
                 <tfoot>
                     <tr>

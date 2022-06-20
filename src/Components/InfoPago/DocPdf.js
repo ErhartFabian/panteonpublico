@@ -19,7 +19,8 @@ export default function DocPdf (props) {
             trigger={() => 
             <Button
                 style={{
-                    backgroundColor: '#259f48'
+                    backgroundColor: '#259f48',
+                    padding: '1.2em'
                 }}
                 type="submit"
                 variant="contained" 
@@ -57,20 +58,21 @@ class ComponentToPrint extends React.Component {
             adeudo: 0
         };
     }
-    //const [adeudo, setAdeudo] = useState(0);
     
     
     componentDidMount(){ 
         let sumaAdeudos = 0; 
         
-        this.props.Print_montos.forEach((element)=>{
-            if ( element.status === 0){
-                sumaAdeudos = sumaAdeudos + Number(element.monto);
-            }
-        })
-        
-        console.log(sumaAdeudos);
-        this.setState({adeudo: this.state.adeudo + sumaAdeudos});
+        if(this.props.Print_montos !== undefined ){
+
+            this.props.Print_montos.forEach((element)=>{
+                if ( element.status === 0){
+                    sumaAdeudos = sumaAdeudos + Number(element.monto);
+                }
+            })
+            
+            this.setState({adeudo: this.state.adeudo + sumaAdeudos});
+        }
     }
    
     render() {
@@ -88,7 +90,6 @@ class ComponentToPrint extends React.Component {
         <div className="titular">
             <div id="datostitular">
                 <p className="Name_titular">Titular de la concesión: {this.props.Print_responsable}</p>
-                {/* <p>Col. Santa Julia calle 5 de Mayo #113</p> */}
                 <p>Pachuca de Soto Hidalgo C.p 42039 </p>
                 <div> <p>R.F.C</p></div>
             </div>
@@ -97,10 +98,6 @@ class ComponentToPrint extends React.Component {
                 <p>PM001997</p>
             </div>
         </div>
-        {/* <div className="responsable2">
-            <p>Segundo responsable: FERNANDO PÉREZ HERNÁNDEZ</p>
-            <p>AV. Solidaridad, Col. Villa Aquiles Serdán #113 Pachuca de Soto, Hidalgo C.p 42039 R.F.C</p>
-        </div> */}
         <div>
             <h3 id="Tfosa">Información de la fosa</h3>
         </div>
@@ -135,6 +132,7 @@ class ComponentToPrint extends React.Component {
             </thead>
             <tbody>
                 {
+                    this.props.Print_montos === undefined ? null : 
                     this.props.Print_montos.map((element, index) => {
                         return (
                             <tr key={index}>
@@ -146,26 +144,6 @@ class ComponentToPrint extends React.Component {
                         );
                     })
                 }
-                {/* <tr>
-                    <td className="columnafecha">2020</td>
-                    <td className="columna">0</td>
-                    <td className="columna">0</td>
-                    <td className="columna">0</td>
-                </tr>
-
-                <tr>
-                    <td className="columnafecha">2021</td>
-                    <td className="datos4">0</td>
-                    <td className="datos4">0</td>
-                    <td className="datos4">0</td>
-                </tr>
-
-                <tr>
-                    <td className="columnafecha">2022</td>
-                    <td className="columna">0</td>
-                    <td className="columna">0</td>
-                    <td className="columna">0</td>
-                </tr> */}
             </tbody>
             <tfoot>
                 <tr>

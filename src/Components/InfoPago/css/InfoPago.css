@@ -20,7 +20,6 @@
 
 .instrutions-infopago{
     height: calc(80vh - 50px);
-    /* display: flex; */
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -28,14 +27,19 @@
     color: #333;
     font-size: 1.3rem;
     padding: 30px;
-    background-color: rgb(170, 170, 170);
-    /* border-radius: 10px; */
-    /* box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%); */
+    background-color:rgb(134, 161, 128);
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     margin-left: auto;
     max-width: 400px;
 }
 
+.instrutions-infopago img{
+    margin-bottom: 20px;
+  }
+
 .instrutions-infopago h2{
+    margin-top: 20%;
     font-size: 1.6rem;
     margin-bottom: 30px;
 }
@@ -51,8 +55,8 @@
     width: 800px;
     height: calc(80vh - 50px);
     min-height: 250px;
-    /* border-radius: 10px;
-    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%); */
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%); 
 }
 
 

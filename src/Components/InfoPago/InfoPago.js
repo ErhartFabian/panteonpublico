@@ -201,6 +201,8 @@ function InfoPago() {
             <div className="container-infopago">
                 <div className="instrutions-infopago">
                     <h2>Instrucciones</h2>
+                    <img src="https://img.icons8.com/ios/344/receipt-dollar.png" height="100px" >
+                    </img>
                     {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
                     <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
                 </div>

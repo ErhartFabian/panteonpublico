@@ -19,7 +19,8 @@ export default function DocPdf (props) {
             trigger={() => 
             <Button
                 style={{
-                    backgroundColor: '#259f48'
+                    backgroundColor: '#259f48',
+                    padding: '1.2em'
                 }}
                 type="submit"
                 variant="contained" 

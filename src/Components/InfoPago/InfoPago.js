@@ -35,7 +35,7 @@ function InfoPago() {
     const [Lote, setLote] = useState("");
 
     const [Clase, setClase] = useState(""); //Estado para reiniciar el select clase
-    const [valorclase] = useState([1, 2, 3, 4]); //valores clase
+    const [valorclase] = useState([1, 2, 3, 4, 5]); //valores clase
 
     const [Fosa,setFosa] = useState("");
     const [finadoSelect, setFinadoSelect] = useState("");

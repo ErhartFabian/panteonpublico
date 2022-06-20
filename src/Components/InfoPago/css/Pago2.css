@@ -88,11 +88,9 @@ body{
     border-bottom: 1px solid var(--detail-blue);
     outline: none;
     color: #706C6C;
-}
-
-input{
     font-size: 1em;
 }
+
 
 .mensaje_error{
     grid-column: 1 / 3;
@@ -108,4 +106,8 @@ input{
 .vista{
     display: flex;
     justify-content: center;
+}
+
+#boton{
+  padding: 1.2em;  
 }

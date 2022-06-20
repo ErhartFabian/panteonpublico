@@ -9,6 +9,7 @@ import {Navbar} from './Components';
 import {Busqueda} from './Components';
 import {FormaContacto} from './Components';
 import {Mapa} from './Components';
+import MsjError from "./Components/MsjError/MsjError";
 import InfoPago from './Components/InfoPago/InfoPago';
 import Servicios from './Components/Servicios';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/Busqueda" element={<Busqueda />} />
       <Route path="/Contacto" element={<FormaContacto />} />
       <Route path="/Servicios" element={<Servicios />} />
+      <Route path="*" element={<MsjError />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

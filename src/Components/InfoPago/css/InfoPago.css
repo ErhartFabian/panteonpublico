@@ -141,5 +141,7 @@
     width: 800px;
     margin: auto;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
 }
 

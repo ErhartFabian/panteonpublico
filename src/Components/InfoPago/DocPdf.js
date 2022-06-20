@@ -18,11 +18,14 @@ export default function DocPdf (props) {
             documentTitle="Ficha de pago"
             trigger={() => 
             <Button
-            type="submit"
-            variant="contained" 
-            color="secondary"
-            size="large"
-            disableElevation
+                style={{
+                    backgroundColor: '#259f48'
+                }}
+                type="submit"
+                variant="contained" 
+                color="secondary"
+                size="medium"
+                disableElevation
             ><FontAwesomeIcon className='icono' icon={faFile}/>Descargar Pdf</Button>
             }
             content={() => componentRef}
@@ -132,9 +135,9 @@ class ComponentToPrint extends React.Component {
             </thead>
             <tbody>
                 {
-                    this.props.Print_montos.map((element) => {
+                    this.props.Print_montos.map((element, index) => {
                         return (
-                            <tr key={element.idFosa}>
+                            <tr key={index}>
                                 <td className="columnafecha">{element.ano}</td>
                                 <td className="columna">{element.monto}</td>
                                 <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>

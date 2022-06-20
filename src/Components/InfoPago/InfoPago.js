@@ -281,7 +281,7 @@ function InfoPago() {
                 <div className="instructions-infopago">
                     <h2 className='instructions-title'>Información</h2>
                     {/* para obtener su comprobande de pago favor de introducir el cuartel, lote, clase y fosa asignados */}
-                    <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados</p>
+                    <p>Para obtener su comprobante de pago favor de introducir el cuartel, lote, clase y fosa asignados.</p>
                 </div>
 
                 <div className='form-inforpago'>

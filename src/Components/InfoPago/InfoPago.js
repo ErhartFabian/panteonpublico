@@ -97,15 +97,15 @@ function InfoPago() {
         if(Fosa === ""){
             setFinadoSelect('');
         }
-        if(finadoSelect === ""){
-            setTitular('');
-        }
+        // if(finadoSelect === ""){
+        //     setTitular('');
+        // }
             
     },[Cuartel,Lote,Clase,Fosa,finadoSelect])
 
     useEffect(()=>{
         if(Cuartel !=="" &&  Lote !=="" && Clase !==""
-        && Fosa !==""){ //&& finadoSelect !== ""){
+        && Fosa !==""){ 
             setMostrarOpciones(true);
         }
         else {
@@ -123,7 +123,7 @@ function InfoPago() {
 
         if(titular !== "" || finadoSelect !== ""){
             setBuscar(false);
-        }
+        };
 
     },[Cuartel, Lote, Clase, Fosa, titular, finadoSelect])
 
@@ -375,7 +375,7 @@ function InfoPago() {
                         
                         { msjerror && <div className="mensaje_error">
                             <p>
-                                <b>Error:</b> No se encontró el comprobante correspondiente, por favor revise nuevamente los datos.
+                                <b>Error:</b> No se encontró la fosa, por favor revise nuevamente los datos.
                             </p>
                         </div>}
 

@@ -11,15 +11,14 @@ export default function Boleta(props) {
         let sumaAdeudos = 0; 
 
         if(props.Montos !== undefined ){
-
             props.Montos.forEach((element)=>{
-                if ( element.status === 0){
+                if ( element.pagado === 0){
                     sumaAdeudos = sumaAdeudos + Number(element.monto);
                 }
             })
-            
             setAdeudo(sumaAdeudos.toFixed(2));
         }
+
     })
 
     return (
@@ -83,9 +82,9 @@ export default function Boleta(props) {
                             return (
                                 <tr key={index}>
                                     <td className="columnafecha">{element.ano}</td>
-                                    <td className="columna">{element.monto}</td>
+                                    <td className="columna">${element.monto}</td>
                                     <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>
-                                    <td className="columna">{element.status === 0 ? 'No pagado' : 'Pagado'}</td>
+                                    <td className="columna">{element.pagado === 0 ? 'No pagado' : 'Pagado'}</td>
                                 </tr>
                             );
                         })
@@ -94,7 +93,7 @@ export default function Boleta(props) {
                 <tfoot>
                     <tr>
                         <td colSpan="1"> Monto a pagar: </td>
-                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${adeudo}</b></td>
+                        <td bgcolor="#EEEEEE" colSpan="4"> <b>${adeudo} pesos</b></td>
                     </tr>
                 </tfoot>
             </table>

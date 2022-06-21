@@ -66,7 +66,7 @@ class ComponentToPrint extends React.Component {
         if(this.props.Print_montos !== undefined ){
 
             this.props.Print_montos.forEach((element)=>{
-                if ( element.status === 0){
+                if ( element.pagado === 0){
                     sumaAdeudos = sumaAdeudos + Number(element.monto);
                 }
             })
@@ -137,9 +137,9 @@ class ComponentToPrint extends React.Component {
                         return (
                             <tr key={index}>
                                 <td className="columnafecha">{element.ano}</td>
-                                <td className="columna">{element.monto}</td>
+                                <td className="columna">${element.monto}</td>
                                 <td className="columna">{element.commet === null ? 'Indefinido' : element.commet}</td>
-                                <td className="columna">{element.status === 0 ? 'No pagado' : 'Pagado'}</td>
+                                <td className="columna">{element.pagado === 0 ? 'No pagado' : 'Pagado'}</td>
                             </tr>
                         );
                     })
@@ -148,7 +148,7 @@ class ComponentToPrint extends React.Component {
             <tfoot>
                 <tr>
                     <td colSpan="1"> Monto a pagar: </td>
-                    <td bgcolor="#EEEEEE" colSpan="4"> <b>${this.state.adeudo}</b></td>
+                    <td bgcolor="#EEEEEE" colSpan="4"> <b>${this.state.adeudo} pesos</b></td>
                 </tr>
             </tfoot>
         </table>

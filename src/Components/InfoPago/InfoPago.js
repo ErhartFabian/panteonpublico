@@ -4,9 +4,9 @@ import DocPdf from './DocPdf';
 //import './css/InfoPago.css'
 import './css/Pago2.css'
 import axios from 'axios';
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faLessThanEqual, faReceipt} from '@fortawesome/free-solid-svg-icons';
+import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader'
 
 function InfoPago() {

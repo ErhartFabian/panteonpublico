@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './css/index.css'
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import MapView from './react-leaflet.js';

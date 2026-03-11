@@ -1,43 +1,52 @@
-import React, { Component, useRef } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
-import './leaflet/dist/leaflet.css';
+import React, { useEffect } from 'react';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import './css/react-leaflet.css';
 import { MarkerIcon } from './react-leaflet-icon.js';
 
-class MapView extends Component {
-  handleChange(e){
-    this.state.map.flyTo(this.props.fosa.coordenadas, 10);
-  }
+function FlyToLocation({ coordinates, shouldFly }) {
+    const map = useMap();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentLocation: null,
-      zoom: 12,
-      map: null
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+    useEffect(() => {
+        if (shouldFly) {
+            map.flyTo(coordinates, map.getZoom(), { animate: true });
+        }
+    }, [coordinates, map, shouldFly]);
 
-  render() {
+    return null;
+}
+
+function MapView({ fosa }) {
+    const defaultCenter = [20.1281, -98.76437];
+    const hasValidCoordinates = Array.isArray(fosa?.coordenadas)
+        && fosa.coordenadas.length === 2
+        && Number.isFinite(fosa.coordenadas[0])
+        && Number.isFinite(fosa.coordenadas[1])
+        && !(fosa.coordenadas[0] === 0 && fosa.coordenadas[1] === 0);
+    const markerPosition = hasValidCoordinates ? fosa.coordenadas : defaultCenter;
+
     return (
-      <MapContainer whenCreated={map => this.setState({ map })} center={[20.1281, -98.76437]} zoom={17} style={{
-        position: "relative",
-        width: "100%",
-        height: "calc(100vh - 85px)",
-      }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        />
-        <Marker position={this.props.fosa.coordenadas} icon={MarkerIcon} onChange={this.handleChange}>
-          <Popup>
-            Cuartel: {this.props.fosa.cuartel} Lote: {this.props.fosa.lote} Clase: {this.props.fosa.clase} Fosa: {this.props.fosa.fosa}
-          </Popup>
-      </Marker>
-      </MapContainer>
+        <MapContainer
+            center={defaultCenter}
+            zoom={17}
+            style={{
+                position: "relative",
+                width: "100%",
+                height: "calc(100vh - 85px)",
+            }}
+        >
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={markerPosition} icon={MarkerIcon}>
+                <Popup>
+                    Cuartel: {fosa?.cuartel} Lote: {fosa?.lote} Clase: {fosa?.clase} Fosa: {fosa?.fosa}
+                </Popup>
+            </Marker>
+            <FlyToLocation coordinates={markerPosition} shouldFly={hasValidCoordinates} />
+        </MapContainer>
     );
-  }
 }
 
 export default MapView;

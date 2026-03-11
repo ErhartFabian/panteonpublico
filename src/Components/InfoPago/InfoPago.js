@@ -53,6 +53,17 @@ function InfoPago() {
 
     const id = Cuartel + Clase + Lote + Fosa;
 
+    // Función para validar parámetros (previene inyección SQL/XSS)
+    function validateIdParams(cuartel, clase, lote, fosa) {
+        const idPattern = /^[0-9a-zA-Z]*$/;
+        return (
+            idPattern.test(String(cuartel)) &&
+            idPattern.test(String(clase)) &&
+            idPattern.test(String(lote)) &&
+            idPattern.test(String(fosa))
+        );
+    }
+
     const URLFosainfo = 'https://panteonpachuca.herokuapp.com/api/getAllDataByFosa/' + id;
 
 
@@ -151,6 +162,14 @@ function InfoPago() {
 
         //Evita guardar el estado de ficha de pago cada que se no se regresa el valor de verComprobante
         setVerComprobante(false);
+
+        // Validar parámetros antes de hacer la petición
+        if (!validateIdParams(Cuartel, Clase, Lote, Fosa)) {
+            setMsjerror(true);
+            setLoading(false);
+            console.error('Parámetros inválidos');
+            return;
+        }
 
         async function getData(){
             setLoading(true);

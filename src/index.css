@@ -1,13 +1,15 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Importar Sistema de Diseño Global */
+@import './styles/design-system.css';
+
+/* Importar Fuente Custom */
+@font-face {
+  font-family: 'Helvetica-Neue';
+  src: url('../assets/helvetica_neue/HelveticaNeueLTStdLt.otf');
+  font-weight: 300;
+  font-display: swap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Aplicar fuente custom a todo */
+html, body, * {
+  font-family: 'Helvetica-Neue', var(--font-family-primary);
 }

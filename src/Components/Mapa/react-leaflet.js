@@ -1,6 +1,7 @@
 import React, { Component, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import './leaflet/dist/leaflet.css';
+import './css/react-leaflet.css';
 import { MarkerIcon } from './react-leaflet-icon.js';
 
 class MapView extends Component {
@@ -22,8 +23,8 @@ class MapView extends Component {
     return (
       <MapContainer whenCreated={map => this.setState({ map })} center={[20.1281, -98.76437]} zoom={17} style={{
         position: "relative",
-        width: "70vw",
-        height: "90.9vh",
+        width: "100%",
+        height: "calc(100vh - 85px)",
       }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

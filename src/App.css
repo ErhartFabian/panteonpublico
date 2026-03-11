@@ -1,7 +1,15 @@
 .app {
   width: 100vw;
-  height: 100vh;
-  background-color: #e5e5f7;
-  background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+  min-height: 100vh;
+  background-color: var(--color-bg-secondary);
+  background-image: var(--color-bg-grid);
   background-size: 15px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

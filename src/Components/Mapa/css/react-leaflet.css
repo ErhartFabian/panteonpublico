@@ -1,4 +1,56 @@
-/* .leaflet-container {
-  width: 100vw;
-  height: 90vh;
-} */
+/* Leaflet container styling with design system variables */
+.leaflet-container {
+	width: 100%;
+	min-height: calc(100vh - 85px);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+	color: var(--color-text-primary);
+	top: var(--spacing-unit-1);
+	right: var(--spacing-unit-1);
+}
+
+.leaflet-popup-content {
+	font-family: var(--font-family-base);
+	font-size: var(--font-size-sm);
+	color: var(--color-text-primary);
+}
+
+.leaflet-popup {
+	border-radius: var(--border-radius-md);
+}
+
+.leaflet-popup-content-wrapper {
+	background: var(--color-bg-primary);
+	box-shadow: var(--shadow-md);
+	border-radius: var(--border-radius-md);
+}
+
+.leaflet-popup-tip-container .leaflet-popup-tip {
+	background-color: var(--color-bg-primary);
+}
+
+.leaflet-control-attribution {
+	background-color: rgba(255, 255, 255, 0.8);
+	color: var(--color-text-primary);
+	font-size: var(--font-size-xs);
+	padding: var(--spacing-unit-0);
+}
+
+.leaflet-control {
+	background-color: var(--color-bg-primary);
+	box-shadow: var(--shadow-md);
+	border-radius: var(--border-radius-sm);
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	color: var(--color-primary);
+	border: 1px solid var(--color-border);
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+	background-color: var(--color-primary-light);
+	color: white;
+}

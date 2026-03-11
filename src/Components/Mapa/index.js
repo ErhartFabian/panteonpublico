@@ -527,7 +527,7 @@ function Mapa() {
                 </div>
 
             </form>
-            <div>
+            <div className="mapa-wrapper">
                 <MapView className="mapa" fosa={fosaAct} />
             </div>
         </div>

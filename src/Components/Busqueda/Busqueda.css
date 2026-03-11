@@ -3,50 +3,68 @@
     src: url(../../../assets/helvetica_neue/HelveticaNeueLTStdLt.otf);    
 }
 
-/*Para tener el formato background de los demás */
-.MuiPaper-root{
-    background-image: radial-gradient(#6e7b86 0.75px, #f7f7ff 0.75px);
+/* Material-UI overrides */
+.MuiPaper-root {
+    background-image: var(--color-bg-grid);
     background-size: 15px 15px;
-    background-color: #e5e5f7;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
 }
 
-/* .MuiInputBase-input{
-    font-family: Helvetica-Nue,Arial;
-} */
-
-.MuiTypography-h6{
-    font-family: 'Helvetica-Nue', Arial;
-    color: #6e7b86;
+.MuiTypography-h6 {
+    font-family: var(--font-family-base);
+    color: var(--color-text-secondary);
 }
 
-.MuiTableCell-root > div{
+.MuiTableCell-root > div {
     justify-content: center;
 }
 
-.MuiTableRow-root{
-    font-family: Helvetica-Nue, Arial;   
+.MuiTableRow-root {
+    font-family: var(--font-family-base);
+    transition: var(--transition-base);
 }
 
-.MTableToolbar-title-9 > h6{
-    font-size: 22px;
-    font-family: Helvetica-Nue, Arial;
+.MuiTableRow-root:hover {
+    background-color: var(--color-bg-hover);
 }
 
-.filter{
+.MTableToolbar-title-9 > h6 {
+    font-size: var(--font-size-xl);
+    font-family: var(--font-family-base);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.filter {
     width: 70%;
     text-align: center;
     border: none;
-    border-bottom: 1px solid #6e7b86;
-    background-color: #F7F7FF;
+    border-bottom: 2px solid var(--color-border);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    padding: var(--spacing-unit-1);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    transition: var(--transition-base);
 }
 
-.filter:focus{
-    background-color:#dedcdc ;
+.filter:focus {
+    outline: none;
+    background-color: var(--color-bg-hover);
+    border-bottom-color: var(--color-primary);
 }
-.fa-solid{
-    color: #6e7b86;
-    margin-top: 5px;
-    margin-left: 20px;
+
+.fa-solid {
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-unit-0);
+    margin-left: var(--spacing-unit-2);
+    transition: var(--transition-base);
+}
+
+.fa-solid:hover {
+    color: var(--color-primary);
 }
 
 

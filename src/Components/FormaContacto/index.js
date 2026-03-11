@@ -4,33 +4,50 @@ import emailjs from '@emailjs/browser';
 
 function FormaContacto() {
     const form = useRef();
-    //useState para el mensaje de enviado correctamente
     const [mensajeEnviado, setMensajeEnviado] = useState(false);
     const [showElement, setShowElement] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_ljg41tl', 'template_hsh9d4l', form.current, 'KFcgLyPohhWVvEG6y')
+        emailjs.sendForm(
+            process.env.REACT_APP_EMAILJS_SERVICE_ID,
+            process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+            form.current,
+            process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        )
             .then((result) => {
-                console.log(result.text);
-            }, (error) => {
-                console.log(error.text);
+                console.log('Email enviado:', result.text);
+                setMensajeEnviado(true);
+            })
+            .catch((error) => {
+                console.error('Error al enviar email:', error);
+                setErrorMessage('Error al enviar el mensaje');
             });
-        e.target.reset();
     }
-    /* cuando todos los datos este llenos al momento de hacer click en el boton se muestra un mensaje de exito */
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (form.current.checkValidity()) {
-            sendEmail(e);
-            setMensajeEnviado(true);
-            setShowElement(true);
-            setTimeout(function () {
+    useEffect(() => {
+        let timeoutId;
+        if (showElement) {
+            timeoutId = setTimeout(() => {
                 setShowElement(false);
             }, 3000);
         }
-        form.current.classNameList.add('was-validated');
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [showElement]);
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setErrorMessage('');
+        if (form.current.checkValidity()) {
+            sendEmail(e);
+            setShowElement(true);
+        }
+        form.current.classList.add('was-validated');
     }
 
     return (
@@ -49,36 +66,33 @@ function FormaContacto() {
 
                 <div className="form__container">
                     <div className="form__group">
-                        <input type="text" id="nombre" maxLength={50} className="form__input" placeholder=" " name="user_name" required />
+                        <input type="text" id="nombre" maxLength={50} className="form__input" placeholder=" " name="user_name" required aria-label="Nombre completo" />
                         <label htmlFor="nombre" className="form__label">Nombre</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="email" id="correo"  maxLength={64} className="form__input" placeholder=" " name="user_email" required />
+                        <input type="email" id="correo" maxLength={64} className="form__input" placeholder=" " name="user_email" required aria-label="Correo electrónico" />
                         <label htmlFor="correo" className="form__label">Correo</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <input type="text" maxLength={10} id="numero-telefono" className="form__input" placeholder=" " name="user_number" required />
+                        <input type="tel" maxLength={10} id="numero-telefono" className="form__input" placeholder=" " name="user_number" pattern="[0-9]*" required aria-label="Número de teléfono" />
                         <label htmlFor="numero-telefono" className="form__label">Número de teléfono</label>
                         <span className="form__line"></span>
                     </div>
                     <div className="form__group">
-                        <textarea type="text" id="area-mensaje" maxLength={160} className="form__input" placeholder=" " name="message" required></textarea>
+                        <textarea id="area-mensaje" maxLength={160} className="form__input" placeholder=" " name="message" required aria-label="Mensaje"></textarea>
                         <label htmlFor="area-mensaje" className="form__label">Mensaje</label>
                         <span className="form__line"></span>
                     </div>
-                    <button type="submit" className="form__submit" value="Send">Enviar</button>
+                    <button type="submit" className="form__submit">Enviar</button>
                 </div>
-                {showElement ? (
-                    <div  className={mensajeEnviado ? 'mensaje-enviado' : 'mensaje-enviado-oculto'}>
-                        {mensajeEnviado && (
-                            <p>Mensaje enviado correctamente</p>
-                        )}
+                {(mensajeEnviado || errorMessage) && showElement && (
+                    <div className={mensajeEnviado ? 'mensaje-enviado' : 'mensaje-error'} role="alert">
+                        {mensajeEnviado && <p>✓ Mensaje enviado correctamente</p>}
+                        {errorMessage && <p>✗ {errorMessage}</p>}
                     </div>
-                ) : (
-                    <div> </div>
-                )}{" "}
+                )}
 
             </form>
         </div>

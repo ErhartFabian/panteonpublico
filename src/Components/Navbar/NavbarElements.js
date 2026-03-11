@@ -8,14 +8,18 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.2rem calc((100vw - 1000px) / 2)
+    padding: 0.2rem calc((100vw - 1000px) / 2);
+    width: 100%;
     z-index: 12;
 `;
 
 export const NavLogo = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     cursor: pointer;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1rem;
     text-decoration: none;
 `;
 
